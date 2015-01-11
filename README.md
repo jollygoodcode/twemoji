@@ -1,6 +1,6 @@
 # Twemoji
 
-Get imoji img by text.
+Get emoji img by text.
 
 ## Installation
 
@@ -78,8 +78,8 @@ Default assets/folder size, by default "36x36". Available via Twitter CDN: 16, 3
 Only applicable when file_ext is .png.
 
 ```ruby
-> Twemoji.parse 'I like chocolate :heart_eyes:!', size: "72x72"
-=> 'I like chololate <img class="emoji" draggable="false" alt=":heart_eyes:" src="https://foocdn.com/72x72/1f60d.png">'
+> Twemoji.parse 'I like chocolate :heart_eyes:!', size: "72x72", ext: '.png'
+=> 'I like chololate <img class="emoji" draggable="false" alt=":heart_eyes:" src="https://twemoji.maxcdn.com/72x72/1f60d.png">'
 ```
 
 ##### class_name
@@ -88,7 +88,7 @@ Default img css class name, by default "emoji".
 
 ```ruby
 > Twemoji.parse 'I like chocolate :heart_eyes:!', class_name: 'superemoji'
-=> 'I like chololate <img class="superemoji" draggable="false" alt=":heart_eyes:" src="https://foocdn.com/72x72/1f60d.png">'
+=> 'I like chololate <img class="superemoji" draggable="false" alt=":heart_eyes:" src="https://twemoji.maxcdn.com/72x72/1f60d.png">'
 ```
 
 ## Contributing

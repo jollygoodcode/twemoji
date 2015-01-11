@@ -1,5 +1,5 @@
 module Twemoji
-  # String to hex map
+  # Text to Codepoint map
   #
   # This hash is frozen.
   #
@@ -839,7 +839,7 @@ module Twemoji
   ":zero:"                            => "30-20e3"
   }.each { | k, v| k.freeze; v.freeze }.freeze
 
-  # Hex to string map
+  # Codepoint to Text map
   #
   # This hash is frozen.
   #
