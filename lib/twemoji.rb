@@ -25,7 +25,7 @@ module Twemoji
     end
   end
 
-  # Find emoji code by text
+  # Find emoji code by emoji text
   #
   # @example Usage
   #
@@ -39,7 +39,7 @@ module Twemoji
     CODES[must_str(text)]
   end
 
-  # Find text by emoji code
+  # Find emoji text by emoji code
   #
   # @example Usage
   #
@@ -48,7 +48,7 @@ module Twemoji
   #
   # @param code [String] Emoji code to find text
   #
-  # @return [String] Text
+  # @return [String] Emoji Text
   def self.find_by_code(code)
     ICODES[must_str(code)]
   end
@@ -68,7 +68,7 @@ module Twemoji
   # @option options [String] (optional) image_size Emoji image's size 16, 36, 72 applicable if specify .png.
   # @option options [String] (optional) class_name Emoji image's css class name.
   #
-  # @return [String]
+  # @return [String] Original text but the occurrences of emoji text replaced with emoji image by given options.
   def self.parse(text, asset_root: "https://twemoji.maxcdn.com/",
                        asset_path: "",
                        file_ext:   ".svg",
@@ -89,6 +89,8 @@ module Twemoji
   end
 
   # Return all emoji patterns' regexp
+  #
+  # @return [RegExp] A Regular expression consists of all emojis text.
   def self.emoji_pattern
     @emoji_pattern ||= /(#{CODES.keys.each { |name| Regexp.escape(name) }.join("|") })/
   end
