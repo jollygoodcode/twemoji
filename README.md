@@ -33,7 +33,7 @@ Or install it yourself as:
 
 ```ruby
 > Twemoji.find_by_code("1f60d")
-=> "1f60d"
+=> ":heart_eyes:"
 ```
 
 #### `.find_by` text or code
@@ -64,18 +64,18 @@ Default assets root url, by default will be `https://twemoji.maxcdn.com/`:
 
 ##### file_ext
 
-Default assets file extensions, by default '.svg'.
+Default assets file extensions, by default `.svg`.
 
 ```ruby
 > Twemoji.parse 'I like chocolate :heart_eyes:!', ext: '.png'
 => 'I like chololate <img class="emoji" draggable="false" alt=":heart_eyes:" src="https://twemoji.maxcdn.com/16x16/1f60d.png">'
 ```
 
+If you specify `.png`, then you can specify `image_size`.
+
 ##### image_size
 
-Default assets/folder size, by default "36x36". Available via Twitter CDN: 16, 36, 72
-
-Only applicable when file_ext is .png.
+Default assets/folder size, by default "36x36". Available via Twitter CDN: `16`, `36`, `72`.
 
 ```ruby
 > Twemoji.parse 'I like chocolate :heart_eyes:!', size: "72x72", ext: '.png'
@@ -84,7 +84,7 @@ Only applicable when file_ext is .png.
 
 ##### class_name
 
-Default img css class name, by default "emoji".
+Default img css class name, by default `"emoji"`.
 
 ```ruby
 > Twemoji.parse 'I like chocolate :heart_eyes:!', class_name: 'superemoji'
