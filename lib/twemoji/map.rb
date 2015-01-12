@@ -1,14 +1,11 @@
 module Twemoji
-  # Text to Codepoint map
-  #
-  # This hash is frozen.
+  # Emoji Text to Codepoint mappings. This hash is frozen.
   #
   # @example Usage
-  #
   #   CODES[:smile:] # => "1f604"
   #   CODES[:notebook_with_decorative_cover:] # => "1f4d4"
-  #
   # @return [Hash<String => String>]
+  # @private
   CODES = {
   ":smile:"                           => "1f604",
   ":laughing:"                        => "1f606",
@@ -839,15 +836,13 @@ module Twemoji
   ":zero:"                            => "30-20e3"
   }.each { | k, v| k.freeze; v.freeze }.freeze
 
-  # Codepoint to Text map
-  #
-  # This hash is frozen.
+  # Emoji Codepoint to Text mappings. This hash is frozen.
   #
   # @example Usage
-  #
   #   ICODES["1f60d"] # => ":heart_eyes:"
   #   ICODES["1f4d4"] # => ":notebook_with_decorative_cover:"
   #
   # @return [Hash<String => String>]
+  # @private
   ICODES = CODES.invert.freeze
 end
