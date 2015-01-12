@@ -17,7 +17,9 @@ module Twemoji
   #
   # @return [String] Text or Code.
   def self.find_by(*args, text: nil, code: nil)
-    raise "Can only specify text or code one at a time" if text && code
+    if text && code
+      raise ArgumentError, "Can only specify text or code one at a time"
+    end
 
     if text
       find_by_text text
@@ -59,7 +61,6 @@ module Twemoji
   # @param text [String] Source text to parse.
   #
   # @option options [String] (optional) asset_root Asset root url to serve emoji.
-  # @option options [String] (optional) asset_path Folder where you store your emoji images.
   # @option options [String] (optional) file_ext   File extension.
   # @option options [String] (optional) image_size Emoji image's size 16, 36, 72 applicable if specify .png.
   # @option options [String] (optional) class_name Emoji image's css class name.
@@ -67,13 +68,11 @@ module Twemoji
   # @return [String] Original text with all occurrences of emoji text
   # replaced by emoji image according to given options.
   def self.parse(text, asset_root: "https://twemoji.maxcdn.com/",
-                       asset_path: "",
-                       file_ext:   ".svg",
+                       file_ext:   ".png",
                        image_size: "16x16",
                        class_name: "emoji")
 
     options[:asset_root] = asset_root
-    options[:asset_path] = asset_path
     options[:file_ext]   = file_ext
     options[:image_size] = image_size
     options[:class_name] = class_name
@@ -181,14 +180,12 @@ module Twemoji
     def self.emoji_url(name)
       code = find_by_text(name)
 
-      if options[:file_ext] == ".svg"
-        File.join(options[:asset_root], "svg", "#{code}.svg")
-      elsif !options[:asset_path].empty?
-        File.join(options[:asset_root], options[:asset_path], "#{code}.#{options[:file_ext]}")
-      elsif options[:file_ext] == ".png"
+      if options[:file_ext] == ".png"
         File.join(options[:asset_root], options[:image_size], "#{code}.png")
+      elsif options[:file_ext] == ".svg"
+        File.join(options[:asset_root], "svg", "#{code}.svg")
       else
-        File.join(options[:asset_root], options[:image_size], "#{code}.#{options[:file_ext]}")
+        raise RuntimeError, "Unspported file extension: #{options[:file_ext]}"
       end
     end
 end
