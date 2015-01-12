@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = %w(katehuang0320@gmail.com)
   spec.summary       = %q{A RubyGem to convert :heart: to Twitter cdn url}
   spec.description   = spec.summary
-  spec.homepage      = "https://github.com/JuanitoFatas/twemoji"
+  spec.homepage      = "https://github.com/jollygoodcode/twemoji"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
