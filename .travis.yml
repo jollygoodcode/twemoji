@@ -1,6 +1,6 @@
 language: ruby
 sudo: false
-bundler_args: --without development --retry=3 --jobs=3
+bundler_args: --retry=3 --jobs=3
 
 rvm:
   - 2.0
