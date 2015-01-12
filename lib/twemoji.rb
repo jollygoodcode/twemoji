@@ -81,10 +81,10 @@ module Twemoji
     options[:image_size] = image_size
     options[:class_name] = class_name
 
-    if text.kind_of?(String)
-      parse_html(text)
-    else
+    if text.kind_of?(Nokogiri::HTML::DocumentFragment)
       parse_document(text)
+    else
+      parse_html(text)
     end
   end
 
@@ -125,6 +125,14 @@ module Twemoji
         node.replace(html)
       end
       doc
+    end
+
+    def self.has_ancestor?(node, tags)
+      while node = node.parent
+        if tags.include?(node.name.downcase)
+          break true
+        end
+      end
     end
 
     def self.filter_emojis(content)
