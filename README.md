@@ -1,6 +1,12 @@
 # Twemoji
 
-Get emoji img by text.
+[![Gem Version](http://img.shields.io/gem/v/twemoji.svg)][gem]
+[![Build Status](https://travis-ci.org/jollygoodcode/twemoji.svg)][travis]
+
+[gem]: https://rubygems.org/gems/twemoji
+[travis]: https://travis-ci.org/jollygoodcode/twemoji
+
+Twitter Emoji has a official JavaScript implementation of [twemoji](https://github.com/twitter/twemoji). This RubyGem Twemoji is a minimum implementation in Ruby, does not implement all its features.
 
 ## Installation
 
@@ -67,7 +73,7 @@ Default assets root url, by default will be `https://twemoji.maxcdn.com/`:
 Default assets file extensions, by default `.svg`.
 
 ```ruby
-> Twemoji.parse 'I like chocolate :heart_eyes:!', ext: '.png'
+> Twemoji.parse 'I like chocolate :heart_eyes:!', file_ext: '.png'
 => 'I like chololate <img class="emoji" draggable="false" alt=":heart_eyes:" src="https://twemoji.maxcdn.com/16x16/1f60d.png">'
 ```
 
@@ -75,10 +81,10 @@ If you specify `.png`, then you can specify `image_size`.
 
 ##### image_size
 
-Default assets/folder size, by default "36x36". Available via Twitter CDN: `16`, `36`, `72`.
+Default assets/folder size, by default `"36x36"`. Available via Twitter CDN: `16`, `36`, `72`.
 
 ```ruby
-> Twemoji.parse 'I like chocolate :heart_eyes:!', size: "72x72", ext: '.png'
+> Twemoji.parse 'I like chocolate :heart_eyes:!', size: "72x72", file_ext: '.png'
 => 'I like chololate <img class="emoji" draggable="false" alt=":heart_eyes:" src="https://twemoji.maxcdn.com/72x72/1f60d.png">'
 ```
 
@@ -93,7 +99,7 @@ Default img css class name, by default `"emoji"`.
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/twemoji/fork )
+1. Fork it ( https://github.com/jollygoodcode/twemoji/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
