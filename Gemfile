@@ -6,6 +6,7 @@ gemspec
 group :development do
   gem "rake"
   gem "bundler"
+  gem "pry"
 end
 
 group :test do

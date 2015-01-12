@@ -28,7 +28,7 @@ class TwemojiTest < Minitest::Test
   def test_parse_html_string
     expected = "I like chocolate <img class='emoji' draggable='false' title=':heart_eyes:' alt=':heart_eyes:' src='https://twemoji.maxcdn.com/svg/1f60d.svg'>!"
 
-    assert_equal expected, Twemoji.parse('I like chocolate :heart_eyes:!')
+    assert_equal expected, Twemoji.parse("I like chocolate :heart_eyes:!")
   end
 
   def test_parse_document
@@ -38,9 +38,15 @@ class TwemojiTest < Minitest::Test
     assert_equal expected, Twemoji.parse(doc).to_html
   end
 
-  def test_parse_with_different_cdn
+  def test_parse_option_cdn
     expected = "I like chocolate <img class='emoji' draggable='false' title=':heart_eyes:' alt=':heart_eyes:' src='https://emoji.bestcdn.com/svg/1f60d.svg'>!"
 
-    assert_equal expected, Twemoji.parse('I like chocolate :heart_eyes:!', asset_root: 'https://emoji.bestcdn.com')
+    assert_equal expected, Twemoji.parse("I like chocolate :heart_eyes:!", asset_root: 'https://emoji.bestcdn.com')
+  end
+
+  def test_parse_option_file_ext
+    expected = "I like chocolate <img class='emoji' draggable='false' title=':heart_eyes:' alt=':heart_eyes:' src='https://twemoji.maxcdn.com/16x16/1f60d.png'>!"
+
+    assert_equal expected, Twemoji.parse("I like chocolate :heart_eyes:!", file_ext: '.png')
   end
 end

@@ -1,0 +1,20 @@
+language: ruby
+sudo: false
+bundler_args: --without development --retry=3 --jobs=3
+
+rvm:
+  - 2.0
+  - 2.1
+  - 2.2
+  - jruby
+  - jruby-19mode
+  - jruby-head
+  - ruby-head
+
+matrix:
+  allow_failures:
+    - rvm: jruby
+    - rvm: jruby-19mode
+    - rvm: juby-head
+    - rvm: ruby-head
+  fast_finish: true
