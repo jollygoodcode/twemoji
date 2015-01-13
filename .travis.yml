@@ -1,14 +1,15 @@
 language: ruby
 sudo: false
-bundler_args: --retry=3 --jobs=3
-
+bundler_args: "--retry=3 --jobs=3"
 rvm:
   - 2.0
   - 2.1
   - 2.2
   - ruby-head
-
 matrix:
   allow_failures:
     - rvm: ruby-head
   fast_finish: true
+notifications:
+  slack:
+    secure: wZ1UPEcH/Zf/wSPvpR1q76vpUQvAEGuwR5500ML8C+shW7PedvuSZaiZYAOZxhyD17RXzXYroON0ArEk3NUcKD8supPzYjUWzCeWDIFaYxEb7dOm7tpRBf4GuQ/oy8HGsBi947ZTX3WytGWZU0q0aRu2EirPcoY05vzley/hYTI=
