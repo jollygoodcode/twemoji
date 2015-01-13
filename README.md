@@ -95,6 +95,13 @@ Default img css class name, by default `"emoji"`.
 => 'I like chololate <img class="superemoji" draggable="false" alt=":heart_eyes:" src="https://twemoji.maxcdn.com/16x16/1f60d.png">'
 ```
 
+##### img_attr
+
+```ruby
+Twemoji.parse("I like chocolate :heart_eyes:!", class_name: 'twemoji', img_attr: "style='height: 1.3em;'")
+=> "I like chocolate <img class='twemoji' draggable='false' title=':heart_eyes:' alt=':heart_eyes:' style='height: 1.3em;' src='https://twemoji.maxcdn.com/16x16/1f60d.png'>!"
+```
+
 ## Contributing
 
 1. Fork it ( https://github.com/jollygoodcode/twemoji/fork )
