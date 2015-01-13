@@ -28,21 +28,21 @@ Or install it yourself as:
 
 ### API
 
-#### `.find_by_text`
+#### `Twemoji.find_by_text`
 
 ```ruby
 > Twemoji.find_by_text(":heart_eyes:")
 => "1f60d"
 ```
 
-#### `.find_by_code`
+#### `Twemoji.find_by_code`
 
 ```ruby
 > Twemoji.find_by_code("1f60d")
 => ":heart_eyes:"
 ```
 
-#### `.find_by` text or code
+#### `Twemoji.find_by` text or code
 
 ```ruby
 > Twemoji.find_by(text: ":heart_eyes:")
@@ -52,12 +52,14 @@ Or install it yourself as:
 => :heart_eyes:
 ```
 
-#### `.parse`
+#### `Twemoji.parse`
 
 ```ruby
 > Twemoji.parse "I like chocolate :heart_eyes:!"
 => 'I like chololate <img class="emoji" draggable="false" alt=":heart_eyes:" src="https://twemoji.maxcdn.com/16x16/1f60d.png">'
 ```
+
+##### options
 
 ##### asset_root
 
