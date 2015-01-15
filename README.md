@@ -2,9 +2,11 @@
 
 [![Gem Version](http://img.shields.io/gem/v/twemoji.svg)][gem]
 [![Build Status](https://travis-ci.org/jollygoodcode/twemoji.svg)][travis]
+[![Inline docs](http://inch-ci.org/github/jollygoodcode/twemoji.svg?branch=master)][inch-doc]
 
 [gem]: https://rubygems.org/gems/twemoji
 [travis]: https://travis-ci.org/jollygoodcode/twemoji
+[inch-doc]: http://inch-ci.org/github/jollygoodcode/twemoji
 
 Twitter Emoji has a official JavaScript implementation of [twemoji](https://github.com/twitter/twemoji). This RubyGem Twemoji is a minimum implementation in Ruby, does not implement all its features.
 
