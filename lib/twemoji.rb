@@ -165,7 +165,7 @@ module Twemoji
     # @return [Nokogiri::HTML::DocumentFragment] Parsed document.
     # @private
     def self.parse_document(doc)
-      doc.search('text()').each do |node|
+      doc.xpath('.//text() | text()').each do |node|
         content = node.to_html
         next if !content.include?(":")
         next if has_ancestor?(node, %w(pre code tt))
