@@ -16,9 +16,9 @@ module Twemoji
   # @option options [String] (optional) :code
   #
   # @return [String] Text or Code.
-  def self.find_by(*args, text: nil, code: nil)
+  def self.find_by(text: nil, code: nil)
     if text && code
-      raise ArgumentError, "Can only specify text or code one at a time"
+      fail ArgumentError, "Can only specify text or code one at a time"
     end
 
     if text
@@ -80,7 +80,7 @@ module Twemoji
     options[:class_name] = class_name
     options[:img_attr]   = img_attr
 
-    if text.kind_of?(Nokogiri::HTML::DocumentFragment)
+    if text.is_a?(Nokogiri::HTML::DocumentFragment)
       parse_document(text)
     else
       parse_html(text)
@@ -102,7 +102,7 @@ module Twemoji
     # @return [String] A String.
     # @private
     def self.must_str(text)
-      text = text.respond_to?(:to_str) ? text.to_str : text.to_s
+      text.respond_to?(:to_str) ? text.to_str : text.to_s
     end
 
     # Options hash for Twemoji.
@@ -192,7 +192,7 @@ module Twemoji
       elsif options[:file_ext] == ".svg"
         File.join(options[:asset_root], "svg", "#{code}.svg")
       else
-        raise RuntimeError, "Unspported file extension: #{options[:file_ext]}"
+        fail "Unspported file extension: #{options[:file_ext]}"
       end
     end
 end
