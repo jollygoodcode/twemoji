@@ -26,6 +26,10 @@ Or install it yourself as:
 
     $ gem install twemoji
 
+## Integration
+
+- [Integration with html-pipeline](https://github.com/jollygoodcode/twemoji/wiki/Integrate-with-html-pipeline)
+
 ## Usage
 
 ### API
