@@ -15,7 +15,7 @@ Twitter Emoji has a official JavaScript implementation of [twemoji](https://gith
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'twemoji'
+gem "twemoji"
 ```
 
 And then execute:
@@ -25,6 +25,14 @@ And then execute:
 Or install it yourself as:
 
     $ gem install twemoji
+
+### Ruby 1.9.3 Support
+
+@bramswenson has put an effeort to support Ruby 1.9.3, please use [his forked branch](https://github.com/bramswenson/twemoji/tree/ruby-1.9.3):
+
+```ruby
+gem "twemoji", github: "bramswenson/twemoji", branch: "ruby-1.9.3"
+```
 
 ## Integration
 
