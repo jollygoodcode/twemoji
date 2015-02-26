@@ -42,6 +42,22 @@ gem "twemoji", github: "bramswenson/twemoji", branch: "ruby-1.9.3"
 
 ### API
 
+#### `Twemoji.find_by` text or code or unicode
+
+```ruby
+> Twemoji.find_by(text: ":heart_eyes:")
+=> 1f60d
+
+> Twemoji.find_by(code: "1f60d")
+=> :heart_eyes:
+
+> Twemoji.find_by(unicode: "😍")
+=> :heart_eyes:
+
+> Twemoji.find_by(unicode: "\u{1f60d}")
+=> :heart_eyes:
+```
+
 #### `Twemoji.find_by_text`
 
 ```ruby
@@ -56,14 +72,21 @@ gem "twemoji", github: "bramswenson/twemoji", branch: "ruby-1.9.3"
 => ":heart_eyes:"
 ```
 
-#### `Twemoji.find_by` text or code
+#### `Twemoji.find_by_unicode`
 
 ```ruby
-> Twemoji.find_by(text: ":heart_eyes:")
-=> 1f60d
+> Twemoji.find_by(unicode: "😍")
+=> ":heart_eyes:"
+```
 
-> Twemoji.find_by(code: "1f60d")
-=> :heart_eyes:
+#### `Twemoji.render_unicode`
+
+```ruby
+> Twemoji.render_unicode ":heart_eyes:"
+=> "😍"
+
+> Twemoji.render_unicode "1f60d"
+=> "😍"
 ```
 
 #### `Twemoji.parse`
@@ -73,9 +96,9 @@ gem "twemoji", github: "bramswenson/twemoji", branch: "ruby-1.9.3"
 => 'I like chololate <img class="emoji" draggable="false" alt=":heart_eyes:" src="https://twemoji.maxcdn.com/16x16/1f60d.png">'
 ```
 
-##### options
+##### `Twemoji.parse` options
 
-##### asset_root
+##### `asset_root`
 
 Default assets root url, by default will be `https://twemoji.maxcdn.com/`:
 
@@ -84,7 +107,7 @@ Default assets root url, by default will be `https://twemoji.maxcdn.com/`:
 => 'I like chololate <img class="emoji" draggable="false" alt=":heart_eyes:" src="https://foocdn.com/16x16/1f60d.png">'
 ```
 
-##### file_ext
+##### `file_ext`
 
 Default assets file extensions, by default `.png`.
 
@@ -93,7 +116,7 @@ Default assets file extensions, by default `.png`.
 => 'I like chololate <img class="emoji" draggable="false" alt=":heart_eyes:" src="https://twemoji.maxcdn.com/svg/1f60d.svg">'
 ```
 
-##### image_size
+##### `image_size`
 
 Default assets/folder size, by default `"16x16"`. Available via Twitter CDN: `16`, `36`, `72`.
 
@@ -102,7 +125,7 @@ Default assets/folder size, by default `"16x16"`. Available via Twitter CDN: `16
 => 'I like chololate <img class="emoji" draggable="false" alt=":heart_eyes:" src="https://twemoji.maxcdn.com/72x72/1f60d.png">'
 ```
 
-##### class_name
+##### `class_name`
 
 Default img css class name, by default `"emoji"`.
 
@@ -111,7 +134,7 @@ Default img css class name, by default `"emoji"`.
 => 'I like chololate <img class="superemoji" draggable="false" alt=":heart_eyes:" src="https://twemoji.maxcdn.com/16x16/1f60d.png">'
 ```
 
-##### img_attr
+##### `img_attr`
 
 ```ruby
 Twemoji.parse("I like chocolate :heart_eyes:!", class_name: 'twemoji', img_attr: "style='height: 1.3em;'")

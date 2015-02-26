@@ -6,16 +6,19 @@ require "twemoji/map"
 # Twemoji is a Ruby implementation, parses your text, replace emoji text
 # with corresponding emoji image. Default emoji images are from Twiiter CDN.
 module Twemoji
-  # Find code by text and find text by code.
+  # Find code by text, find text by code, and find text by unicode.
   #
   # @example Usage
-  #   Twemoji.find_by(text: :heart_eyes:) # => "1f60d"
-  #   Twemoji.find_by(code: :1f60d:)      # => ":heart_eyes:"
+  #   Twemoji.find_by(text: ":heart_eyes:") # => "1f60d"
+  #   Twemoji.find_by(code: ":1f60d:")      # => ":heart_eyes:"
+  #   Twemoji.find_by(unicode: "😍")        # => ":heart_eyes:"
+  #   Twemoji.find_by(unicode: "\u{1f60d}") # => ":heart_eyes:"
   #
   # @option options [String] (optional) :text
   # @option options [String] (optional) :code
+  # @option options [String] (optional) :unicode
   #
-  # @return [String] Text or Code.
+  # @return [String] Emoji text or code.
   def self.find_by(text: nil, code: nil, unicode: nil)
     if [ text, code, unicode ].compact!.size > 1
       fail ArgumentError, "Can only specify text, code or unicode one at a time"
@@ -31,7 +34,7 @@ module Twemoji
     end
   end
 
-  # Find emoji code by emoji text
+  # Find emoji code by emoji text.
   #
   # @example Usage
   #   Twemoji.find_by_text ":heart_eyes:"
@@ -55,7 +58,7 @@ module Twemoji
     ICODES[must_str(code)]
   end
 
-  # Find emoji text by raw emoji unicode
+  # Find emoji text by raw emoji unicode.
   #
   # @example Usage
   #   Twemoji.find_by_unicode "😍"
@@ -67,7 +70,7 @@ module Twemoji
     ICODES[must_str("%4.4x" % raw.ord)]
   end
 
-  # Render raw emoji unicode from text or emoji code
+  # Render raw emoji unicode from emoji text or emoji code.
   #
   # @example Usage
   #   Twemoji.render_unicode ":heart_eyes:"
@@ -78,15 +81,16 @@ module Twemoji
   # @param text_or_code [String] Emoji text or code to render as unicode.
   # @return [String] Emoji UTF-8 Text.
   def self.render_unicode(text_or_code)
-    text_or_code = find_by_text(text_or_code) if text_or_code[0] == ':'
+    text_or_code = find_by_text(text_or_code) if text_or_code[0] == ":"
     [text_or_code.hex].pack("U")
   end
 
-  # Parse text, replace emoji text with image.
+  # Parse string, replace emoji text with image.
+  # Parse DOM, replace emoji with image.
   #
   # @example Usage
   #   Twemoji.parse("I like chocolate :heart_eyes:!")
-  #   => => 'I like chololate <img class="emoji" draggable="false" alt="😍" src="https://twemoji.maxcdn.com/svg/1f60d.svg">'
+  #   => "I like chocolate <img class='emoji' draggable='false' title=':heart_eyes:' alt='😍' src='https://twemoji.maxcdn.com/16x16/1f60d.png'>!"
   #
   # @param text [String] Source text to parse.
   #
