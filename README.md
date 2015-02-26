@@ -56,13 +56,29 @@ gem "twemoji", github: "bramswenson/twemoji", branch: "ruby-1.9.3"
 => ":heart_eyes:"
 ```
 
-#### `Twemoji.find_by` text or code
+#### `Twemoji.find_by_unicode`
+
+```ruby
+> Twemoji.find_by_unicode("😍")
+=> ":heart_eyes:"
+
+> Twemoji.find_by_unicode("\u{1f60d}")
+=> ":heart_eyes:"
+```
+
+#### `Twemoji.find_by` text, code or unicode
 
 ```ruby
 > Twemoji.find_by(text: ":heart_eyes:")
 => 1f60d
 
 > Twemoji.find_by(code: "1f60d")
+=> :heart_eyes:
+
+> Twemoji.find_by(unicode: "😍")
+=> :heart_eyes:
+
+> Twemoji.find_by(unicode: "u\{1f60d}")
 => :heart_eyes:
 ```
 
