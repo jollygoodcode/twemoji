@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 1.1.0 - 2015.02.27
+
 - Some more documentations @JuanitoFatas
 
 - Behave more like twemoji.js. @bramswenson [#5](https://github.com/jollygoodcode/twemoji/pull/5)
