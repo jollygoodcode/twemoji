@@ -125,3 +125,13 @@ Twemoji.parse("I like chocolate :heart_eyes:!", class_name: 'twemoji', img_attr:
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
+
+## Credits
+
+A huge THANK YOU to all our [contributors] (https://github.com/jollygoodcode/twemoji/graphs/contributors)! :heart:
+
+This project is maintained by [Jolly Good Code](http://www.jollygoodcode.com).
+
+## License
+
+MIT License. See [LICENSE](LICENSE) for details.
