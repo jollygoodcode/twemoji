@@ -8,7 +8,7 @@
 [travis]: https://travis-ci.org/jollygoodcode/twemoji
 [inch-doc]: http://inch-ci.org/github/jollygoodcode/twemoji
 
-Twitter [opensourced Twitter Emoji](http://twitter.github.io/twemoji/) in Nov 2014 and they have an official JavaScript implementation of it at [twemoji](https://github.com/twitter/twemoji). 
+Twitter [opensourced Twitter Emoji](http://twitter.github.io/twemoji/) and the official JavaScript implementation is available at [twemoji](https://github.com/twitter/twemoji). 
 
 This RubyGem `twemoji` is a minimum implementation of Twitter Emoji in Ruby so that you can haz emoji in your Ruby/Rails apps too! 
 
@@ -32,7 +32,7 @@ Or install it yourself as:
 
 ### Ruby 1.9.3 Support
 
-@bramswenson has put an effeort to support Ruby 1.9.3, please use [his forked branch](https://github.com/bramswenson/twemoji/tree/ruby-1.9.3):
+@bramswenson has put in effort to support Ruby 1.9.3, please use [his forked branch](https://github.com/bramswenson/twemoji/tree/ruby-1.9.3):
 
 ```ruby
 gem "twemoji", github: "bramswenson/twemoji", branch: "ruby-1.9.3"
@@ -155,6 +155,10 @@ List of image attributes for the `img` tag. Optional.
 > Twemoji.emoji_pattern
 => /(:smile:|:laughing:| ... |:womens:|:x:|:zero:)/
 ```
+
+## Attribution Requirements
+
+Please follow the [Attribution Requirements](https://github.com/twitter/twemoji#attribution-requirements) as stated on the official Twemoji (JS) repo.
 
 ## Contributing
 
