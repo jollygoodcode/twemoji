@@ -8,7 +8,11 @@
 [travis]: https://travis-ci.org/jollygoodcode/twemoji
 [inch-doc]: http://inch-ci.org/github/jollygoodcode/twemoji
 
-Twitter Emoji has a official JavaScript implementation of [twemoji](https://github.com/twitter/twemoji). This RubyGem Twemoji is a minimum implementation in Ruby, does not implement all its features.
+Twitter [opensourced Twitter Emoji](http://twitter.github.io/twemoji/) in Nov 2014 and they have an official JavaScript implementation of it at [twemoji](https://github.com/twitter/twemoji). 
+
+This RubyGem `twemoji` is a minimum implementation of Twitter Emoji in Ruby so that you can haz emoji in your Ruby/Rails apps too! 
+
+__Note:__ This gem might not implement all the features available in the JavaScript implementation.
 
 ## Installation
 
@@ -36,7 +40,7 @@ gem "twemoji", github: "bramswenson/twemoji", branch: "ruby-1.9.3"
 
 ## Integration
 
-- [Integration with html-pipeline](https://github.com/jollygoodcode/twemoji/wiki/Integrate-with-html-pipeline)
+- [Integration with `html-pipeline`](https://github.com/jollygoodcode/twemoji/wiki/Integrate-with-html-pipeline)
 
 ## Usage
 
@@ -100,7 +104,7 @@ gem "twemoji", github: "bramswenson/twemoji", branch: "ruby-1.9.3"
 
 ##### `asset_root`
 
-Default assets root url, by default will be `https://twemoji.maxcdn.com/`:
+Default assets root url. Defaults to `https://twemoji.maxcdn.com/`:
 
 ```ruby
 > Twemoji.parse 'I like chocolate :heart_eyes:!', asset_root: "foocdn.com"
@@ -109,7 +113,7 @@ Default assets root url, by default will be `https://twemoji.maxcdn.com/`:
 
 ##### `file_ext`
 
-Default assets file extensions, by default `.png`.
+Default assets file extensions. Defaults to `.png`.
 
 ```ruby
 > Twemoji.parse 'I like chocolate :heart_eyes:!', file_ext: ".svg"
@@ -118,7 +122,9 @@ Default assets file extensions, by default `.png`.
 
 ##### `image_size`
 
-Default assets/folder size, by default `"16x16"`. Available via Twitter CDN: `16`, `36`, `72`.
+Default assets/folder size. Defaults to `"16x16"`. 
+
+Sizes available via Twitter CDN: `16`, `36`, `72`.
 
 ```ruby
 > Twemoji.parse 'I like chocolate :heart_eyes:!', image_size: "72x72"
@@ -127,7 +133,7 @@ Default assets/folder size, by default `"16x16"`. Available via Twitter CDN: `16
 
 ##### `class_name`
 
-Default img css class name, by default `"emoji"`.
+Default image CSS class name. Defaults to `"emoji"`.
 
 ```ruby
 > Twemoji.parse 'I like chocolate :heart_eyes:!', class_name: "superemoji"
@@ -135,6 +141,8 @@ Default img css class name, by default `"emoji"`.
 ```
 
 ##### `img_attr`
+
+List of image attributes for the `img` tag. Optional.
 
 ```ruby
 > Twemoji.parse("I like chocolate :heart_eyes:!", class_name: 'twemoji', img_attr: "style='height: 1.3em;'")
