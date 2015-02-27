@@ -8,9 +8,9 @@
 [travis]: https://travis-ci.org/jollygoodcode/twemoji
 [inch-doc]: http://inch-ci.org/github/jollygoodcode/twemoji
 
-Twitter [opensourced Twitter Emoji](http://twitter.github.io/twemoji/) and the official JavaScript implementation is available at [twemoji](https://github.com/twitter/twemoji). 
+Twitter [opensourced Twitter Emoji](http://twitter.github.io/twemoji/) and the official JavaScript implementation is available at [twemoji](https://github.com/twitter/twemoji).
 
-This RubyGem `twemoji` is a minimum implementation of Twitter Emoji in Ruby so that you can haz emoji in your Ruby/Rails apps too! 
+This RubyGem `twemoji` is a minimum implementation of Twitter Emoji in Ruby so that you can haz emoji in your Ruby/Rails apps too!
 
 __Note:__ This gem might not implement all the features available in the JavaScript implementation.
 
@@ -41,6 +41,32 @@ gem "twemoji", github: "bramswenson/twemoji", branch: "ruby-1.9.3"
 ## Integration
 
 - [Integration with `html-pipeline`](https://github.com/jollygoodcode/twemoji/wiki/Integrate-with-html-pipeline)
+
+## Rails Helper
+
+`$ touch app/helpers/emoji_helper.rb`
+
+```ruby
+module EmojiHelper
+  def emojify(content, **options)
+    Twemoji.parse(h(content), options).html_safe if content.present?
+  end
+end
+```
+
+In your ERb view:
+
+```erb
+<%= emojify "I like chocolate :heart_eyes:!", image_size: "36x36 %>"
+```
+
+will render
+
+```
+I like chocolate <img class="emoji" draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/36x36/1f60d.png">!
+```
+
+More options could be passed in, please see [Twemoji.parse options](https://github.com/jollygoodcode/twemoji#twemojiparse-options) for more details.
 
 ## Usage
 
@@ -122,7 +148,7 @@ Default assets file extensions. Defaults to `.png`.
 
 ##### `image_size`
 
-Default assets/folder size. Defaults to `"16x16"`. 
+Default assets/folder size. Defaults to `"16x16"`.
 
 Sizes available via Twitter CDN: `16`, `36`, `72`.
 
