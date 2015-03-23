@@ -40,7 +40,7 @@ gem "twemoji", github: "bramswenson/twemoji", branch: "ruby-1.9.3"
 
 ## Integration
 
-- [Integration with `html-pipeline`](https://github.com/jollygoodcode/twemoji/wiki/Integrate-with-html-pipeline)
+- [Integration with `HTML::Pipeline`](https://github.com/jollygoodcode/twemoji/wiki/Integrate-with-HTML%3A%3APipeline)
 
 ## Rails Helper
 
