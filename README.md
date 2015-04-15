@@ -57,7 +57,7 @@ end
 In your ERb view:
 
 ```erb
-<%= emojify "I like chocolate :heart_eyes:!", image_size: "36x36 %>"
+<%= emojify "I like chocolate :heart_eyes:!", image_size: "36x36" %>
 ```
 
 will render
