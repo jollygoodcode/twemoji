@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+- Twemoji Configuration [#15](https://github.com/jollygoodcode/twemoji/pull/15)
+
+  ```ruby
+  Twemoji.configure do
+    config.asset_root = "https://twemoji.awesomecdn.com/"
+    config.file_ext   = ".svg"
+    config.image_size = nil # only png need to set size
+    config.class_name = "twemoji"
+    config.img_attr   = "style='height: 1.3em;'"
+  end
+  ```
+
 ## 1.1.0 - 2015.02.27
 
 - Some more documentations @JuanitoFatas
