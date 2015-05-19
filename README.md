@@ -182,6 +182,20 @@ List of image attributes for the `img` tag. Optional.
 => /(:smile:|:laughing:| ... |:womens:|:x:|:zero:)/
 ```
 
+## Configuration
+
+`Twemoji.parse` options can be given in configure block:
+
+```ruby
+Twemoji.configure do |config|
+  config.asset_root = "https://twemoji.awesomecdn.com/"
+  config.file_ext   = ".svg"
+  config.image_size = nil # only png need to set size
+  config.class_name = "twemoji"
+  config.img_attr   = "style='height: 1.3em;'"
+end
+```
+
 ## Attribution Requirements
 
 Please follow the [Attribution Requirements](https://github.com/twitter/twemoji#attribution-requirements) as stated on the official Twemoji (JS) repo.

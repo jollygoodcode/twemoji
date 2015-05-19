@@ -2,6 +2,7 @@ require "nokogiri"
 
 require "twemoji/version"
 require "twemoji/map"
+require "twemoji/configuration"
 
 # Twemoji is a Ruby implementation, parses your text, replace emoji text
 # with corresponding emoji image. Default emoji images are from Twiiter CDN.
@@ -102,11 +103,11 @@ module Twemoji
   #
   # @return [String] Original text with all occurrences of emoji text
   # replaced by emoji image according to given options.
-  def self.parse(text, asset_root: "https://twemoji.maxcdn.com/",
-                       file_ext:   ".png",
-                       image_size: "16x16",
-                       class_name: "emoji",
-                       img_attr: nil)
+  def self.parse(text, asset_root: Twemoji.configuration.asset_root,
+                       file_ext:   Twemoji.configuration.file_ext,
+                       image_size: Twemoji.configuration.image_size,
+                       class_name: Twemoji.configuration.class_name,
+                       img_attr:   Twemoji.configuration.img_attr)
 
     options[:asset_root] = asset_root
     options[:file_ext]   = file_ext
