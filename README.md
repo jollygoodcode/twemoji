@@ -166,13 +166,22 @@ Default image CSS class name. Defaults to `"emoji"`.
 => "I like chocolate <img class='superemoji' draggable='false' title=':heart_eyes:' alt='😍' src='https://twemoji.maxcdn.com/16x16/1f60d.png'>!"
 ```
 
-##### `img_attr`
+##### `img_attrs`
 
 List of image attributes for the `img` tag. Optional.
 
 ```ruby
-> Twemoji.parse("I like chocolate :heart_eyes:!", class_name: 'twemoji', img_attr: "style='height: 1.3em;'")
+> Twemoji.parse("I like chocolate :heart_eyes:!", class_name: 'twemoji', img_attrs: { style: "height: 1.3em;" })
 => "I like chocolate <img class='twemoji' draggable='false' title=':heart_eyes:' alt='😍' style='height: 1.3em;' src='https://twemoji.maxcdn.com/16x16/1f60d.png'>!"
+```
+
+attribute value can apply proc-like object, remove `:` from title attribute:
+
+```ruby
+> no_colons = ->(name) { name.gsub(":", "") }
+
+> Twemoji.parse("I like chocolate :heart_eyes:!", class_name: 'twemoji', img_attrs: { title: no_colons })
+=> "I like chocolate <img class='twemoji' draggable='false' title='heart_eyes' alt='😍' src='https://twemoji.maxcdn.com/16x16/1f60d.png'>!"
 ```
 
 #### `Twemoji.emoji_pattern`
@@ -192,7 +201,7 @@ Twemoji.configure do |config|
   config.file_ext   = ".svg"
   config.image_size = nil # only png need to set size
   config.class_name = "twemoji"
-  config.img_attr   = "style='height: 1.3em;'"
+  config.img_attrs  = { style: "height: 1.3em;" }
 end
 ```
 
@@ -210,7 +219,7 @@ Please follow the [Attribution Requirements](https://github.com/twitter/twemoji#
 
 ## Credits
 
-A huge THANK YOU to all our [contributors] (https://github.com/jollygoodcode/twemoji/graphs/contributors)! :heart:
+A huge THANK YOU to all our [contributors](https://github.com/jollygoodcode/twemoji/graphs/contributors)! :heart:
 
 This project is maintained by [Jolly Good Code](http://www.jollygoodcode.com).
 
