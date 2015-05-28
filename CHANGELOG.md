@@ -2,6 +2,36 @@
 
 ## Unreleased
 
+- **Breaking change**: `Tewmoji.parse` `img_attr` option changed to `img_attrs` [#16](https://github.com/jollygoodcode/twemoji/pull/16)
+
+  Old behaviour to specify `img` HTML attributes was passed in as a string to
+  `img_attr` option from `Twemoji.parse`. **This API is removed**.
+
+  Now please use `img_attrs` and passed in attribute-value pair you want in the
+  form of Hash. You can now specify any HTML attributes to rendered emoji `img`.
+
+  Note that the value of `img` tag attributes can be a proc-like object run
+  against emoji name. Say if you do not want the colon from the title attribute
+  of `img` tag. You can define a `no_colon = ->(name) { name.gsub(":", "") }`
+  then passed into `Twemoji.parse` like below example:
+
+  ```ruby
+  > Twemoji.parse(":heart_eyes:", img_attrs: { title: no_colon })
+  <img
+    draggable="false"
+    title="heart_eyes"
+    alt=":heart_eyes:"
+    src="https://twemoji.maxcdn.com/16x16/1f60d.png"
+    class="twemoji"
+  >
+  ```
+
+  ```ruby
+  Twemoji.configure do |config|
+    config.img_attrs = { style: "height: 1.3em;" }
+  end
+  ```
+
 - Twemoji Configuration [#15](https://github.com/jollygoodcode/twemoji/pull/15)
 
   ```ruby
