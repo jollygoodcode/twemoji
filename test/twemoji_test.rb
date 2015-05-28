@@ -86,10 +86,16 @@ class TwemojiTest < Minitest::Test
     assert_equal expected, Twemoji.parse("I like chocolate :heart_eyes:!", class_name: 'twemoji')
   end
 
-  def test_parse_option_img_attr
+  def test_parse_option_single_img_attr
     expected = %(I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/16x16/1f60d.png" class="twemoji" style="height: 1.3em;">!)
 
     assert_equal expected, Twemoji.parse("I like chocolate :heart_eyes:!", class_name: 'twemoji', img_attrs: { style: 'height: 1.3em;' })
+  end
+
+  def test_parse_option_multiple_img_attrs
+    expected = %(I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/16x16/1f60d.png" class="twemoji" style="height: 1.3em;" width="20">!)
+
+    assert_equal expected, Twemoji.parse("I like chocolate :heart_eyes:!", class_name: 'twemoji', img_attrs: { style: 'height: 1.3em;', width: "20" })
   end
 
   def test_parse_option_img_attr_callable
