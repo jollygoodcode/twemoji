@@ -228,7 +228,7 @@ module Twemoji
       elsif options[:file_ext] == ".svg"
         File.join(options[:asset_root], "svg", "#{code}.svg")
       else
-        fail "Unspported file extension: #{options[:file_ext]}"
+        fail "Unsupported file extension: #{options[:file_ext]}"
       end
     end
 end
