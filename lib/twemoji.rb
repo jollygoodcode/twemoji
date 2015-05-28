@@ -106,7 +106,7 @@ module Twemoji
                        file_ext:   Twemoji.configuration.file_ext,
                        image_size: Twemoji.configuration.image_size,
                        class_name: Twemoji.configuration.class_name,
-                       img_attrs: {})
+                       img_attrs:  Twemoji.configuration.img_attrs)
 
     options[:asset_root] = asset_root
     options[:file_ext]   = file_ext

@@ -71,7 +71,7 @@ class TwemojiTest < Minitest::Test
       Twemoji.parse("I like chocolate :heart_eyes:!", file_ext: '.gif')
     end
 
-    assert_equal "Unspported file extension: .gif", exception.message
+    assert_equal "Unsupported file extension: .gif", exception.message
   end
 
   def test_parse_option_image_size
