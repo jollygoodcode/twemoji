@@ -207,17 +207,15 @@ module Twemoji
     def self.img_tag(name)
       # set default attributes and override from img_attr
       attributes = {
-        draggable: 'false',
+        draggable: "false",
         title:     name,
         alt:       render_unicode(name),
         src:       emoji_url(name)
-      }.merge(options[:img_attr])
+      }.merge!(options[:img_attr])
 
       # run value filters where given
-      attributes.keys.each do |attr|
-        if attributes[attr].respond_to?(:call)
-          attributes[attr] = attributes[attr].call(name)
-        end
+      attributes.each do |key, value|
+        attributes[key] = value.call(name) if value.respond_to?(:call)
       end
 
       %(<img #{hash_to_attributes(attributes)}>)
