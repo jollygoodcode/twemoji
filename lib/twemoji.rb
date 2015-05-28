@@ -220,7 +220,7 @@ module Twemoji
         end
       end
 
-      "<img #{hash_to_attributes(attributes)}>"
+      %(<img #{hash_to_attributes(attributes)}>)
     end
 
     # Returns emoji url by given name and options from `Twemoji.parse`.
@@ -246,10 +246,6 @@ module Twemoji
     # @return [String] String of attributes suitable for use in tag
     # @private
     def self.hash_to_attributes(hash)
-      hash.inject('') do |attributes, (attr, value)|
-        attributes += ' ' unless attributes == ''
-        attributes += "#{attr}='#{value}'"
-        attributes
-      end
+      hash.map { |attr, value| %(#{attr}="#{value}") }.join(' ')
     end
 end
