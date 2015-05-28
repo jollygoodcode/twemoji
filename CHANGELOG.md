@@ -5,7 +5,7 @@
 - Twemoji Configuration [#15](https://github.com/jollygoodcode/twemoji/pull/15)
 
   ```ruby
-  Twemoji.configure do
+  Twemoji.configure do |config|
     config.asset_root = "https://twemoji.awesomecdn.com/"
     config.file_ext   = ".svg"
     config.image_size = nil # only png need to set size
