@@ -11,4 +11,5 @@ end
 
 group :test do
   gem "minitest", ">= 5.5"
+  gem "minitest-emoji"
 end
