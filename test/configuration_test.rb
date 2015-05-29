@@ -11,7 +11,7 @@ class TwemojiConfigurationTest < Minitest::Test
     assert_equal ".png", Twemoji.configuration.file_ext
     assert_equal "16x16", Twemoji.configuration.image_size
     assert_equal "emoji", Twemoji.configuration.class_name
-    assert_equal nil, Twemoji.configuration.img_attr
+    assert_equal Hash(nil), Twemoji.configuration.img_attrs
   end
 
   def test_configuration_asset_root
@@ -47,11 +47,11 @@ class TwemojiConfigurationTest < Minitest::Test
     assert_equal "twemoji", Twemoji.configuration.class_name
   end
 
-  def test_configuration_img_attr
+  def test_configuration_img_attrs
     Twemoji.configure do |config|
-      config.img_attr = "style='height: 1.3em;'"
+      config.img_attrs = { style: "height: 1.3em" }
     end
 
-    assert_equal "style='height: 1.3em;'", Twemoji.configuration.img_attr
+    assert_equal Hash(style: "height: 1.3em"), Twemoji.configuration.img_attrs
   end
 end

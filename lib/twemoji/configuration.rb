@@ -12,14 +12,14 @@ module Twemoji
   end
 
   class Configuration
-    attr_accessor :asset_root, :file_ext, :image_size, :class_name, :img_attr
+    attr_accessor :asset_root, :file_ext, :image_size, :class_name, :img_attrs
 
     def initialize
       @asset_root = "https://twemoji.maxcdn.com/".freeze
       @file_ext   = ".png".freeze
       @image_size = "16x16".freeze
       @class_name = "emoji".freeze
-      @img_attr   = nil
+      @img_attrs  = {}
     end
   end
 end
