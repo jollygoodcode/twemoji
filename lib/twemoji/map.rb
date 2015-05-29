@@ -834,7 +834,7 @@ module Twemoji
   ":womens:"                          => "1f6ba",
   ":x:"                               => "274c",
   ":zero:"                            => "30-20e3"
-  }.each { | k, v| k.freeze; v.freeze }.freeze
+  }.each { |k, v| k.freeze; v.freeze }.freeze
 
   # Emoji Codepoint to Text mappings. This hash is frozen.
   #
