@@ -1,7 +1,8 @@
 require "nokogiri"
-
+require "json"
 require "twemoji/version"
 require "twemoji/map"
+require "twemoji/json"
 require "twemoji/configuration"
 
 # Twemoji is a Ruby implementation, parses your text, replace emoji text
@@ -125,6 +126,35 @@ module Twemoji
   # @return [RegExp] A Regular expression consists of all emojis text.
   def self.emoji_pattern
     @emoji_pattern ||= /(#{CODES.keys.each { |name| Regexp.escape(name) }.join("|") })/
+  end
+
+  # Return Twemoji json string, unicode => twemoji CDN url
+  #
+  # @example Output
+  # {
+  #   ":heart_eyes:": "https://twemoji.maxcdn.com/svg/1f60d.svg"
+  # }
+  #
+  # option [String] (optional) :file_ext - image extension: svg or png
+  # option [String] (optional) :image_size - if file_ext is png, can choose size of png from
+  #                                          "16x16", "32x32", "72x72"
+  # @return [String] Twemoji json string
+  def self.to_json(file_ext: "png", image_size: "16x16")
+    output = if file_ext == "svg"
+      Twemoji::SVG
+    elsif file_ext == "png"
+      case image_size
+      when "16x16" then Twemoji::PNG_16x16
+      when "36x36" then Twemoji::PNG_36x36
+      when "72x72" then Twemoji::PNG_72x72
+      else
+        fail %(Unsupported png image size: `#{image_size}', supported: "16x16", "36x36", "72x72".)
+      end
+    else
+      fail %(Unsupported file extension: `#{file_ext}', supported: "png" and "svg".)
+    end
+
+    output.to_json
   end
 
   private
