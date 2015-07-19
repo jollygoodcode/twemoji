@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Soften Nokogiri dependency to ~> 1.6.2 (>= 1.6.2, < 1.7) [#19](https://github.com/jollygoodcode/twemoji/pull/19)
+
 ## 2.0.0 - 2015.05.29
 
 - **Breaking change**: `Tewmoji.parse` `img_attr` option changed to `img_attrs` [#16](https://github.com/jollygoodcode/twemoji/pull/16)
