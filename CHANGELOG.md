@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 1.1.1 - 2015.07.19
+
+- Soften Nokogiri dependency to ~> 1.6.2 (>= 1.6.2, < 1.7) [#19](https://github.com/jollygoodcode/twemoji/pull/19)
+
 ## 1.1.0 - 2015.02.27
 
 - Some more documentations @JuanitoFatas
