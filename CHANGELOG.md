@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Required Ruby 2.0+ [#12](https://github.com/jollygoodcode/twemoji/pull/12)
+
 - Export JSON for SVG and PNG (16x16, 36x36, 72x72) [#18](https://github.com/jollygoodcode/twemoji/pull/18)
 
 ## 2.0.1 - 2015.07.19
