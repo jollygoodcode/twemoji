@@ -191,6 +191,30 @@ attribute value can apply proc-like object, remove `:` from title attribute:
 => /(:smile:|:laughing:| ... |:womens:|:x:|:zero:)/
 ```
 
+#### `Twemoji.to_json`
+
+Returns emoji json, example of output:
+
+```json
+{
+  ...
+  ":heart_eyes:": "https://twemoji.maxcdn.com/svg/1f60d.svg"
+  ...
+}
+```
+
+Support `svg` or `png`, `png` can specify size from `16x16`, `36x36` or `72x72`.
+
+```ruby
+> Twemoji.to_json(file_ext: "svg")
+
+> Twemoji.to_json(file_ext: "png", image_size: "16x16")
+
+> Twemoji.to_json(file_ext: "png", image_size: "36x36")
+
+> Twemoji.to_json(file_ext: "png", image_size: "72x72")
+```
+
 ## Configuration
 
 `Twemoji.parse` options can be given in configure block:
