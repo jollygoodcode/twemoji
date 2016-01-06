@@ -1,6 +1,6 @@
 # Twemoji
 
-[![Gem Version](http://img.shields.io/gem/v/twemoji.svg)][gem]
+[![Gem Version](https://badge.fury.io/rb/twemoji.svg)](https://badge.fury.io/rb/twemoji)
 [![Build Status](https://travis-ci.org/jollygoodcode/twemoji.svg)][travis]
 [![Inline docs](http://inch-ci.org/github/jollygoodcode/twemoji.svg?branch=master)][inch-doc]
 
