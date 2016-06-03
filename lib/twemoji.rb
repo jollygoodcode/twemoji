@@ -66,7 +66,7 @@ module Twemoji
   #   Twemoji.find_by_unicode "😍"
   #   => ":heart_eyes:"
   #
-  # @param unicode [String] Emoji raw unicode to find text.
+  # @param raw [String] Emoji raw unicode to find text.
   # @return [String] Emoji Text.
   def self.find_by_unicode(raw)
     ICODES[must_str("%4.4x" % raw.ord)]
