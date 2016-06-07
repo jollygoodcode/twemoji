@@ -195,9 +195,34 @@ Specify additional img attributes like so:
 config.img_attrs  = { style: "height: 1.3em;" }
 ```
 
+## Tips (from twitter/twemoji)
+
+### Inline Styles
+
+If you'd like to size the emoji according to the surrounding text, you can add the following CSS to your stylesheet:
+
+```css
+img.emoji {
+  height: 1em;
+  width: 1em;
+  margin: 0 .05em 0 .1em;
+  vertical-align: -0.1em;
+}
+```
+
+This will make sure emoji derive their width and height from the font-size of the text they're shown with. It also adds just a little bit of space before and after each emoji, and pulls them upwards a little bit for better optical alignment.
+
+### UTF-8 Character Set
+
+To properly support emoji, the document character must be set to UTF-8. This can done by including the following meta tag in the document <head>
+
+```html
+<meta charset="utf-8">
+```
+
 ## Attribution Requirements
 
-Please follow the [Attribution Requirements](https://github.com/twitter/twemoji#attribution-requirements) as stated on the official Twemoji (JS) repo.
+**IMPORTANT:** Please follow the [Attribution Requirements](https://github.com/twitter/twemoji#attribution-requirements) as stated on the official Twemoji (JS) repo.
 
 ## Contributing
 
