@@ -3,12 +3,11 @@
 ## 3.0.0 - 2016.06.08
 
 - Add support to twemoji.js V2
-- twemoji.js only
 - asset_root changed to `https://twemoji.maxcdn.com/2`
 - PNG only has one size `72x72`
 - Require Ruby 2.0+
 - Remove Twemoji.to_json method
-- Add Twemoji::SVG (not loaded by default)
+- Add Twemoji::SVG (not loaded by default), looks like:
 
   ```ruby
   {
@@ -18,7 +17,7 @@
   }
   ```
 
-- Add Twemoji::PNG (not loaded by default)
+- Add Twemoji::PNG (not loaded by default), looks like:
 
   ```ruby
   {
