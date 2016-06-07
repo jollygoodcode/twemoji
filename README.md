@@ -207,6 +207,8 @@ Please see the [CONTRIBUTING.md](/CONTRIBUTING.md) file.
 
 A huge THANK YOU to all our [contributors](https://github.com/jollygoodcode/twemoji/graphs/contributors)! :heart:
 
+The emoji keywords are from [jollygoodcode/emoji-keywords](https://github.com/jollygoodcode/emoji-keywords).
+
 ## License
 
 Please see the [LICENSE.md](/LICENSE.md) file.
