@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Twemoji
   def self.configuration
     @configuration ||= Configuration.new
@@ -12,13 +14,12 @@ module Twemoji
   end
 
   class Configuration
-    attr_accessor :asset_root, :file_ext, :image_size, :class_name, :img_attrs
+    attr_accessor :asset_root, :file_ext, :class_name, :img_attrs
 
     def initialize
-      @asset_root = "https://twemoji.maxcdn.com/".freeze
-      @file_ext   = ".png".freeze
-      @image_size = "16x16".freeze
-      @class_name = "emoji".freeze
+      @asset_root = "https://twemoji.maxcdn.com/2"
+      @file_ext   = ".png"
+      @class_name = "emoji"
       @img_attrs  = {}
     end
   end

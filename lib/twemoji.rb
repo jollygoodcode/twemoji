@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "nokogiri"
 require "json"
 require "twemoji/version"
@@ -97,20 +99,17 @@ module Twemoji
   #
   # @option options [String] (optional) asset_root Asset root url to serve emoji.
   # @option options [String] (optional) file_ext   File extension.
-  # @option options [String] (optional) image_size Emoji image's size 16, 36, 72 applicable if specify .png.
   # @option options [String] (optional) img_attrs Emoji image's img tag attributes.
   #
   # @return [String] Original text with all occurrences of emoji text
   # replaced by emoji image according to given options.
   def self.parse(text, asset_root: Twemoji.configuration.asset_root,
                        file_ext:   Twemoji.configuration.file_ext,
-                       image_size: Twemoji.configuration.image_size,
                        class_name: Twemoji.configuration.class_name,
                        img_attrs:  Twemoji.configuration.img_attrs)
 
     options[:asset_root] = asset_root
     options[:file_ext]   = file_ext
-    options[:image_size] = image_size
     options[:img_attrs]  = { class: class_name }.merge! img_attrs
 
     if text.is_a?(Nokogiri::HTML::DocumentFragment)
@@ -219,7 +218,7 @@ module Twemoji
       code = find_by_text(name)
 
       if options[:file_ext] == ".png"
-        File.join(options[:asset_root], options[:image_size], "#{code}.png")
+        File.join(options[:asset_root], "72x72", "#{code}.png")
       elsif options[:file_ext] == ".svg"
         File.join(options[:asset_root], "svg", "#{code}.svg")
       else

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Twemoji
   # Emoji Text to Codepoint mappings. This hash is frozen.
   #
@@ -1668,7 +1670,7 @@ module Twemoji
     ":copyright:" => "a9",
     ":registered_sign:" => "ae",
     ":shibuya:" => "e50a",
-  }.each { |k, v| k.freeze; v.freeze }.freeze
+  }.freeze
 
   # Emoji Codepoint to Text mappings. This hash is frozen.
   #

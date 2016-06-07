@@ -63,7 +63,7 @@ In your ERb view:
 will render
 
 ```
-I like chocolate <img class="emoji" draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/36x36/1f60d.png">!
+I like chocolate <img class="emoji" draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/36x36/1f60d.png">!
 ```
 
 More options could be passed in, please see [Twemoji.parse options](https://github.com/jollygoodcode/twemoji#twemojiparse-options) for more details.
@@ -123,18 +123,18 @@ More options could be passed in, please see [Twemoji.parse options](https://gith
 
 ```ruby
 > Twemoji.parse "I like chocolate :heart_eyes:!"
-=> "I like chocolate <img class='emoji' draggable='false' title=':heart_eyes:' alt='😍' src='https://twemoji.maxcdn.com/16x16/1f60d.png'>!"
+=> "I like chocolate <img class='emoji' draggable='false' title=':heart_eyes:' alt='😍' src='https://twemoji.maxcdn.com/2/72x72/1f60d.png'>!"
 ```
 
 ##### `Twemoji.parse` options
 
 ##### `asset_root`
 
-Default assets root url. Defaults to `https://twemoji.maxcdn.com/`:
+Default assets root url. Defaults to `https://twemoji.maxcdn.com/2/`:
 
 ```ruby
 > Twemoji.parse 'I like chocolate :heart_eyes:!', asset_root: "foocdn.com"
-=> "I like chocolate <img class='emoji' draggable='false' title=':heart_eyes:' alt='😍' src='foocdn.com/16x16/1f60d.png'>!"
+=> "I like chocolate <img class='emoji' draggable='false' title=':heart_eyes:' alt='😍' src='foocdn.com/72x72/1f60d.png'>!"
 ```
 
 ##### `file_ext`
@@ -143,7 +143,7 @@ Default assets file extensions. Defaults to `.png`.
 
 ```ruby
 > Twemoji.parse 'I like chocolate :heart_eyes:!', file_ext: ".svg"
-=> "I like chocolate <img class='emoji' draggable='false' title=':heart_eyes:' alt='😍' src='https://twemoji.maxcdn.com/svg/1f60d.svg'>!"
+=> "I like chocolate <img class='emoji' draggable='false' title=':heart_eyes:' alt='😍' src='https://twemoji.maxcdn.com/2/svg/1f60d.svg'>!"
 ```
 
 ##### `image_size`
@@ -154,7 +154,7 @@ Sizes available via Twitter CDN: `16`, `36`, `72`.
 
 ```ruby
 > Twemoji.parse 'I like chocolate :heart_eyes:!', image_size: "72x72"
-=> "I like chocolate <img class='emoji' draggable='false' title=':heart_eyes:' alt='😍' src='https://twemoji.maxcdn.com/72x72/1f60d.png'>!"
+=> "I like chocolate <img class='emoji' draggable='false' title=':heart_eyes:' alt='😍' src='https://twemoji.maxcdn.com/2/72x72/1f60d.png'>!"
 ```
 
 ##### `class_name`
@@ -163,7 +163,7 @@ Default image CSS class name. Defaults to `"emoji"`.
 
 ```ruby
 > Twemoji.parse 'I like chocolate :heart_eyes:!', class_name: "superemoji"
-=> "I like chocolate <img class='superemoji' draggable='false' title=':heart_eyes:' alt='😍' src='https://twemoji.maxcdn.com/16x16/1f60d.png'>!"
+=> "I like chocolate <img class='superemoji' draggable='false' title=':heart_eyes:' alt='😍' src='https://twemoji.maxcdn.com/2/72x72/1f60d.png'>!"
 ```
 
 ##### `img_attrs`
@@ -172,7 +172,7 @@ List of image attributes for the `img` tag. Optional.
 
 ```ruby
 > Twemoji.parse("I like chocolate :heart_eyes:!", class_name: 'twemoji', img_attrs: { style: "height: 1.3em;" })
-=> "I like chocolate <img class='twemoji' draggable='false' title=':heart_eyes:' alt='😍' style='height: 1.3em;' src='https://twemoji.maxcdn.com/16x16/1f60d.png'>!"
+=> "I like chocolate <img class='twemoji' draggable='false' title=':heart_eyes:' alt='😍' style='height: 1.3em;' src='https://twemoji.maxcdn.com/2/72x72/1f60d.png'>!"
 ```
 
 attribute value can apply proc-like object, remove `:` from title attribute:
@@ -181,7 +181,7 @@ attribute value can apply proc-like object, remove `:` from title attribute:
 > no_colons = ->(name) { name.gsub(":", "") }
 
 > Twemoji.parse("I like chocolate :heart_eyes:!", class_name: 'twemoji', img_attrs: { title: no_colons })
-=> "I like chocolate <img class='twemoji' draggable='false' title='heart_eyes' alt='😍' src='https://twemoji.maxcdn.com/16x16/1f60d.png'>!"
+=> "I like chocolate <img class='twemoji' draggable='false' title='heart_eyes' alt='😍' src='https://twemoji.maxcdn.com/2/72x72/1f60d.png'>!"
 ```
 
 #### `Twemoji.emoji_pattern`
@@ -191,42 +191,27 @@ attribute value can apply proc-like object, remove `:` from title attribute:
 => /(:smile:|:laughing:| ... |:womens:|:x:|:zero:)/
 ```
 
-#### `Twemoji.to_json`
+#### JSON for your front-end
 
-Returns emoji json, example of output:
-
-```json
-{
-  ...
-  ":heart_eyes:": "https://twemoji.maxcdn.com/svg/1f60d.svg"
-  ...
-}
-```
-
-Support `svg` or `png`, `png` can specify size from `16x16`, `36x36` or `72x72`.
-
-```ruby
-> Twemoji.to_json(file_ext: "svg")
-
-> Twemoji.to_json(file_ext: "png", image_size: "16x16")
-
-> Twemoji.to_json(file_ext: "png", image_size: "36x36")
-
-> Twemoji.to_json(file_ext: "png", image_size: "72x72")
-```
+Please take a look at [Twemoji::PNG](lib/twemoji/png.rb) and [Twemoji::SVG](lib/twemoji/svg.rb) and use `to_json` yourself.
 
 ## Configuration
 
-`Twemoji.parse` options can be given in configure block:
+`Twemoji.parse` options can be given in configure block, default values are:
 
 ```ruby
 Twemoji.configure do |config|
-  config.asset_root = "https://twemoji.awesomecdn.com/"
+  config.asset_root = "https://twemoji.maxcdn.com/2"
   config.file_ext   = ".svg"
-  config.image_size = nil # only png need to set size
-  config.class_name = "twemoji"
-  config.img_attrs  = { style: "height: 1.3em;" }
+  config.class_name = "emoji"
+  config.img_attrs  = {}
 end
+```
+
+Specify additional img attributes like so:
+
+```ruby
+config.img_attrs  = { style: "height: 1.3em;" }
 ```
 
 ## Attribution Requirements

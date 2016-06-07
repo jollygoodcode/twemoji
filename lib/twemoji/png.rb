@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Twemoji
   PNG = {
     ":mahjong:" => "https://twemoji.maxcdn.com/2/72x72/1f004.png",
@@ -1661,5 +1663,5 @@ module Twemoji
     ":copyright:" => "https://twemoji.maxcdn.com/2/72x72/a9.png",
     ":registered_sign:" => "https://twemoji.maxcdn.com/2/72x72/ae.png",
     ":shibuya:" => "https://twemoji.maxcdn.com/2/72x72/e50a.png",
-  }.each { |k, v| k.freeze; v.freeze }.freeze
+  }.freeze
 end
