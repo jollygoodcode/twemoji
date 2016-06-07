@@ -209,6 +209,9 @@ module Twemoji
       %(<img #{hash_to_html_attrs(img_attrs_hash)}>)
     end
 
+    PNG_IMAGE_SIZE = "72x72"
+    private_constant :PNG_IMAGE_SIZE
+
     # Returns emoji url by given name and options from `Twemoji.parse`.
     #
     # @param name [String] Emoji name to generate image url.
@@ -218,7 +221,7 @@ module Twemoji
       code = find_by_text(name)
 
       if options[:file_ext] == ".png"
-        File.join(options[:asset_root], "72x72", "#{code}.png")
+        File.join(options[:asset_root], PNG_IMAGE_SIZE, "#{code}.png")
       elsif options[:file_ext] == ".svg"
         File.join(options[:asset_root], "svg", "#{code}.svg")
       else
