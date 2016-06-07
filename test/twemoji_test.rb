@@ -46,7 +46,7 @@ class TwemojiTest < Minitest::Test
   end
 
   def test_parse_plus_one
-    expected = %(<img draggable="false" class="emoji" alt="👍" src="https://twemoji.maxcdn.com/2/72x72/1f44d.png">)
+    expected = %(<img draggable="false" title=":+1:" alt="👍" src="https://twemoji.maxcdn.com/2/72x72/1f44d.png" class="emoji">)
 
     assert_equal expected, Twemoji.parse(":+1:")
   end
