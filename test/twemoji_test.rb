@@ -6,7 +6,7 @@ class TwemojiTest < Minitest::Test
   end
 
   def test_number_of_emojis
-    assert_equal 874, Twemoji::CODES.size
+    assert_equal 1661, Twemoji::CODES.size
   end
 
   def test_finder_methods_cannot_find_by_more_than_one
