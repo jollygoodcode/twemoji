@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add a `bin/hack` script to make gem development easier [#25](https://github.com/jollygoodcode/twemoji/pull/25)
+
 ## 2.1.1 - 2015.10.09
 
 - Export JSON for SVG and PNG (16x16, 36x36, 72x72) [#18](https://github.com/jollygoodcode/twemoji/pull/18)
