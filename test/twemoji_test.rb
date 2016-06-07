@@ -5,6 +5,10 @@ class TwemojiTest < Minitest::Test
     @option = {}
   end
 
+  def test_number_of_emojis
+    assert_equal 874, Twemoji::CODES.size
+  end
+
   def test_finder_methods_cannot_find_by_more_than_one
     exception = assert_raises ArgumentError do
       Twemoji.find_by(text: ":heart_eyes:", code: "1f60d")
@@ -39,6 +43,12 @@ class TwemojiTest < Minitest::Test
 
   def test_find_by_escaped_unicode
     assert_equal ":heart_eyes:", Twemoji.find_by_unicode("\u{1f60d}")
+  end
+
+  def test_parse_plus_one
+    expected = %(<img draggable="false" title=":+1:" alt="👍" src="https://twemoji.maxcdn.com/16x16/1f44d.png" class="emoji">)
+
+    assert_equal expected, Twemoji.parse(":+1:")
   end
 
   def test_parse_html_string

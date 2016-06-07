@@ -125,7 +125,7 @@ module Twemoji
   #
   # @return [RegExp] A Regular expression consists of all emojis text.
   def self.emoji_pattern
-    @emoji_pattern ||= /(#{CODES.keys.each { |name| Regexp.escape(name) }.join("|") })/
+    @emoji_pattern ||= /(#{CODES.keys.map { |name| Regexp.quote(name) }.join("|") })/
   end
 
   # Return Twemoji json string, unicode => twemoji CDN url
