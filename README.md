@@ -1,5 +1,9 @@
 # Twemoji
 
+## Please use Twemoji RubyGem Version 3.0.0+ (1661 emojis!)
+
+Twemoji gem version version 1.x will not be supported.
+
 [![Gem Version](http://img.shields.io/gem/v/twemoji.svg)][gem]
 [![Build Status](https://travis-ci.org/jollygoodcode/twemoji.svg)][travis]
 [![Inline docs](http://inch-ci.org/github/jollygoodcode/twemoji.svg?branch=master)][inch-doc]
