@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Lose released Gem weight [#26](https://github.com/jollygoodcode/twemoji/pull/26)
+
 - Add a `bin/hack` script to make gem development easier [#25](https://github.com/jollygoodcode/twemoji/pull/25)
 
 ## 2.1.1 - 2015.10.09
