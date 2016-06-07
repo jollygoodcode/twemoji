@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+  </head>
+  <body>
+    <h1>Twitter Emoji (Twemoji) Cheatsheet</h1>
+
+    <style>
+      html {
+        font-size: 16px;
+      }
+      ul.emoji-list * {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      ul.emoji-list li {
+        font-size: 2rem;
+        float: left;
+        display: inline-block;
+        padding: 2px;
+        margin: 4px;
+      }
+      img.emoji {
+        height: 1.5rem;
+        width: 1.5rem;
+        margin: 0 .05rem 0 .1rem;
+        vertical-align: -0.1rem;
+      }
+    </style>
+
+    <ul class="emoji-list">
+      % require "twemoji"; Twemoji.configure { |config| config.file_ext = ".svg" }
+      % Twemoji::CODES.sort_by { |k, _| k }.each do |code, _|
+        <li>
+          {{Twemoji.parse(code)}}
+        </li>
+      % end
+    </ul>
+
+    <script>
+      var ul = document.getElementsByTagName('ul')[0];
+      var total = ul.getElementsByTagName('li').length;
+
+      (function (img, metaKey, i) {
+        function copyToClipboard(e) {
+          prompt('Copy to clipboard via ' + metaKey + '+C and Enter', this.title);
+        }
+        for (i = 0; i < img.length; img[i++].onclick = copyToClipboard) {}
+      }(
+        document.getElementsByTagName('img'),
+        /\b(?:Mac |i)OS\b/i.test(navigator.userAgent) ? 'Command' : 'Ctrl'
+      ));
+    </script>
+  </body>
+</html>
