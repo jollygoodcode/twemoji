@@ -30,14 +30,6 @@ Or install it yourself as:
 
     $ gem install twemoji
 
-### Ruby 1.9.3 Support
-
-@bramswenson has put in effort to support Ruby 1.9.3, please use [his forked branch](https://github.com/bramswenson/twemoji/tree/ruby-1.9.3):
-
-```ruby
-gem "twemoji", github: "bramswenson/twemoji", branch: "ruby-1.9.3"
-```
-
 ## Integration
 
 - [Integration with `HTML::Pipeline`](https://github.com/jollygoodcode/twemoji/wiki/Integrate-with-HTML%3A%3APipeline)
