@@ -138,17 +138,6 @@ Default assets file extensions. Defaults to `.png`.
 => "I like chocolate <img class='emoji' draggable='false' title=':heart_eyes:' alt='😍' src='https://twemoji.maxcdn.com/2/svg/1f60d.svg'>!"
 ```
 
-##### `image_size`
-
-Default assets/folder size. Defaults to `"16x16"`.
-
-Sizes available via Twitter CDN: `16`, `36`, `72`.
-
-```ruby
-> Twemoji.parse 'I like chocolate :heart_eyes:!', image_size: "72x72"
-=> "I like chocolate <img class='emoji' draggable='false' title=':heart_eyes:' alt='😍' src='https://twemoji.maxcdn.com/2/72x72/1f60d.png'>!"
-```
-
 ##### `class_name`
 
 Default image CSS class name. Defaults to `"emoji"`.
