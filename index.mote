@@ -38,7 +38,7 @@
 
     <ul class="emoji-list">
       % require "twemoji"; Twemoji.configure { |config| config.file_ext = ".svg" }
-      % Twemoji::CODES.sort_by { |k, _| k }.each do |code, _|
+      % Twemoji::CODES.each do |code, _|
         <li>
           {{Twemoji.parse(code)}}
         </li>
