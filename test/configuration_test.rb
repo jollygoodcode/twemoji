@@ -7,9 +7,8 @@ class TwemojiConfigurationTest < Minitest::Test
   end
 
   def test_configuration_defaults
-    assert_equal "https://twemoji.maxcdn.com/", Twemoji.configuration.asset_root
-    assert_equal ".png", Twemoji.configuration.file_ext
-    assert_equal "16x16", Twemoji.configuration.image_size
+    assert_equal "https://twemoji.maxcdn.com/2", Twemoji.configuration.asset_root
+    assert_equal "svg", Twemoji.configuration.file_ext
     assert_equal "emoji", Twemoji.configuration.class_name
     assert_equal Hash(nil), Twemoji.configuration.img_attrs
   end
@@ -24,19 +23,10 @@ class TwemojiConfigurationTest < Minitest::Test
 
   def test_configuration_file_ext
     Twemoji.configure do |config|
-      config.file_ext = ".svg"
+      config.file_ext = "png"
     end
 
-    assert_equal ".svg", Twemoji.configuration.file_ext
-  end
-
-  def test_configuration_image_size
-    Twemoji.configure do |config|
-      config.file_ext = ".png"
-      config.image_size = "36x36"
-    end
-
-    assert_equal "36x36", Twemoji.configuration.image_size
+    assert_equal "png", Twemoji.configuration.file_ext
   end
 
   def test_configuration_class_name

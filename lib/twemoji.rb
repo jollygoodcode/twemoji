@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require "nokogiri"
 require "json"
 require "twemoji/version"
 require "twemoji/map"
-require "twemoji/json"
 require "twemoji/configuration"
 
 # Twemoji is a Ruby implementation, parses your text, replace emoji text
@@ -12,7 +13,7 @@ module Twemoji
   #
   # @example Usage
   #   Twemoji.find_by(text: ":heart_eyes:") # => "1f60d"
-  #   Twemoji.find_by(code: ":1f60d:")      # => ":heart_eyes:"
+  #   Twemoji.find_by(code: "1f60d")      # => ":heart_eyes:"
   #   Twemoji.find_by(unicode: "😍")        # => ":heart_eyes:"
   #   Twemoji.find_by(unicode: "\u{1f60d}") # => ":heart_eyes:"
   #
@@ -45,7 +46,7 @@ module Twemoji
   # @param text [String] Text to find emoji code.
   # @return [String] Emoji Code.
   def self.find_by_text(text)
-    CODES[must_str(text)]
+    codes[must_str(text)]
   end
 
   # Find emoji text by emoji code.
@@ -57,7 +58,7 @@ module Twemoji
   # @param code [String] Emoji code to find text.
   # @return [String] Emoji Text.
   def self.find_by_code(code)
-    ICODES[must_str(code)]
+    invert_codes[must_str(code)]
   end
 
   # Find emoji text by raw emoji unicode.
@@ -69,7 +70,7 @@ module Twemoji
   # @param raw [String] Emoji raw unicode to find text.
   # @return [String] Emoji Text.
   def self.find_by_unicode(raw)
-    ICODES[must_str("%4.4x" % raw.ord)]
+    invert_codes[must_str("%4.4x" % raw.ord)]
   end
 
   # Render raw emoji unicode from emoji text or emoji code.
@@ -92,26 +93,24 @@ module Twemoji
   #
   # @example Usage
   #   Twemoji.parse("I like chocolate :heart_eyes:!")
-  #   => "I like chocolate <img class='emoji' draggable='false' title=':heart_eyes:' alt='😍' src='https://twemoji.maxcdn.com/16x16/1f60d.png'>!"
+  #   => 'I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="emoji">!'
   #
   # @param text [String] Source text to parse.
   #
   # @option options [String] (optional) asset_root Asset root url to serve emoji.
   # @option options [String] (optional) file_ext   File extension.
-  # @option options [String] (optional) image_size Emoji image's size 16, 36, 72 applicable if specify .png.
-  # @option options [String] (optional) img_attrs Emoji image's img tag attributes.
+  # @option options [String] (optional) class_name Emoji image's tag class attribute.
+  # @option options [String] (optional) img_attrs  Emoji image's img tag attributes.
   #
   # @return [String] Original text with all occurrences of emoji text
   # replaced by emoji image according to given options.
   def self.parse(text, asset_root: Twemoji.configuration.asset_root,
                        file_ext:   Twemoji.configuration.file_ext,
-                       image_size: Twemoji.configuration.image_size,
                        class_name: Twemoji.configuration.class_name,
                        img_attrs:  Twemoji.configuration.img_attrs)
 
     options[:asset_root] = asset_root
     options[:file_ext]   = file_ext
-    options[:image_size] = image_size
     options[:img_attrs]  = { class: class_name }.merge! img_attrs
 
     if text.is_a?(Nokogiri::HTML::DocumentFragment)
@@ -125,36 +124,7 @@ module Twemoji
   #
   # @return [RegExp] A Regular expression consists of all emojis text.
   def self.emoji_pattern
-    @emoji_pattern ||= /(#{CODES.keys.map { |name| Regexp.quote(name) }.join("|") })/
-  end
-
-  # Return Twemoji json string, unicode => twemoji CDN url
-  #
-  # @example Output
-  # {
-  #   ":heart_eyes:": "https://twemoji.maxcdn.com/svg/1f60d.svg"
-  # }
-  #
-  # option [String] (optional) :file_ext - image extension: svg or png
-  # option [String] (optional) :image_size - if file_ext is png, can choose size of png from
-  #                                          "16x16", "32x32", "72x72"
-  # @return [String] Twemoji json string
-  def self.to_json(file_ext: "png", image_size: "16x16")
-    output = if file_ext == "svg"
-      Twemoji::SVG
-    elsif file_ext == "png"
-      case image_size
-      when "16x16" then Twemoji::PNG_16x16
-      when "36x36" then Twemoji::PNG_36x36
-      when "72x72" then Twemoji::PNG_72x72
-      else
-        fail %(Unsupported png image size: `#{image_size}', supported: "16x16", "36x36", "72x72".)
-      end
-    else
-      fail %(Unsupported file extension: `#{file_ext}', supported: "png" and "svg".)
-    end
-
-    output.to_json
+    @emoji_pattern ||= /(#{codes.keys.map { |name| Regexp.quote(name) }.join("|") })/
   end
 
   private
@@ -194,7 +164,7 @@ module Twemoji
     # @return [Nokogiri::HTML::DocumentFragment] Parsed document.
     # @private
     def self.parse_document(doc)
-      doc.xpath('.//text() | text()').each do |node|
+      doc.xpath(".//text() | text()").each do |node|
         content = node.to_html
         next if !content.include?(":")
         next if has_ancestor?(node, %w(pre code tt))
@@ -240,6 +210,9 @@ module Twemoji
       %(<img #{hash_to_html_attrs(img_attrs_hash)}>)
     end
 
+    PNG_IMAGE_SIZE = "72x72"
+    private_constant :PNG_IMAGE_SIZE
+
     # Returns emoji url by given name and options from `Twemoji.parse`.
     #
     # @param name [String] Emoji name to generate image url.
@@ -248,9 +221,9 @@ module Twemoji
     def self.emoji_url(name)
       code = find_by_text(name)
 
-      if options[:file_ext] == ".png"
-        File.join(options[:asset_root], options[:image_size], "#{code}.png")
-      elsif options[:file_ext] == ".svg"
+      if options[:file_ext] == "png"
+        File.join(options[:asset_root], PNG_IMAGE_SIZE, "#{code}.png")
+      elsif options[:file_ext] == "svg"
         File.join(options[:asset_root], "svg", "#{code}.svg")
       else
         fail "Unsupported file extension: #{options[:file_ext]}"

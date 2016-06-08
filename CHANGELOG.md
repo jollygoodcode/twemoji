@@ -2,6 +2,41 @@
 
 ## Unreleased
 
+## 3.0.0 - 2016.06.08
+
+### Features
+
+- Add support to twemoji.js V2
+- Add `Twemoji.svg` (not loaded by default), looks like:
+
+  ```ruby
+  {
+    ...
+    ":heart_eyes:" => "https://twemoji.maxcdn.com/2/svg/1f60d.svg",
+    ...
+  }
+  ```
+
+- Add `Twemoji.png` (not loaded by default), looks like:
+
+  ```ruby
+  {
+    ...
+    ":heart_eyes:" => "https://twemoji.maxcdn.com/2/72x72/1f60d.png",
+    ...
+  }
+  ```
+
+### Breaking Changes
+
+- Require Ruby 2.0+
+- `Twemoji::CODES` changes to `Twemoji.codes`
+- `Twemoji::ICODES` changes to `Twemoji.invert_codes`
+- `asset_root` config default value changed to `https://twemoji.maxcdn.com/2`
+- `file_ext` config default value changed to `svg`, available values are `"svg"` and `"png"`
+- PNG now only has one size `72x72`
+- Remove `Twemoji.to_json` method
+
 ## 2.2.1 - 2016.06.07
 
 - Lose released Gem weight [#26](https://github.com/jollygoodcode/twemoji/pull/26)
