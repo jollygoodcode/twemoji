@@ -145,6 +145,12 @@ class TwemojiTest < Minitest::Test
     assert_equal expected, Twemoji.parse("I like chocolate :heart_eyes:!", class_name: 'twemoji', img_attrs: img_attrs)
   end
 
+  def test_parse_diversity
+    expected = %(<img draggable="false" title=":man::skin-tone-2:" alt="👨🏻" src="https://twemoji.maxcdn.com/2/72x72/1f468-1f3fb.png" class="emoji">)
+
+    assert_equal expected, Twemoji.parse(":man::skin-tone-2:")
+  end
+
   def test_emoji_pattern
     assert_kind_of Regexp, Twemoji.emoji_pattern
   end
