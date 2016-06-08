@@ -5,9 +5,7 @@
 ## 2.2.1 - 2016.06.07
 
 - Lose released Gem weight [#26](https://github.com/jollygoodcode/twemoji/pull/26)
-
 - Add a `bin/hack` script to make gem development easier [#25](https://github.com/jollygoodcode/twemoji/pull/25)
-
 - Add missing 47 emojis [#27](https://github.com/jollygoodcode/twemoji/pull/27)
 - Fix emoji_pattern not properly escaped [#27](https://github.com/jollygoodcode/twemoji/pull/27)
 - Change `:thumbsup:` `:thumbsdown:` to `:+1:` `:-1:`
