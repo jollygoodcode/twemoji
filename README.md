@@ -14,6 +14,11 @@ This RubyGem `twemoji` is a minimum implementation of Twitter Emoji in Ruby so t
 
 __Note:__ This gem might not implement all the features available in the JavaScript implementation.
 
+## Twemoji Gem and twemoji.js versions
+
+- Twemoji Gem 3.x supports twemoji.js V2 (1661 emojis)
+- Twemoji Gem 2.x supports twemoji.js V1 (874 emojis)
+
 ## Installation
 
 Add this line to your application's Gemfile:
