@@ -136,11 +136,13 @@ Default assets root url. Defaults to `https://twemoji.maxcdn.com/2/`:
 
 ##### `file_ext`
 
-Default assets file extensions. Defaults to `.png`.
+Default assets file extensions. Defaults to `svg`.
+
+Can change to `"png"`:
 
 ```ruby
-> Twemoji.parse 'I like chocolate :heart_eyes:!', file_ext: ".svg"
-=> "I like chocolate <img class='emoji' draggable='false' title=':heart_eyes:' alt='😍' src='https://twemoji.maxcdn.com/2/svg/1f60d.svg'>!"
+> Twemoji.parse 'I like chocolate :heart_eyes:!', file_ext: "png"
+=> "I like chocolate <img class='emoji' draggable='false' title=':heart_eyes:' alt='😍' src='https://twemoji.maxcdn.com/2/72x72/1f60d.png'>!"
 ```
 
 ##### `class_name`
@@ -220,7 +222,7 @@ end.to_json.html_safe %>
 ```ruby
 Twemoji.configure do |config|
   config.asset_root = "https://twemoji.maxcdn.com/2"
-  config.file_ext   = ".png"
+  config.file_ext   = "svg"
   config.class_name = "emoji"
   config.img_attrs  = {}
 end

@@ -63,64 +63,64 @@ class TwemojiTest < Minitest::Test
   end
 
   def test_parse_plus_one
-    expected = %(<img draggable="false" title=":+1:" alt="👍" src="https://twemoji.maxcdn.com/2/72x72/1f44d.png" class="emoji">)
+    expected = %(<img draggable="false" title=":+1:" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" class="emoji">)
 
     assert_equal expected, Twemoji.parse(":+1:")
   end
 
   def test_parse_minus_one
-    expected = %(<img draggable="false" title=":-1:" alt="👎" src="https://twemoji.maxcdn.com/2/72x72/1f44e.png" class="emoji">)
+    expected = %(<img draggable="false" title=":-1:" alt="👎" src="https://twemoji.maxcdn.com/2/svg/1f44e.svg" class="emoji">)
 
     assert_equal expected, Twemoji.parse(":-1:")
   end
 
   def test_parse_html_string
-    expected = %(I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/72x72/1f60d.png" class="emoji">!)
+    expected = %(I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="emoji">!)
 
     assert_equal expected, Twemoji.parse("I like chocolate :heart_eyes:!")
   end
 
   def test_parse_document
     doc  = Nokogiri::HTML::DocumentFragment.parse("<p>I like chocolate :heart_eyes:!</p>")
-    expected = '<p>I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/72x72/1f60d.png" class="emoji">!</p>'
+    expected = '<p>I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="emoji">!</p>'
 
     assert_equal expected, Twemoji.parse(doc).to_html
   end
 
   def test_parse_option_asset_root
-    expected = %(I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://emoji.bestcdn.com/72x72/1f60d.png" class="emoji">!)
+    expected = %(I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://emoji.bestcdn.com/svg/1f60d.svg" class="emoji">!)
 
     assert_equal expected, Twemoji.parse("I like chocolate :heart_eyes:!", asset_root: 'https://emoji.bestcdn.com')
   end
 
-  def test_parse_option_file_ext_svg
-    expected = %(I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="emoji">!)
+  def test_parse_option_file_ext_png
+    expected = %(I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/72x72/1f60d.png" class="emoji">!)
 
-    assert_equal expected, Twemoji.parse("I like chocolate :heart_eyes:!", file_ext: '.svg')
+    assert_equal expected, Twemoji.parse("I like chocolate :heart_eyes:!", file_ext: 'png')
   end
 
   def test_parse_option_unsupport_file_ext_gif
     exception = assert_raises RuntimeError do
-      Twemoji.parse("I like chocolate :heart_eyes:!", file_ext: '.gif')
+      Twemoji.parse("I like chocolate :heart_eyes:!", file_ext: 'gif')
     end
 
-    assert_equal "Unsupported file extension: .gif", exception.message
+    assert_equal "Unsupported file extension: gif", exception.message
   end
 
   def test_parse_option_class_name
-    expected = %(I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/72x72/1f60d.png" class="twemoji">!)
+    expected = %(I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="twemoji">!)
 
     assert_equal expected, Twemoji.parse("I like chocolate :heart_eyes:!", class_name: 'twemoji')
   end
 
   def test_parse_option_single_img_attr
-    expected = %(I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/72x72/1f60d.png" class="twemoji" style="height: 1.3em;">!)
+    expected = %(I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="twemoji" style="height: 1.3em;">!)
 
     assert_equal expected, Twemoji.parse("I like chocolate :heart_eyes:!", class_name: 'twemoji', img_attrs: { style: 'height: 1.3em;' })
   end
 
   def test_parse_option_multiple_img_attrs
-    expected = %(I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/72x72/1f60d.png" class="twemoji" style="height: 1.3em;" width="20">!)
+    expected = %(I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="twemoji" style="height: 1.3em;" width="20">!)
 
     assert_equal expected, Twemoji.parse("I like chocolate :heart_eyes:!", class_name: 'twemoji', img_attrs: { style: 'height: 1.3em;', width: "20" })
   end
@@ -134,7 +134,7 @@ class TwemojiTest < Minitest::Test
       alt:   shortname_filter,
     }
 
-    expected = %(I like chocolate <img draggable="false" title="heart_eyes" alt="heart_eyes" src="https://twemoji.maxcdn.com/2/72x72/1f60d.png" class="twemoji" style="height: 1.3em;">!)
+    expected = %(I like chocolate <img draggable="false" title="heart_eyes" alt="heart_eyes" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="twemoji" style="height: 1.3em;">!)
 
     assert_equal expected, Twemoji.parse("I like chocolate :heart_eyes:!", class_name: 'twemoji', img_attrs: img_attrs)
   end

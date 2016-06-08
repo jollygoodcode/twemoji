@@ -18,7 +18,7 @@ module Twemoji
 
     def initialize
       @asset_root = "https://twemoji.maxcdn.com/2"
-      @file_ext   = ".png"
+      @file_ext   = "svg"
       @class_name = "emoji"
       @img_attrs  = {}
     end

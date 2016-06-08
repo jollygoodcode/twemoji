@@ -220,9 +220,9 @@ module Twemoji
     def self.emoji_url(name)
       code = find_by_text(name)
 
-      if options[:file_ext] == ".png"
+      if options[:file_ext] == "png"
         File.join(options[:asset_root], PNG_IMAGE_SIZE, "#{code}.png")
-      elsif options[:file_ext] == ".svg"
+      elsif options[:file_ext] == "svg"
         File.join(options[:asset_root], "svg", "#{code}.svg")
       else
         fail "Unsupported file extension: #{options[:file_ext]}"

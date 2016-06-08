@@ -28,6 +28,7 @@
 ### Breaking Changes
 
 - `asset_root` config default value changed to `https://twemoji.maxcdn.com/2`
+- `file_ext` config available values are `"svg"` and `"png"`, defaults to `"svg"`
 - PNG now only has one size `72x72`
 - Require Ruby 2.0+
 - Remove `Twemoji.to_json` method
