@@ -37,6 +37,10 @@
 - PNG now only has one size `72x72`
 - Remove `Twemoji.to_json` method
 
+### Bug fixes
+
+- Fix `find_by_unicode` that only can find by single unicode [051f5a5](https://github.com/jollygoodcode/twemoji/commit/051f5a57c40f24d8d5caa65b462a9bee01545412)
+
 ## 2.2.1 - 2016.06.07
 
 - Lose released Gem weight [#26](https://github.com/jollygoodcode/twemoji/pull/26)
