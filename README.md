@@ -120,7 +120,7 @@ More options could be passed in, please see [Twemoji.parse options](https://gith
 
 ```ruby
 > Twemoji.parse "I like chocolate :heart_eyes:!"
-=> "I like chocolate <img class='emoji' draggable='false' title=':heart_eyes:' alt='😍' src='https://twemoji.maxcdn.com/2/72x72/1f60d.png'>!"
+=> 'I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="emoji">!'
 ```
 
 ##### `Twemoji.parse` options
@@ -130,8 +130,8 @@ More options could be passed in, please see [Twemoji.parse options](https://gith
 Default assets root url. Defaults to `https://twemoji.maxcdn.com/2/`:
 
 ```ruby
-> Twemoji.parse 'I like chocolate :heart_eyes:!', asset_root: "foocdn.com"
-=> "I like chocolate <img class='emoji' draggable='false' title=':heart_eyes:' alt='😍' src='foocdn.com/72x72/1f60d.png'>!"
+> Twemoji.parse "I like chocolate :heart_eyes:!", asset_root: "foocdn.com"
+=> 'I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="foocdn.com/svg/1f60d.svg" class="emoji">!'
 ```
 
 ##### `file_ext`
@@ -142,7 +142,7 @@ Can change to `"png"`:
 
 ```ruby
 > Twemoji.parse 'I like chocolate :heart_eyes:!', file_ext: "png"
-=> "I like chocolate <img class='emoji' draggable='false' title=':heart_eyes:' alt='😍' src='https://twemoji.maxcdn.com/2/72x72/1f60d.png'>!"
+=> 'I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/72x72/1f60d.png" class="emoji">!'
 ```
 
 ##### `class_name`
@@ -150,8 +150,8 @@ Can change to `"png"`:
 Default image CSS class name. Defaults to `"emoji"`.
 
 ```ruby
-> Twemoji.parse 'I like chocolate :heart_eyes:!', class_name: "superemoji"
-=> "I like chocolate <img class='superemoji' draggable='false' title=':heart_eyes:' alt='😍' src='https://twemoji.maxcdn.com/2/72x72/1f60d.png'>!"
+> Twemoji.parse "I like chocolate :heart_eyes:!", class_name: "superemoji"
+=> 'I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="superemoji">!'
 ```
 
 ##### `img_attrs`
@@ -159,8 +159,8 @@ Default image CSS class name. Defaults to `"emoji"`.
 List of image attributes for the `img` tag. Optional.
 
 ```ruby
-> Twemoji.parse("I like chocolate :heart_eyes:!", class_name: 'twemoji', img_attrs: { style: "height: 1.3em;" })
-=> "I like chocolate <img class='twemoji' draggable='false' title=':heart_eyes:' alt='😍' style='height: 1.3em;' src='https://twemoji.maxcdn.com/2/72x72/1f60d.png'>!"
+> Twemoji.parse "I like chocolate :heart_eyes:!", class_name: "twemoji", img_attrs: { style: "height: 1.3em;" }
+=> 'I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="twemoji" style="height: 1.3em;">!'
 ```
 
 attribute value can apply proc-like object, remove `:` from title attribute:
@@ -168,8 +168,8 @@ attribute value can apply proc-like object, remove `:` from title attribute:
 ```ruby
 > no_colons = ->(name) { name.gsub(":", "") }
 
-> Twemoji.parse("I like chocolate :heart_eyes:!", class_name: 'twemoji', img_attrs: { title: no_colons })
-=> "I like chocolate <img class='twemoji' draggable='false' title='heart_eyes' alt='😍' src='https://twemoji.maxcdn.com/2/72x72/1f60d.png'>!"
+> Twemoji.parse "I like chocolate :heart_eyes:!", class_name: "twemoji", img_attrs: { title: no_colons }
+=> 'I like chocolate <img draggable="false" title="heart_eyes" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="twemoji">!'
 ```
 
 #### `Twemoji.emoji_pattern`
