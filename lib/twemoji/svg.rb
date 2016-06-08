@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 module Twemoji
+  def self.svg
+    SVG
+  end
+
   SVG = {
     ":mahjong:" => "https://twemoji.maxcdn.com/2/svg/1f004.svg",
     ":black_joker:" => "https://twemoji.maxcdn.com/2/svg/1f0cf.svg",
@@ -1664,4 +1668,5 @@ module Twemoji
     ":registered_sign:" => "https://twemoji.maxcdn.com/2/svg/ae.svg",
     ":shibuya:" => "https://twemoji.maxcdn.com/2/svg/e50a.svg",
   }.freeze
+  private_constant :SVG
 end

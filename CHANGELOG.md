@@ -5,7 +5,7 @@
 ## Features
 
 - Add support to twemoji.js V2
-- Add Twemoji::SVG (not loaded by default), looks like:
+- Add Twemoji.svg (not loaded by default), looks like:
 
   ```ruby
   {
@@ -15,7 +15,7 @@
   }
   ```
 
-- Add Twemoji::PNG (not loaded by default), looks like:
+- Add Twemoji.png (not loaded by default), looks like:
 
   ```ruby
   {
@@ -27,6 +27,8 @@
 
 ### Breaking Changes
 
+- `Twemoji::CODES` changes to `Twemoji.codes`
+- `Twemoji::ICODES` changes to `Twemoji.invert_codes`
 - `asset_root` config default value changed to `https://twemoji.maxcdn.com/2`
 - `file_ext` config available values are `"svg"` and `"png"`, defaults to `"svg"`
 - PNG now only has one size `72x72`

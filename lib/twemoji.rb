@@ -46,7 +46,7 @@ module Twemoji
   # @param text [String] Text to find emoji code.
   # @return [String] Emoji Code.
   def self.find_by_text(text)
-    CODES[must_str(text)]
+    codes[must_str(text)]
   end
 
   # Find emoji text by emoji code.
@@ -58,7 +58,7 @@ module Twemoji
   # @param code [String] Emoji code to find text.
   # @return [String] Emoji Text.
   def self.find_by_code(code)
-    ICODES[must_str(code)]
+    invert_codes[must_str(code)]
   end
 
   # Find emoji text by raw emoji unicode.
@@ -70,7 +70,7 @@ module Twemoji
   # @param raw [String] Emoji raw unicode to find text.
   # @return [String] Emoji Text.
   def self.find_by_unicode(raw)
-    ICODES[must_str("%4.4x" % raw.ord)]
+    invert_codes[must_str("%4.4x" % raw.ord)]
   end
 
   # Render raw emoji unicode from emoji text or emoji code.
@@ -123,7 +123,7 @@ module Twemoji
   #
   # @return [RegExp] A Regular expression consists of all emojis text.
   def self.emoji_pattern
-    @emoji_pattern ||= /(#{CODES.keys.map { |name| Regexp.quote(name) }.join("|") })/
+    @emoji_pattern ||= /(#{codes.keys.map { |name| Regexp.quote(name) }.join("|") })/
   end
 
   private

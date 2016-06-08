@@ -1,12 +1,28 @@
 # frozen_string_literal: true
 
 module Twemoji
-  # Emoji Text to Codepoint mappings. This hash is frozen.
+  # Emoji Text to Codepoint mappings.
   #
   # @example Usage
-  #   CODES[:smile:] # => "1f604"
-  #   CODES[:notebook_with_decorative_cover:] # => "1f4d4"
+  #   codes[:smile:] # => "1f604"
+  #   codes[:notebook_with_decorative_cover:] # => "1f4d4"
   # @return [Hash<String => String>]
+  def self.codes
+    CODES
+  end
+
+  # Emoji Codepoint to Text mappings. This hash is frozen.
+  #
+  # @example Usage
+  #   invert_codes["1f60d"] # => ":heart_eyes:"
+  #   invert_codes["1f4d4"] # => ":notebook_with_decorative_cover:"
+  #
+  # @return [Hash<String => String>]
+  def self.invert_codes
+    codes.invert.freeze
+  end
+
+  # Emoji Text to Codepoint mapping constant. This hash is frozen.
   # @private
   CODES = {
     ":mahjong:" => "1f004",
@@ -1671,14 +1687,5 @@ module Twemoji
     ":registered_sign:" => "ae",
     ":shibuya:" => "e50a",
   }.freeze
-
-  # Emoji Codepoint to Text mappings. This hash is frozen.
-  #
-  # @example Usage
-  #   ICODES["1f60d"] # => ":heart_eyes:"
-  #   ICODES["1f4d4"] # => ":notebook_with_decorative_cover:"
-  #
-  # @return [Hash<String => String>]
-  # @private
-  ICODES = CODES.invert.freeze
+  private_constant :CODES
 end

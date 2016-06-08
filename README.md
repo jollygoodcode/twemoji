@@ -203,11 +203,11 @@ gem "twemoji", require: ["twemoji/png", "twemoji/svg"]
 
 Then you can do `to_json` to feed your front-end.
 
-You can also make custom format by leverage `Twemoji::CODES` constant:
+You can also make custom format by leverage `Twemoji.codes`:
 
 ```html+erb
 # emojis.json.erb
-<%= Twemoji::CODES.collect do |code, _|
+<%= Twemoji.codes.collect do |code, _|
   Hash(
     value: code,
     html: content_tag(:span, Twemoji.parse(code).html_safe + " #{code}" )

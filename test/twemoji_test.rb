@@ -6,7 +6,7 @@ class TwemojiTest < Minitest::Test
   end
 
   def test_number_of_emojis
-    assert_equal 1661, Twemoji::CODES.size
+    assert_equal 1661, Twemoji.codes.size
   end
 
   def test_twemoji_png_and_svg_not_loaded_by_default
@@ -18,12 +18,18 @@ class TwemojiTest < Minitest::Test
 
   def test_twemoji_png
     require "twemoji/png"
-    assert_equal 1661, Twemoji::PNG.size
+    assert_raises NameError do
+      Twemoji::PNG
+    end
+    assert_equal 1661, Twemoji.png.size
   end
 
   def test_twemoji_png
     require "twemoji/svg"
-    assert_equal 1661, Twemoji::SVG.size
+    assert_raises NameError do
+      Twemoji::SVG
+    end
+    assert_equal 1661, Twemoji.svg.size
   end
 
   def test_finder_methods_cannot_find_by_more_than_one

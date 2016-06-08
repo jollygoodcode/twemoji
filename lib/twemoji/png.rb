@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 module Twemoji
+  def self.png
+    PNG
+  end
+
   PNG = {
     ":mahjong:" => "https://twemoji.maxcdn.com/2/72x72/1f004.png",
     ":black_joker:" => "https://twemoji.maxcdn.com/2/72x72/1f0cf.png",
@@ -1664,4 +1668,5 @@ module Twemoji
     ":registered_sign:" => "https://twemoji.maxcdn.com/2/72x72/ae.png",
     ":shibuya:" => "https://twemoji.maxcdn.com/2/72x72/e50a.png",
   }.freeze
+  private_constant :PNG
 end
