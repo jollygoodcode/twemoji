@@ -54,13 +54,13 @@ end
 In your ERb view:
 
 ```erb
-<%= emojify "I like chocolate :heart_eyes:!", image_size: "36x36" %>
+<%= emojify "I like chocolate :heart_eyes:!" %>
 ```
 
 will render
 
 ```
-I like chocolate <img class="emoji" draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/36x36/1f60d.png">!
+I like chocolate <img class="emoji" draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/72x72/1f60d.png">!
 ```
 
 More options could be passed in, please see [Twemoji.parse options](https://github.com/jollygoodcode/twemoji#twemojiparse-options) for more details.
@@ -174,12 +174,44 @@ attribute value can apply proc-like object, remove `:` from title attribute:
 
 ```ruby
 > Twemoji.emoji_pattern
-=> /(:smile:|:laughing:| ... |:womens:|:x:|:zero:)/
+=> /(:mahjong:|:black_joker:| ... |:registered_sign:|:shibuya:)/
 ```
 
 #### JSON for your front-end
 
-Please take a look at [Twemoji::PNG](lib/twemoji/png.rb) and [Twemoji::SVG](lib/twemoji/svg.rb) and use `to_json` yourself.
+We prepare two constants: [Twemoji::PNG](lib/twemoji/png.rb) and [Twemoji::SVG](lib/twemoji/svg.rb) (**not loaded by default**), you need to require them to use:
+
+```ruby
+require "twemoji/png" # If you want to use Twemoji::PNG
+require "twemoji/svg" # If you want to use Twemoji::SVG
+```
+
+Or require at `Gemfile`:
+
+```ruby
+# Require the one you need, require Twemoji::PNG
+gem "twemoji", require: "twemoji/png"
+
+# Or Twemoji::SVG
+gem "twemoji", require: "twemoji/svg"
+
+# Or both
+gem "twemoji", require: ["twemoji/png", "twemoji/svg"]
+```
+
+Then you can do `to_json` to feed your front-end.
+
+You can also make custom format by leverage `Twemoji::CODES` constant:
+
+```html+erb
+# emojis.json.erb
+<%= Twemoji::CODES.collect do |code, _|
+  Hash(
+    value: code,
+    html: content_tag(:span, Twemoji.parse(code).html_safe + " #{code}" )
+  )
+end.to_json.html_safe %>
+```
 
 ## Configuration
 
@@ -188,7 +220,7 @@ Please take a look at [Twemoji::PNG](lib/twemoji/png.rb) and [Twemoji::SVG](lib/
 ```ruby
 Twemoji.configure do |config|
   config.asset_root = "https://twemoji.maxcdn.com/2"
-  config.file_ext   = ".svg"
+  config.file_ext   = ".png"
   config.class_name = "emoji"
   config.img_attrs  = {}
 end
