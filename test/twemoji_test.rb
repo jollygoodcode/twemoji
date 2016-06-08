@@ -9,6 +9,23 @@ class TwemojiTest < Minitest::Test
     assert_equal 1661, Twemoji::CODES.size
   end
 
+  def test_twemoji_png_and_svg_not_loaded_by_default
+    assert_raises NameError do
+      Twemoji::PNG
+      Twemoji::SVG
+    end
+  end
+
+  def test_twemoji_png
+    require "twemoji/png"
+    assert_equal 1661, Twemoji::PNG.size
+  end
+
+  def test_twemoji_png
+    require "twemoji/svg"
+    assert_equal 1661, Twemoji::SVG.size
+  end
+
   def test_finder_methods_cannot_find_by_more_than_one
     exception = assert_raises ArgumentError do
       Twemoji.find_by(text: ":heart_eyes:", code: "1f60d")
