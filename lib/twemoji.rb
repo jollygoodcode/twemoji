@@ -13,7 +13,7 @@ module Twemoji
   #
   # @example Usage
   #   Twemoji.find_by(text: ":heart_eyes:") # => "1f60d"
-  #   Twemoji.find_by(code: ":1f60d:")      # => ":heart_eyes:"
+  #   Twemoji.find_by(code: "1f60d")      # => ":heart_eyes:"
   #   Twemoji.find_by(unicode: "😍")        # => ":heart_eyes:"
   #   Twemoji.find_by(unicode: "\u{1f60d}") # => ":heart_eyes:"
   #
@@ -93,13 +93,14 @@ module Twemoji
   #
   # @example Usage
   #   Twemoji.parse("I like chocolate :heart_eyes:!")
-  #   => "I like chocolate <img class='emoji' draggable='false' title=':heart_eyes:' alt='😍' src='https://twemoji.maxcdn.com/16x16/1f60d.png'>!"
+  #   => 'I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="emoji">!'
   #
   # @param text [String] Source text to parse.
   #
   # @option options [String] (optional) asset_root Asset root url to serve emoji.
   # @option options [String] (optional) file_ext   File extension.
-  # @option options [String] (optional) img_attrs Emoji image's img tag attributes.
+  # @option options [String] (optional) class_name Emoji image's tag class attribute.
+  # @option options [String] (optional) img_attrs  Emoji image's img tag attributes.
   #
   # @return [String] Original text with all occurrences of emoji text
   # replaced by emoji image according to given options.
@@ -163,7 +164,7 @@ module Twemoji
     # @return [Nokogiri::HTML::DocumentFragment] Parsed document.
     # @private
     def self.parse_document(doc)
-      doc.xpath('.//text() | text()').each do |node|
+      doc.xpath(".//text() | text()").each do |node|
         content = node.to_html
         next if !content.include?(":")
         next if has_ancestor?(node, %w(pre code tt))

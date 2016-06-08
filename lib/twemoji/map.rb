@@ -4,8 +4,8 @@ module Twemoji
   # Emoji Text to Codepoint mappings.
   #
   # @example Usage
-  #   codes[:smile:] # => "1f604"
-  #   codes[:notebook_with_decorative_cover:] # => "1f4d4"
+  #   codes[":heart_eyes:"] # => "1f60d"
+  #   codes[":notebook_with_decorative_cover:"] # => "1f4d4"
   # @return [Hash<String => String>]
   def self.codes
     CODES
