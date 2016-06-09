@@ -2,10 +2,14 @@
 
 ## Unreleased
 
+## 2.2.2 - 2016.06.09
+
+- Backport [051f5a5](https://github.com/jollygoodcode/twemoji/commit/051f5a57c40f24d8d5caa65b462a9bee01545412) (find by multiple unicodes fix)
+
+## 2.2.1 - 2016.06.07
+
 - Lose released Gem weight [#26](https://github.com/jollygoodcode/twemoji/pull/26)
-
 - Add a `bin/hack` script to make gem development easier [#25](https://github.com/jollygoodcode/twemoji/pull/25)
-
 - Add missing 47 emojis [#27](https://github.com/jollygoodcode/twemoji/pull/27)
 - Fix emoji_pattern not properly escaped [#27](https://github.com/jollygoodcode/twemoji/pull/27)
 - Change `:thumbsup:` `:thumbsdown:` to `:+1:` `:-1:`
