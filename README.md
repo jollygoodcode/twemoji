@@ -10,7 +10,7 @@
 
 Twitter [opensourced Twitter Emoji](http://twitter.github.io/twemoji/) and the official JavaScript implementation is available at [twemoji](https://github.com/twitter/twemoji).
 
-This RubyGem `twemoji` is a minimum implementation of Twitter Emoji in Ruby so that you can haz emoji in your Ruby/Rails apps too!
+This RubyGem `twemoji` is a minimum implementation of Twitter Emoji in Ruby so that you can use emoji in your Ruby/Rails apps too!
 
 __Note:__ This gem might not implement all the features available in the JavaScript implementation.
 
