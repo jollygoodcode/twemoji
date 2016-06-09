@@ -5,10 +5,10 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="Emoji codes from https://github.com/jollygoodcode/emoji-keywords/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Twiiter Emoji (Twemoji) Cheatsheet</title>
+    <title>Twiiter Emoji (Twemoji) Cheat sheet</title>
   </head>
   <body>
-    <h1>Twitter Emoji (Twemoji) Cheatsheet</h1>
+    <h1>Twitter Emoji (Twemoji) Cheat sheet</h1>
 
     <style>
       html {
@@ -37,8 +37,7 @@
     </style>
 
     <ul class="emoji-list">
-      % require "twemoji"; Twemoji.configure { |config| config.file_ext = ".svg" }
-      % Twemoji::CODES.each do |code, _|
+      % require "twemoji"; Twemoji.codes.each do |code, _|
         <li>
           {{Twemoji.parse(code)}}
         </li>
