@@ -6,10 +6,6 @@
     <meta name="description" content="Emoji codes from https://github.com/jollygoodcode/emoji-keywords/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Twiiter Emoji (Twemoji) Cheat sheet</title>
-  </head>
-  <body>
-    <h1>Twitter Emoji (Twemoji) Cheat sheet</h1>
-
     <style>
       html {
         font-size: 16px;
@@ -34,7 +30,28 @@
         margin: 0 .05rem 0 .1rem;
         vertical-align: -0.1rem;
       }
+
+      footer {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+        text-align: center;
+        padding: 1.5rem 1rem;
+        font-size: 90%;
+      }
+
+      .footer-links {
+        list-style: none;
+        margin-left: 0;
+      }
+
+      .footer-links li {
+        display: inline;
+      }
     </style>
+  </head>
+  <body>
+    <h1>Twitter Emoji (Twemoji) Cheat sheet</h1>
 
     <ul class="emoji-list">
         <li>
@@ -5021,6 +5038,22 @@
           <img draggable="false" title=":shibuya:" alt="" src="https://twemoji.maxcdn.com/2/svg/e50a.svg" class="emoji">
         </li>
     </ul>
+
+    <footer class="footer">
+      <p>Open sourced under MIT. Copyright 2016 <a href="https://twitter.com/JollyGoodCode">@JollyGoodCode</a>.</p>
+
+      <ul class="footer-links">
+        <li>
+          <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=jollygoodcode&amp;repo=twemoji&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="112px" height="20px"></iframe>
+        </li>
+        <li>
+          <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=jollygoodcode&amp;repo=twemoji&amp;type=fork&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="98px" height="20px"></iframe>
+        </li>
+        <li class="tweet-btn">
+          <iframe id="twitter-widget-1" scrolling="no" frameborder="0" allowtransparency="true" class="twitter-share-button twitter-share-button-rendered twitter-tweet-button" title="Twitter Tweet Button" src="http://platform.twitter.com/widgets/tweet_button.c5094533286f08172435cb9c1efe2915.en.html#dnt=false&amp;id=twitter-widget-1&amp;lang=en&amp;original_referer=https%3A%2F%2Fjollygoodcode/twemoji%2F&amp;size=m&amp;text=Twemoji%20for%20Ruby&amp;time=1465450430896&amp;type=share&amp;url=https%3A%2F%2Fgithub.com/jollygoodcode/twemoji&amp;via=jollygoodcode" style="position: static; visibility: visible; width: 61px; height: 20px;" data-url="https://github.com/jollygoodcode/twemoji"></iframe>
+        </li>
+      </ul>
+    </footer>
 
     <script>
       var ul = document.getElementsByTagName('ul')[0];
