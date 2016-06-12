@@ -16,8 +16,8 @@ __Note:__ This gem might not implement all the features available in the JavaScr
 
 ## Twemoji Gem and twemoji.js versions
 
-- Twemoji Gem 3.x supports twemoji.js V2 (1661 emojis)
-- Twemoji Gem 2.x supports twemoji.js V1 (874 emojis)
+- Twemoji Gem 3.x supports twemoji.js V2 (1661 emojis) [Preview](https://jollygoodcode.github.io/twemoji/)
+- Twemoji Gem 2.x supports twemoji.js V1 (874 emojis) [Preview](http://jollygoodcode.github.io/twemoji/v1/)
 
 ## Installation
 
