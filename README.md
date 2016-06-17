@@ -41,6 +41,10 @@ Or install it yourself as:
 
 - [Integration with `HTML::Pipeline`](https://github.com/jollygoodcode/twemoji/wiki/Integrate-with-HTML%3A%3APipeline)
 
+## Twemoji and Rails
+
+- [Checkout this tutorial: Twemoji in Rails](https://github.com/jollygoodcode/jollygoodcode.github.io/issues/18)
+
 ## Rails Helper
 
 `$ touch app/helpers/emoji_helper.rb`
