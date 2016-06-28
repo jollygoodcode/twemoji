@@ -84,8 +84,9 @@ module Twemoji
   # @param text_or_code [String] Emoji text or code to render as unicode.
   # @return [String] Emoji UTF-8 Text.
   def self.render_unicode(text_or_code)
-    text_or_code = find_by_text(text_or_code) if text_or_code[0] == ":"
-    [text_or_code.hex].pack("U")
+    text_or_code = find_by_text(text_or_code) if text_or_code[0] == ?:
+    unicodes = text_or_code.split(?-)
+    unicodes.map(&:hex).pack(?U*unicodes.size)
   end
 
   # Parse string, replace emoji text with image.
