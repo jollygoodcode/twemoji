@@ -156,6 +156,12 @@ class TwemojiTest < Minitest::Test
     end
   end
 
+  def test_parse_flag_img_alt
+    expected = %(<img draggable=\"false\" title=\":flag-sg:\" alt=\"🇸🇬\" src=\"https://twemoji.maxcdn.com/2/svg/1f1f8-1f1ec.svg\" class=\"emoji\">)
+
+    assert_equal expected, Twemoji.parse(":flag-sg:")
+  end
+
   def test_emoji_pattern
     assert_kind_of Regexp, Twemoji.emoji_pattern
   end
