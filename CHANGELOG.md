@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 3.0.1 - 2016.06.28
+
+- Fix `img` tag `alt` attribute render incorrectly [#29](https://github.com/jollygoodcode/twemoji/pull/29)
+
 ## 3.0.0 - 2016.06.08
 
 ### Features
