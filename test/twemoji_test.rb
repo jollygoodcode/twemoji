@@ -68,6 +68,14 @@ class TwemojiTest < Minitest::Test
     assert_equal ":flag-es:", Twemoji.find_by_unicode("🇪🇸")
   end
 
+  def test_render_unicode_country_flag
+    assert_equal "🇪🇸", Twemoji.render_unicode(":flag-es:")
+  end
+
+  def test_render_unicode_country_flag
+    assert_equal "🇪🇸", Twemoji.render_unicode("1f1ea-1f1f8")
+  end
+
   def test_find_by_escaped_unicode
     assert_equal ":heart_eyes:", Twemoji.find_by_unicode("\u{1f60d}")
   end
