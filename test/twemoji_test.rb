@@ -68,6 +68,14 @@ class TwemojiTest < Minitest::Test
     assert_equal ":flag-es:", Twemoji.find_by_unicode("🇪🇸")
   end
 
+  def test_render_unicode_country_flag
+    assert_equal "🇪🇸", Twemoji.render_unicode(":flag-es:")
+  end
+
+  def test_render_unicode_country_flag
+    assert_equal "🇪🇸", Twemoji.render_unicode("1f1ea-1f1f8")
+  end
+
   def test_find_by_escaped_unicode
     assert_equal ":heart_eyes:", Twemoji.find_by_unicode("\u{1f60d}")
   end
@@ -154,6 +162,12 @@ class TwemojiTest < Minitest::Test
       # Each diversity set of emojis (base + 5 modifier = 6) should result in 6 img tags
       assert_equal 6, Twemoji.parse(diversity).scan(/<img/).size
     end
+  end
+
+  def test_parse_flag_img_alt
+    expected = %(<img draggable=\"false\" title=\":flag-sg:\" alt=\"🇸🇬\" src=\"https://twemoji.maxcdn.com/2/svg/1f1f8-1f1ec.svg\" class=\"emoji\">)
+
+    assert_equal expected, Twemoji.parse(":flag-sg:")
   end
 
   def test_emoji_pattern
