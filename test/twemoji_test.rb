@@ -64,6 +64,10 @@ class TwemojiTest < Minitest::Test
     assert_equal ":heart_eyes:", Twemoji.find_by_unicode("😍")
   end
 
+  def test_find_by_unicode_copyright
+    assert_equal ":copyright:", Twemoji.find_by_unicode("©")
+  end
+
   def test_find_by_unicode_country_flag
     assert_equal ":flag-es:", Twemoji.find_by_unicode("🇪🇸")
   end
