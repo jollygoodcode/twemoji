@@ -832,7 +832,7 @@ module Twemoji
     ":woman-woman-girl-girl:" => "1f469-200d-1f469-200d-1f467-200d-1f467",
     ":woman-heart-man:" => "1f469-200d-2764-fe0f-200d-1f468",
     ":woman-heart-woman:" => "1f469-200d-2764-fe0f-200d-1f469",
-    ":kiss::man:" => "1f469-200d-2764-fe0f-200d-1f48b-200d-1f468",
+    ":woman-kiss-man:" => "1f469-200d-2764-fe0f-200d-1f48b-200d-1f468",
     ":woman-kiss-woman:" => "1f469-200d-2764-fe0f-200d-1f48b-200d-1f469",
     ":family:" => "1f46a",
     ":couple:" => "1f46b",
