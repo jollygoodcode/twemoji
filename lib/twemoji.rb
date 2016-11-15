@@ -70,7 +70,7 @@ module Twemoji
   # @param raw [String] Emoji raw unicode to find text.
   # @return [String] Emoji Text.
   def self.find_by_unicode(raw)
-    invert_codes[raw.split("").map { |r| "%4.4x" % r.ord }.join("-")]
+    invert_codes[raw.split("").map { |r| "%x" % r.ord }.join("-")]
   end
 
   # Render raw emoji unicode from emoji text or emoji code.
