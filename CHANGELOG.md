@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 3.0.2 - 2016.11.15
+
+- Fix handling codepoint less than 0x1000 [#33](https://github.com/jollygoodcode/twemoji/pull/33)
+- Fix strange naming of kiss emoji [#32](https://github.com/jollygoodcode/twemoji/pull/32)
+
 ## 3.0.1 - 2016.06.28
 
 - Fix `img` tag `alt` attribute render incorrectly [#29](https://github.com/jollygoodcode/twemoji/pull/29)
