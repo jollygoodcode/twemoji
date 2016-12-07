@@ -129,7 +129,14 @@ More options could be passed in, please see [Twemoji.parse options](https://gith
 => 'I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="emoji">!'
 ```
 
-##### `Twemoji.parse` options
+#### `Twemoji.parse_unicode`
+
+```ruby
+> Twemoji.parse_unicode "I like chocolate 😍!"
+=> 'I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="emoji">!'
+```
+
+##### `Twemoji.parse` and `Twemoji.parse_unicode` options
 
 ##### `asset_root`
 
