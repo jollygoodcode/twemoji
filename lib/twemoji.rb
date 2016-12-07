@@ -70,7 +70,7 @@ module Twemoji
   # @param raw [String] Emoji raw unicode to find text.
   # @return [String] Emoji Text.
   def self.find_by_unicode(raw)
-    invert_codes[raw.split("").map { |r| "%x" % r.ord }.join("-")]
+    invert_codes[unicode_to_str(raw)]
   end
 
   # Render raw emoji unicode from emoji text or emoji code.
@@ -316,7 +316,7 @@ module Twemoji
         draggable: "false".freeze,
         title:     find_by_unicode(unicode),
         alt:       unicode,
-        src:       emoji_url(unicode, :unicode_to_code)
+        src:       emoji_url(unicode, :unicode_to_str)
       }
     end
 
@@ -326,7 +326,7 @@ module Twemoji
     # @param unicode [String] Unicode value.
     # @return String representation of unicode value
     # @private
-    def self.unicode_to_code(unicode)
+    def self.unicode_to_str(unicode)
       unicode.split("").map { |r| "%x" % r.ord }.join("-")
     end
 
