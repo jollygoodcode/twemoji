@@ -5,7 +5,6 @@ module Twemoji
     @configuration ||= Configuration.new
   end
 
-
   def self.configuration=(configuration)
     @configuration = configuration
   end
