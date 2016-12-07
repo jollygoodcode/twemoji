@@ -161,7 +161,8 @@ module Twemoji
   end
 
   def self.emoji_pattern_unicode
-    @emoji_pattern_unicode ||= /(#{invert_codes.keys.map { |name| Regexp.quote([name.hex].pack("U")) }.join("|") })/
+    @sorted_emoji_unicode_keys ||= invert_codes.keys.sort_by {|key| key.length }.reverse
+    @emoji_pattern_unicode ||= /(#{@sorted_emoji_unicode_keys.map { |name| Regexp.quote(name.split('-').collect {|n| n.hex}.pack("U*")) }.join("|") })/
   end
 
   private
@@ -319,8 +320,14 @@ module Twemoji
       }
     end
 
-    def self.unicode_to_code(name)
-      name.ord.to_s(16)
+
+    # Convert raw unicode to string key version
+    # e.g. 🇲🇾 converts to "1f1f2-1f1fe"
+    # @param unicode [String] Unicode value.
+    # @return String representation of unicode value
+    # @private
+    def self.unicode_to_code(unicode)
+      unicode.split("").map { |r| "%x" % r.ord }.join("-")
     end
 
     # Coverts hash of attributes into HTML attributes.

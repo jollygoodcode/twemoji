@@ -183,6 +183,12 @@ class TwemojiTest < Minitest::Test
 
     assert_equal expected, Twemoji.parse_unicode("😍")
   end 
+  
+  def test_parse_by_unicode_flag
+    expected = %(<img draggable=\"false\" title=\":flag-my:\" alt=\"🇲🇾\" src=\"https://twemoji.maxcdn.com/2/svg/1f1f2-1f1fe.svg\" class=\"emoji\">)
+
+    assert_equal expected, Twemoji.parse_unicode("🇲🇾")
+  end 
 
   def test_parse_by_unicode_text
     expected = %(I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="twemoji">!)
