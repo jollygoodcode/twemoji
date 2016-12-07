@@ -2,7 +2,6 @@ require "test_helper"
 
 class TwemojiTest < Minitest::Test
   def setup
-    @option = {}
   end
 
   def test_number_of_emojis
@@ -24,7 +23,7 @@ class TwemojiTest < Minitest::Test
     assert_equal 1661, Twemoji.png.size
   end
 
-  def test_twemoji_png
+  def test_twemoji_svg
     require "twemoji/svg"
     assert_raises NameError do
       Twemoji::SVG
@@ -72,11 +71,11 @@ class TwemojiTest < Minitest::Test
     assert_equal ":flag-es:", Twemoji.find_by_unicode("🇪🇸")
   end
 
-  def test_render_unicode_country_flag
+  def test_render_unicode_country_flag_es
     assert_equal "🇪🇸", Twemoji.render_unicode(":flag-es:")
   end
 
-  def test_render_unicode_country_flag
+  def test_render_unicode_country_flag_es_unicode
     assert_equal "🇪🇸", Twemoji.render_unicode("1f1ea-1f1f8")
   end
 
@@ -95,6 +94,7 @@ class TwemojiTest < Minitest::Test
 
     assert_equal expected, Twemoji.parse(":-1:")
   end
+
 
   def test_parse_html_string
     expected = %(I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="emoji">!)
@@ -177,4 +177,17 @@ class TwemojiTest < Minitest::Test
   def test_emoji_pattern
     assert_kind_of Regexp, Twemoji.emoji_pattern
   end
+
+  def test_parse_by_unicode
+    expected = %(<img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="emoji">)
+
+    assert_equal expected, Twemoji.parse_unicode("😍")
+  end 
+
+  def test_parse_by_unicode_text
+    expected = %(I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="twemoji">!)
+
+    assert_equal expected, Twemoji.parse_unicode("I like chocolate 😍!", class_name: 'twemoji')
+  end 
+
 end
