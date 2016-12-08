@@ -125,7 +125,7 @@ module Twemoji
   # Parse DOM, replace emoji unicode value with image.
   #
   # @example Usage
-  #   Twemoji.parse("I like chocolate 😍!")
+  #   Twemoji.parse_unicode("I like chocolate 😍!")
   #   => 'I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="emoji">!'
   #
   # @param text [String] Source text to parse.
@@ -138,9 +138,9 @@ module Twemoji
   # @return [String] Original text with all occurrences of emoji text
   # replaced by emoji image according to given options.
   def self.parse_unicode(text, asset_root: Twemoji.configuration.asset_root,
-                       file_ext:   Twemoji.configuration.file_ext,
-                       class_name: Twemoji.configuration.class_name,
-                       img_attrs:  Twemoji.configuration.img_attrs)
+                               file_ext:   Twemoji.configuration.file_ext,
+                               class_name: Twemoji.configuration.class_name,
+                               img_attrs:  Twemoji.configuration.img_attrs)
 
     options[:asset_root] = asset_root
     options[:file_ext]   = file_ext
@@ -189,7 +189,7 @@ module Twemoji
     # @param text [String] Text string to be parse.
     # @return [String] Text with emoji text replaced by emoji image.
     # @private
-    def self.parse_html(text, filter= :filter_emojis)
+    def self.parse_html(text, filter = :filter_emojis)
       if filter == :filter_emojis && !text.include?(":")
         return text
       end
@@ -203,7 +203,7 @@ module Twemoji
     # @param doc [Nokogiri::HTML::DocumentFragment] Document to parse.
     # @return [Nokogiri::HTML::DocumentFragment] Parsed document.
     # @private
-    def self.parse_document(doc, filter= :filter_emojis)
+    def self.parse_document(doc, filter = :filter_emojis)
       doc.xpath(".//text() | text()").each do |node|
         content = node.to_html
         next if filter == :filter_emojis && !content.include?(":")
@@ -231,14 +231,20 @@ module Twemoji
 
     # Filter emoji text in content, replaced by corresponding emoji image.
     #
-    # @param content [String] Contetn to filter emoji text to image.
+    # @param content [String] Content to filter emoji text to image.
     # @return [String] Returns a String just like content with all emoji text
     #                  replaced by the corresponding emoji image.
     # @private
-    def self.filter_emojis(content, pattern=emoji_pattern)
+    def self.filter_emojis(content, pattern = emoji_pattern)
       content.gsub(pattern) { |match| img_tag(match) }
     end
 
+    # Filter emoji unicode values in content, replaced by corresponding emoji image.
+    #
+    # @param content [String] Content to filter emoji unicode value to image.
+    # @return [String] Returns a String just like content with all emoji text
+    #                  replaced by the corresponding emoji image.
+    # @private
     def self.filter_emojis_unicode(content)
       self.filter_emojis(content, emoji_pattern_unicode)
     end
