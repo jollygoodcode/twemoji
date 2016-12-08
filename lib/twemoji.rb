@@ -298,12 +298,18 @@ module Twemoji
     # @return Hash of customized attributes
     # @private
     def self.customized_attrs(name)
-      custom_img_attributes = options[:img_attrs]
+      custom_img_attributes = {} 
 
-      # run value filters where given
-      custom_img_attributes.each do |key, value|
-        custom_img_attributes[key] = value.call(name) if value.respond_to?(:call)
+      options[:img_attrs].each do |key, value|
+        # run value filters where given
+        if value.respond_to?(:call)
+          custom_img_attributes[key] = value.call(name) 
+        else 
+          custom_img_attributes[key] = value
+        end
       end
+
+      custom_img_attributes
     end
 
     # Default img attributes: draggable, title, alt, src.
