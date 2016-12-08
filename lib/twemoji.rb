@@ -265,8 +265,8 @@ module Twemoji
     def self.img_tag(name)
       # choose default attributes based on name or unicode codepoint
       default_attrs = name.include?(":") ? default_attrs(name) : default_attrs_unicode(name)
-
-      img_attrs_hash = default_attrs.merge! customized_attrs(name)
+      text_name = name.include?(":") ? name : Twemoji.find_by_unicode(name)
+      img_attrs_hash = default_attrs.merge! customized_attrs(text_name)
 
       %(<img #{hash_to_html_attrs(img_attrs_hash)}>)
     end

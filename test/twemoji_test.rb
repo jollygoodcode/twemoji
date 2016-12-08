@@ -195,4 +195,24 @@ class TwemojiTest < Minitest::Test
     assert_equal expected, Twemoji.parse_unicode("I like chocolate 😍!", class_name: 'twemoji')
   end 
 
+  def test_parse_by_unicode_attr
+    expected = %(<img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="twemoji" aria-label="emoji: heart_eyes">)
+    aria_label = ->(name) { 'emoji: ' + name.gsub(":", '') }
+    assert_equal expected, Twemoji.parse_unicode("😍", img_attrs: {'aria-label'=> aria_label }, class_name: 'twemoji' )
+  end 
+
+  def test_parse_by_unicode_multiple
+    expected = %(<img draggable="false" title=":cookie:" alt="🍪" src="https://twemoji.maxcdn.com/2/svg/1f36a.svg" class="emoji" aria-label="emoji: cookie">
+    <img draggable="false" title=":birthday:" alt="🎂" src="https://twemoji.maxcdn.com/2/svg/1f382.svg" class="emoji" aria-label="emoji: birthday">)
+    aria_label = ->(name) { 'emoji: ' + name.gsub(":", '') }
+    assert_equal expected, Twemoji.parse_unicode("🍪🎂", img_attrs: {'aria-label'=> aria_label } )
+  end 
+
+  def test_parse_multiple
+    expected = %(<img draggable="false" title=":cookie:" alt="🍪" src="https://twemoji.maxcdn.com/2/svg/1f36a.svg" class="emoji" aria-label="emoji: cookie"> 
+    <img draggable="false" title=":birthday:" alt="🎂" src="https://twemoji.maxcdn.com/2/svg/1f382.svg" class="emoji" aria-label="emoji: birthday">)
+    aria_label = ->(name) { 'emoji: ' + name.gsub(":", '') }
+    assert_equal expected, Twemoji.parse(":cookie::birthday:", img_attrs: {'aria-label'=> aria_label } )
+  end 
+
 end
