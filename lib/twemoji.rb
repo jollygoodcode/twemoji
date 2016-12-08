@@ -160,6 +160,10 @@ module Twemoji
     @emoji_pattern ||= /(#{codes.keys.map { |name| Regexp.quote(name) }.join("|") })/
   end
 
+  # Return all emoji patterns' regular expressions in unicode.
+  # e.g '1f1f2-1f1fe' will be converted to \u{1f1f2}\u{1f1fe} for RegExp matching
+  #
+  # @return [RegExp] A Regular expression consists of all emojis unicode.
   def self.emoji_pattern_unicode
     @sorted_emoji_unicode_keys ||= invert_codes.keys.sort_by {|key| key.length }.reverse
     @emoji_pattern_unicode ||= /(#{@sorted_emoji_unicode_keys.map { |name| Regexp.quote(name.split('-').collect {|n| n.hex}.pack("U*")) }.join("|") })/
@@ -187,6 +191,8 @@ module Twemoji
     # Parse a HTML String, replace emoji text with corresponding emoji image.
     #
     # @param text [String] Text string to be parse.
+    # @param filter [Symbol] Symbol of filter function to use. Available filters
+    #                        are :filter_emoji and :filter_emoji_unicode
     # @return [String] Text with emoji text replaced by emoji image.
     # @private
     def self.parse_html(text, filter = :filter_emojis)
@@ -201,6 +207,8 @@ module Twemoji
     # with corresponding emoji image.
     #
     # @param doc [Nokogiri::HTML::DocumentFragment] Document to parse.
+    # @param filter [Symbol] Symbol of filter function to use. Available filters
+    #                        are :filter_emoji and :filter_emoji_unicode
     # @return [Nokogiri::HTML::DocumentFragment] Parsed document.
     # @private
     def self.parse_document(doc, filter = :filter_emojis)
