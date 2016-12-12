@@ -136,14 +136,14 @@ Parsing by name token:
 Parsing by name unicode values:
 
 ```ruby
-> Twemoji.parse_unicode "I like chocolate 😍!"
+> Twemoji.parse "I like chocolate 😍!"
 => 'I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="emoji">!'
 ```
 
 Parsing by both name and unicode:
 
 ```ruby
-> Twemoji.parse_unicode ":cookie: 🎂"
+> Twemoji.parse ":cookie: 🎂"
 => '<img draggable="false" title=":cookie:" alt="🍪" src="https://twemoji.maxcdn.com/2/svg/1f36a.svg" class="emoji"> <img draggable="false" title=":birthday:" alt="🎂" src="https://twemoji.maxcdn.com/2/svg/1f382.svg" class="emoji">'
 ```
 
@@ -201,6 +201,18 @@ attribute value can apply proc-like object, remove `:` from title attribute:
 ```ruby
 > Twemoji.emoji_pattern
 => /(:mahjong:|:black_joker:| ... |:registered_sign:|:shibuya:)/
+```
+
+#### `Twemoji.emoji_pattern_unicode`
+
+```ruby
+> Twemoji.emoji_pattern_unicode
+```
+
+#### `Twemoji.emoji_pattern_all` = `emoji_pattern` + `emoji_pattern_unicode`
+
+```ruby
+> Twemoji.emoji_pattern_all
 ```
 
 #### JSON for your front-end
