@@ -124,7 +124,7 @@ More options could be passed in, please see [Twemoji.parse options](https://gith
 
 #### `Twemoji.parse`
 
-`Twemoji.parse` parses for both name tokens (e.g. :heart_eyes:) or unicode values (e.g. `\u1f60d`).
+Parses for both name tokens (e.g. :heart_eyes:) or unicode values (e.g. `\u1f60d`).
 
 Parsing by name token:
 
