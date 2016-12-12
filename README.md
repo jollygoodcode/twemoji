@@ -309,6 +309,11 @@ A huge THANK YOU to all our [contributors](https://github.com/jollygoodcode/twem
 
 The emoji keywords are from [jollygoodcode/emoji-keywords](https://github.com/jollygoodcode/emoji-keywords).
 
+## Guidelines
+
+This project subscribes to the [Moya Contributors Guidelines](https://github.com/Moya/contributors)
+which TLDR: means we give out push access easily and often.
+
 ## License
 
 Please see the [LICENSE.md](/LICENSE.md) file.
