@@ -120,6 +120,14 @@ module Twemoji
       parse_html(text)
     end
   end
+  
+  # Return sorted codepoint values by descending length
+  #
+  # @return [Array] An array of emoji codepoint values sorted by descending length
+  def self.sorted_codepoint_values 
+    # has to be sorted to match the combined codepoint (2-3 char emojis) before single char emojis
+    @sorted_codepoint_values ||= invert_codes.keys.sort_by {|key| key.length }.reverse
+  end 
 
   # Return all emoji patterns' regular expressions.
   #
@@ -133,14 +141,17 @@ module Twemoji
   #
   # @return [RegExp] A Regular expression consists of all emojis unicode.
   def self.emoji_pattern_unicode
-    @sorted_emoji_unicode_keys ||= invert_codes.keys.sort_by {|key| key.length }.reverse
-    @emoji_pattern_unicode ||= /(#{@sorted_emoji_unicode_keys.map { |name| Regexp.quote(name.split('-').collect {|n| n.hex}.pack("U*")) }.join("|") })/
+    @emoji_pattern_unicode ||= /(#{sorted_codepoint_values.map { |name| Regexp.quote(name.split('-').collect {|n| n.hex}.pack("U*")) }.join("|") })/
   end
 
+  # Return all emoji patterns' regular expressions in unicode and name.
+  #
+  # @return [RegExp] A Regular expression consists of all emojis unicode codepoint and names.
   def self.emoji_pattern_all
-    @sorted_emoji_unicode_keys ||= invert_codes.keys.sort_by {|key| key.length }.reverse
-    @emoji_pattern_all ||= /(#{codes.keys.map { |name| Regexp.quote(name) }.join("|") }|#{@sorted_emoji_unicode_keys.map { |name| Regexp.quote(name.split('-').collect {|n| n.hex}.pack("U*")) }.join("|") })/
-    @emoji_pattern_all
+    names = codes.keys.map { |name| Regexp.quote(name) }.join("|") 
+    codepoints = sorted_codepoint_values.map { |name| Regexp.quote(name.split('-').collect {|n| n.hex}.pack("U*")) }.join("|")
+
+    @emoji_pattern_all ||= /(#{names}|#{codepoints})/
   end
 
   private
