@@ -184,7 +184,6 @@ module Twemoji
     def self.parse_document(doc, filter = :filter_emojis)
       doc.xpath(".//text() | text()").each do |node|
         content = node.to_html
-        next if filter == :filter_emojis && !content.include?(":")
         next if has_ancestor?(node, %w(pre code tt))
         html = self.send(filter, content)
         next if html == content

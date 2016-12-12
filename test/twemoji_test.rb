@@ -207,6 +207,18 @@ class TwemojiTest < Minitest::Test
     assert_equal expected, Twemoji.parse("🍪🎂", img_attrs: {'aria-label'=> aria_label } )
   end 
 
+    def test_parse_by_unicode_multiple_html
+    expected = %(<p><img draggable="false" title=":cookie:" alt="🍪" src="https://twemoji.maxcdn.com/2/svg/1f36a.svg" class="emoji" aria-label="emoji: cookie"><img draggable="false" title=":birthday:" alt="🎂" src="https://twemoji.maxcdn.com/2/svg/1f382.svg" class="emoji" aria-label="emoji: birthday"></p>)
+    aria_label = ->(name) { 'emoji: ' + name.gsub(":", '') }
+    assert_equal expected, Twemoji.parse(Nokogiri::HTML::DocumentFragment.parse("<p>🍪🎂</p>"), img_attrs: {'aria-label'=> aria_label } ).to_html
+  end  
+
+  def test_parse_by_unicode_multiple_mix_codepoint_name_html
+    expected = %(<p><img draggable="false" title=":cookie:" alt="🍪" src="https://twemoji.maxcdn.com/2/svg/1f36a.svg" class="emoji" aria-label="emoji: cookie"><img draggable="false" title=":birthday:" alt="🎂" src="https://twemoji.maxcdn.com/2/svg/1f382.svg" class="emoji" aria-label="emoji: birthday"></p>)
+    aria_label = ->(name) { 'emoji: ' + name.gsub(":", '') }
+    assert_equal expected, Twemoji.parse(Nokogiri::HTML::DocumentFragment.parse("<p>🍪:birthday:</p>"), img_attrs: {'aria-label'=> aria_label } ).to_html
+  end 
+
   def test_parse_by_unicode_and_name
     expected = %(<img draggable="false" title=":cookie:" alt="🍪" src="https://twemoji.maxcdn.com/2/svg/1f36a.svg" class="emoji" aria-label="emoji: cookie"><img draggable="false" title=":birthday:" alt="🎂" src="https://twemoji.maxcdn.com/2/svg/1f382.svg" class="emoji" aria-label="emoji: birthday">)
     aria_label = ->(name) { 'emoji: ' + name.gsub(":", '') }
