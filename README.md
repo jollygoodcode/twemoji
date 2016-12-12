@@ -124,19 +124,30 @@ More options could be passed in, please see [Twemoji.parse options](https://gith
 
 #### `Twemoji.parse`
 
+`Twemoji.parse` parses for both name tokens (e.g. :heart_eyes:) or unicode values (e.g. `\u1f60d`).
+
+Parsing by name token:
+
 ```ruby
 > Twemoji.parse "I like chocolate :heart_eyes:!"
 => 'I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="emoji">!'
 ```
 
-#### `Twemoji.parse_unicode`
+Parsing by name unicode values:
 
 ```ruby
 > Twemoji.parse_unicode "I like chocolate 😍!"
 => 'I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="emoji">!'
 ```
 
-##### `Twemoji.parse` and `Twemoji.parse_unicode` options
+Parsing by both name and unicode:
+
+```ruby
+> Twemoji.parse_unicode ":cookie: 🎂"
+=> '<img draggable="false" title=":cookie:" alt="🍪" src="https://twemoji.maxcdn.com/2/svg/1f36a.svg" class="emoji"> <img draggable="false" title=":birthday:" alt="🎂" src="https://twemoji.maxcdn.com/2/svg/1f382.svg" class="emoji">'
+```
+
+##### `Twemoji.parse` options
 
 ##### `asset_root`
 
