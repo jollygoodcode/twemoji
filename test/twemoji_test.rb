@@ -180,31 +180,37 @@ class TwemojiTest < Minitest::Test
   def test_parse_by_unicode
     expected = %(<img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="emoji">)
 
-    assert_equal expected, Twemoji.parse_unicode("😍")
+    assert_equal expected, Twemoji.parse("😍")
   end 
   
   def test_parse_by_unicode_flag
     expected = %(<img draggable=\"false\" title=\":flag-my:\" alt=\"🇲🇾\" src=\"https://twemoji.maxcdn.com/2/svg/1f1f2-1f1fe.svg\" class=\"emoji\">)
 
-    assert_equal expected, Twemoji.parse_unicode("🇲🇾")
+    assert_equal expected, Twemoji.parse("🇲🇾")
   end 
 
   def test_parse_by_unicode_text
     expected = %(I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="twemoji">!)
 
-    assert_equal expected, Twemoji.parse_unicode("I like chocolate 😍!", class_name: 'twemoji')
+    assert_equal expected, Twemoji.parse("I like chocolate 😍!", class_name: 'twemoji')
   end 
 
   def test_parse_by_unicode_attr
     expected = %(<img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="twemoji" aria-label="emoji: heart_eyes">)
     aria_label = ->(name) { 'emoji: ' + name.gsub(":", '') }
-    assert_equal expected, Twemoji.parse_unicode("😍", img_attrs: {'aria-label'=> aria_label }, class_name: 'twemoji' )
+    assert_equal expected, Twemoji.parse("😍", img_attrs: {'aria-label'=> aria_label }, class_name: 'twemoji' )
   end 
 
   def test_parse_by_unicode_multiple
     expected = %(<img draggable="false" title=":cookie:" alt="🍪" src="https://twemoji.maxcdn.com/2/svg/1f36a.svg" class="emoji" aria-label="emoji: cookie"><img draggable="false" title=":birthday:" alt="🎂" src="https://twemoji.maxcdn.com/2/svg/1f382.svg" class="emoji" aria-label="emoji: birthday">)
     aria_label = ->(name) { 'emoji: ' + name.gsub(":", '') }
-    assert_equal expected, Twemoji.parse_unicode("🍪🎂", img_attrs: {'aria-label'=> aria_label } )
+    assert_equal expected, Twemoji.parse("🍪🎂", img_attrs: {'aria-label'=> aria_label } )
+  end 
+
+  def test_parse_by_unicode_and_name
+    expected = %(<img draggable="false" title=":cookie:" alt="🍪" src="https://twemoji.maxcdn.com/2/svg/1f36a.svg" class="emoji" aria-label="emoji: cookie"><img draggable="false" title=":birthday:" alt="🎂" src="https://twemoji.maxcdn.com/2/svg/1f382.svg" class="emoji" aria-label="emoji: birthday">)
+    aria_label = ->(name) { 'emoji: ' + name.gsub(":", '') }
+    assert_equal expected, Twemoji.parse(":cookie:🎂", img_attrs: {'aria-label'=> aria_label } )
   end 
 
   def test_parse_multiple

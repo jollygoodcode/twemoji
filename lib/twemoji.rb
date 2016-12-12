@@ -121,38 +121,6 @@ module Twemoji
     end
   end
 
-  # Parse string, replace emoji unicode codepoint with image.
-  # Parse DOM, replace emoji unicode codepoint with image.
-  #
-  # @example Usage
-  #   Twemoji.parse_unicode("I like chocolate 😍!")
-  #   => 'I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="emoji">!'
-  #
-  # @param text [String] Source text to parse.
-  #
-  # @option options [String] (optional) asset_root Asset root url to serve emoji.
-  # @option options [String] (optional) file_ext   File extension.
-  # @option options [String] (optional) class_name Emoji image's tag class attribute.
-  # @option options [String] (optional) img_attrs  Emoji image's img tag attributes.
-  #
-  # @return [String] Original text with all occurrences of emoji text
-  # replaced by emoji image according to given options.
-  def self.parse_unicode(text, asset_root: Twemoji.configuration.asset_root,
-                               file_ext:   Twemoji.configuration.file_ext,
-                               class_name: Twemoji.configuration.class_name,
-                               img_attrs:  Twemoji.configuration.img_attrs)
-
-    options[:asset_root] = asset_root
-    options[:file_ext]   = file_ext
-    options[:img_attrs]  = { class: class_name }.merge! img_attrs
-
-    if text.is_a?(Nokogiri::HTML::DocumentFragment)
-      parse_document(text, :filter_emojis_unicode)
-    else
-      parse_html(text, :filter_emojis_unicode)
-    end
-  end
-
   # Return all emoji patterns' regular expressions.
   #
   # @return [RegExp] A Regular expression consists of all emojis text.
@@ -167,6 +135,12 @@ module Twemoji
   def self.emoji_pattern_unicode
     @sorted_emoji_unicode_keys ||= invert_codes.keys.sort_by {|key| key.length }.reverse
     @emoji_pattern_unicode ||= /(#{@sorted_emoji_unicode_keys.map { |name| Regexp.quote(name.split('-').collect {|n| n.hex}.pack("U*")) }.join("|") })/
+  end
+
+  def self.emoji_pattern_all
+    @sorted_emoji_unicode_keys ||= invert_codes.keys.sort_by {|key| key.length }.reverse
+    @emoji_pattern_all ||= /(#{codes.keys.map { |name| Regexp.quote(name) }.join("|") }|#{@sorted_emoji_unicode_keys.map { |name| Regexp.quote(name.split('-').collect {|n| n.hex}.pack("U*")) }.join("|") })/
+    @emoji_pattern_all
   end
 
   private
@@ -196,10 +170,6 @@ module Twemoji
     # @return [String] Text with emoji text replaced by emoji image.
     # @private
     def self.parse_html(text, filter = :filter_emojis)
-      if filter == :filter_emojis && !text.include?(":")
-        return text
-      end
-
       self.send(filter, text)
     end
 
@@ -243,18 +213,8 @@ module Twemoji
     # @return [String] Returns a String just like content with all emoji text
     #                  replaced by the corresponding emoji image.
     # @private
-    def self.filter_emojis(content, pattern = emoji_pattern)
+    def self.filter_emojis(content, pattern = emoji_pattern_all)
       content.gsub(pattern) { |match| img_tag(match) }
-    end
-
-    # Filter emoji unicode codepoint in content, replaced by corresponding emoji image.
-    #
-    # @param content [String] Content to filter emoji unicode codepoint to image.
-    # @return [String] Returns a String just like content with all emoji text
-    #                  replaced by the corresponding emoji image.
-    # @private
-    def self.filter_emojis_unicode(content)
-      self.filter_emojis(content, emoji_pattern_unicode)
     end
 
     # Returns emoji image tag by given name and options from `Twemoji.parse`.
