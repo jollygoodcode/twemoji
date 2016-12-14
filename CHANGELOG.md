@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## 3.1.0 - 2016.12.13
+
+- `Twemoji.parse` can now parse unicode values, too [#35](https://github.com/jollygoodcode/twemoji/pull/35)
+  * [New API] `Twemoji.emoji_pattern_unicode` - List all emoji unicodes in a regex
+  * [New API] `Twemoji.emoji_pattern_all` - List all emoji names and unicodes in a regex
+
 ## 3.0.2 - 2016.11.15
 
 - Fix handling codepoint less than 0x1000 [#33](https://github.com/jollygoodcode/twemoji/pull/33)
