@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 3.1.1 - 2017.02.17
+
+- Soften nokogiri dependency >= 1.6 [#38](https://github.com/jollygoodcode/twemoji/pull/38)
+
 ## 3.1.0 - 2016.12.13
 
 - `Twemoji.parse` can now parse unicode values, too [#35](https://github.com/jollygoodcode/twemoji/pull/35)
