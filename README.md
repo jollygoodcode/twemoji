@@ -217,11 +217,11 @@ attribute value can apply proc-like object, remove `:` from title attribute:
 
 #### JSON for your front-end
 
-We prepare two constants: [Twemoji::PNG](lib/twemoji/png.rb) and [Twemoji::SVG](lib/twemoji/svg.rb) (**not loaded by default**), you need to require them to use:
+We prepare two constants: [Twemoji.png](lib/twemoji/png.rb) and [Twemoji.svg](lib/twemoji/svg.rb) (**not loaded by default**), you need to require them to use:
 
 ```ruby
-require "twemoji/png" # If you want to use Twemoji::PNG
-require "twemoji/svg" # If you want to use Twemoji::SVG
+require "twemoji/png" # If you want to use Twemoji.png
+require "twemoji/svg" # If you want to use Twemoji.svg
 ```
 
 Or require at `Gemfile`:
