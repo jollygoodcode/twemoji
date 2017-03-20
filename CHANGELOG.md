@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Abstract constants into yaml files [#39](https://github.com/jollygoodcode/twemoji/pull/39)
+
 ## 3.1.1 - 2017.02.17
 
 - Soften nokogiri dependency >= 1.6 [#38](https://github.com/jollygoodcode/twemoji/pull/38)
