@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 3.1.2 - 2017.03.20
+
 - Abstract constants into yaml files [#39](https://github.com/jollygoodcode/twemoji/pull/39)
 
 ## 3.1.1 - 2017.02.17
