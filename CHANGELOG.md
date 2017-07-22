@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 3.1.3 - 2017.07.22
+
+- Fixes name of kiss emoji [#42](https://github.com/jollygoodcode/twemoji/pull/42)
+
 ## 3.1.2 - 2017.03.20
 
 - Abstract constants into yaml files [#39](https://github.com/jollygoodcode/twemoji/pull/39)
