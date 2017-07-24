@@ -804,7 +804,7 @@ module Twemoji
     ":woman::skin-tone-3:" => "https://twemoji.maxcdn.com/2/72x72/1f469-1f3fc.png",
     ":woman::skin-tone-4:" => "https://twemoji.maxcdn.com/2/72x72/1f469-1f3fd.png",
     ":woman::skin-tone-5:" => "https://twemoji.maxcdn.com/2/72x72/1f469-1f3fe.png",
-    ":woman::skin-tone-6" => "https://twemoji.maxcdn.com/2/72x72/1f469-1f3ff.png",
+    ":woman::skin-tone-6:" => "https://twemoji.maxcdn.com/2/72x72/1f469-1f3ff.png",
     ":woman:" => "https://twemoji.maxcdn.com/2/72x72/1f469.png",
     ":woman-woman-boy:" => "https://twemoji.maxcdn.com/2/72x72/1f469-200d-1f469-200d-1f466.png",
     ":woman-woman-boy-boy:" => "https://twemoji.maxcdn.com/2/72x72/1f469-200d-1f469-200d-1f466-200d-1f466.png",
