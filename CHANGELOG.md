@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 3.1.4 - 2017.07.22
+
+- Fixes woman skin 6 emoji [#44](https://github.com/jollygoodcode/twemoji/pull/44)
+
 ## 3.1.3 - 2017.07.22
 
 - Fixes name of kiss emoji [#42](https://github.com/jollygoodcode/twemoji/pull/42)
