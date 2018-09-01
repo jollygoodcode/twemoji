@@ -297,7 +297,7 @@ To properly support emoji, the document character must be set to UTF-8. This can
 
 ## Attribution Requirements
 
-**IMPORTANT:** Please follow the [Attribution Requirements](https://github.com/twitter/twemoji#attribution-requirements) as stated on the official Twemoji (JS) repo.
+**IMPORTANT:** Please follow the [Attribution Requirements](https://github.com/twitter/twemoji#attribution-requirements) as stated on the official Twemoji (JavaScript) repo.
 
 ## Contributing
 
