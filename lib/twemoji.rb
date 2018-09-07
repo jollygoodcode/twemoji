@@ -58,7 +58,7 @@ module Twemoji
   # @param code [String] Emoji code to find text.
   # @return [String] Emoji Text.
   def self.find_by_code(code)
-    invert_codes[must_str(code)]
+    invert_codes[must_str(code).gsub(/(-fe0e|-fe0f)/, '')]
   end
 
   # Find emoji text by raw emoji unicode.
@@ -70,7 +70,7 @@ module Twemoji
   # @param raw [String] Emoji raw unicode to find text.
   # @return [String] Emoji Text.
   def self.find_by_unicode(raw)
-    invert_codes[unicode_to_str(raw)]
+    invert_codes[unicode_to_str(raw).gsub(/(-fe0e|-fe0f)/, '')]
   end
 
   # Render raw emoji unicode from emoji text or emoji code.

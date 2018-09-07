@@ -83,6 +83,14 @@ class TwemojiTest < Minitest::Test
     assert_equal ":heart_eyes:", Twemoji.find_by_unicode("\u{1f60d}")
   end
 
+  def test_find_by_code_including_emoji_presentation_selector
+    assert_equal ":eye::left_speech_bubble:", Twemoji.find_by_code("1f441-fe0f-200d-1f5e8-fe0f")
+  end
+
+  def test_find_by_unicode_including_emoji_presentation_selector
+    assert_equal ":eye::left_speech_bubble:", Twemoji.find_by_unicode("\u{1f441}\u{fe0f}\u{200d}\u{1f5e8}\u{fe0f}")
+  end
+
   def test_parse_plus_one
     expected = %(<img draggable="false" title=":+1:" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" class="emoji">)
 
@@ -211,7 +219,7 @@ class TwemojiTest < Minitest::Test
     expected = %(<p><img draggable="false" title=":cookie:" alt="🍪" src="https://twemoji.maxcdn.com/2/svg/1f36a.svg" class="emoji" aria-label="emoji: cookie"><img draggable="false" title=":birthday:" alt="🎂" src="https://twemoji.maxcdn.com/2/svg/1f382.svg" class="emoji" aria-label="emoji: birthday"></p>)
     aria_label = ->(name) { 'emoji: ' + name.gsub(":", '') }
     assert_equal expected, Twemoji.parse(Nokogiri::HTML::DocumentFragment.parse("<p>🍪🎂</p>"), img_attrs: {'aria-label'=> aria_label } ).to_html
-  end  
+  end
 
   def test_parse_by_unicode_multiple_mix_codepoint_name_html
     expected = %(<p><img draggable="false" title=":cookie:" alt="🍪" src="https://twemoji.maxcdn.com/2/svg/1f36a.svg" class="emoji" aria-label="emoji: cookie"><img draggable="false" title=":birthday:" alt="🎂" src="https://twemoji.maxcdn.com/2/svg/1f382.svg" class="emoji" aria-label="emoji: birthday"></p>)
@@ -230,5 +238,4 @@ class TwemojiTest < Minitest::Test
     aria_label = ->(name) { 'emoji: ' + name.gsub(":", '') }
     assert_equal expected, Twemoji.parse(":cookie::birthday:", img_attrs: {'aria-label'=> aria_label } )
   end 
-
 end
