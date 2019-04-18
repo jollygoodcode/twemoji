@@ -318,7 +318,7 @@ module Twemoji
     # @return [String] HTML attributes suitable for use in tag
     # @private
     def self.hash_to_html_attrs(hash)
-      hash.map { |attr, value| %(#{attr}="#{value}") }.join(" ")
+      hash.reject { |key, value| value.nil? || value == '' }.map { |attr, value| %(#{attr}="#{value}") }.join(" ")
     end
 
     # Return sorted codepoint values by descending length.
