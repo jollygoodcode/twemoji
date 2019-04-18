@@ -181,54 +181,60 @@ class TwemojiTest < Minitest::Test
     expected = %(<img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="emoji">)
 
     assert_equal expected, Twemoji.parse("😍")
-  end 
-  
+  end
+
   def test_parse_by_unicode_flag
     expected = %(<img draggable=\"false\" title=\":flag-my:\" alt=\"🇲🇾\" src=\"https://twemoji.maxcdn.com/2/svg/1f1f2-1f1fe.svg\" class=\"emoji\">)
 
     assert_equal expected, Twemoji.parse("🇲🇾")
-  end 
+  end
 
   def test_parse_by_unicode_text
     expected = %(I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="twemoji">!)
 
     assert_equal expected, Twemoji.parse("I like chocolate 😍!", class_name: 'twemoji')
-  end 
+  end
 
   def test_parse_by_unicode_attr
     expected = %(<img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="twemoji" aria-label="emoji: heart_eyes">)
     aria_label = ->(name) { 'emoji: ' + name.gsub(":", '') }
     assert_equal expected, Twemoji.parse("😍", img_attrs: {'aria-label'=> aria_label }, class_name: 'twemoji' )
-  end 
+  end
 
   def test_parse_by_unicode_multiple
     expected = %(<img draggable="false" title=":cookie:" alt="🍪" src="https://twemoji.maxcdn.com/2/svg/1f36a.svg" class="emoji" aria-label="emoji: cookie"><img draggable="false" title=":birthday:" alt="🎂" src="https://twemoji.maxcdn.com/2/svg/1f382.svg" class="emoji" aria-label="emoji: birthday">)
     aria_label = ->(name) { 'emoji: ' + name.gsub(":", '') }
     assert_equal expected, Twemoji.parse("🍪🎂", img_attrs: {'aria-label'=> aria_label } )
-  end 
+  end
 
     def test_parse_by_unicode_multiple_html
     expected = %(<p><img draggable="false" title=":cookie:" alt="🍪" src="https://twemoji.maxcdn.com/2/svg/1f36a.svg" class="emoji" aria-label="emoji: cookie"><img draggable="false" title=":birthday:" alt="🎂" src="https://twemoji.maxcdn.com/2/svg/1f382.svg" class="emoji" aria-label="emoji: birthday"></p>)
     aria_label = ->(name) { 'emoji: ' + name.gsub(":", '') }
     assert_equal expected, Twemoji.parse(Nokogiri::HTML::DocumentFragment.parse("<p>🍪🎂</p>"), img_attrs: {'aria-label'=> aria_label } ).to_html
-  end  
+  end
 
   def test_parse_by_unicode_multiple_mix_codepoint_name_html
     expected = %(<p><img draggable="false" title=":cookie:" alt="🍪" src="https://twemoji.maxcdn.com/2/svg/1f36a.svg" class="emoji" aria-label="emoji: cookie"><img draggable="false" title=":birthday:" alt="🎂" src="https://twemoji.maxcdn.com/2/svg/1f382.svg" class="emoji" aria-label="emoji: birthday"></p>)
     aria_label = ->(name) { 'emoji: ' + name.gsub(":", '') }
     assert_equal expected, Twemoji.parse(Nokogiri::HTML::DocumentFragment.parse("<p>🍪:birthday:</p>"), img_attrs: {'aria-label'=> aria_label } ).to_html
-  end 
+  end
 
   def test_parse_by_unicode_and_name
     expected = %(<img draggable="false" title=":cookie:" alt="🍪" src="https://twemoji.maxcdn.com/2/svg/1f36a.svg" class="emoji" aria-label="emoji: cookie"><img draggable="false" title=":birthday:" alt="🎂" src="https://twemoji.maxcdn.com/2/svg/1f382.svg" class="emoji" aria-label="emoji: birthday">)
     aria_label = ->(name) { 'emoji: ' + name.gsub(":", '') }
     assert_equal expected, Twemoji.parse(":cookie:🎂", img_attrs: {'aria-label'=> aria_label } )
-  end 
+  end
 
   def test_parse_multiple
     expected = %(<img draggable="false" title=":cookie:" alt="🍪" src="https://twemoji.maxcdn.com/2/svg/1f36a.svg" class="emoji" aria-label="emoji: cookie"><img draggable="false" title=":birthday:" alt="🎂" src="https://twemoji.maxcdn.com/2/svg/1f382.svg" class="emoji" aria-label="emoji: birthday">)
     aria_label = ->(name) { 'emoji: ' + name.gsub(":", '') }
     assert_equal expected, Twemoji.parse(":cookie::birthday:", img_attrs: {'aria-label'=> aria_label } )
-  end 
+  end
 
+  def test_parse_empty_class_name
+    expected = '<img draggable="false" title=":flag-br:" alt="🇧🇷" src="https://twemoji.maxcdn.com/2/svg/1f1e7-1f1f7.svg">'
+
+    assert_equal expected, Twemoji.parse('🇧🇷', class_name: nil)
+    assert_equal expected, Twemoji.parse('🇧🇷', class_name: '')
+  end
 end
