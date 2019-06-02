@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 3.1.5 - 2019.06.02
+
 - Introduced `Twemoji::Utils::Unicode.unpack` [#51](https://github.com/jollygoodcode/twemoji/pull/51)
 - Do not set attribute on generated element if not specified [#49](https://github.com/jollygoodcode/twemoji/pull/49)
 
