@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Do not set attribute on generated element if not specified [#44](https://github.com/jollygoodcode/twemoji/pull/49)
+
 ## 3.1.4 - 2017.07.22
 
 - Fixes woman skin 6 emoji [#44](https://github.com/jollygoodcode/twemoji/pull/44)
