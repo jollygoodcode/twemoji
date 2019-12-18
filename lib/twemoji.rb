@@ -126,7 +126,7 @@ module Twemoji
   #
   # @return [RegExp] A Regular expression consists of all emojis text.
   def self.emoji_pattern
-    @emoji_pattern ||= /(#{codes.keys.map { |name| Regexp.quote(name) }.join("|") })/
+    EMOJI_PATTERN
   end
 
   # Return all emoji patterns' regular expressions in unicode.
@@ -134,20 +134,30 @@ module Twemoji
   #
   # @return [RegExp] A Regular expression consists of all emojis unicode.
   def self.emoji_pattern_unicode
-    @emoji_pattern_unicode ||= /(#{sorted_codepoint_values.map { |name| Regexp.quote(name.split('-').collect {|n| n.hex}.pack("U*")) }.join("|") })/
+    EMOJI_PATTERN_UNICODE
   end
 
   # Return all emoji patterns' regular expressions in unicode and name.
   #
   # @return [RegExp] A Regular expression consists of all emojis unicode codepoint and names.
   def self.emoji_pattern_all
-    names = codes.keys.map { |name| Regexp.quote(name) }.join("|")
-    codepoints = sorted_codepoint_values.map { |name| Regexp.quote(name.split('-').collect {|n| n.hex}.pack("U*")) }.join("|")
-
-    @emoji_pattern_all ||= /(#{names}|#{codepoints})/
+    EMOJI_PATTERN_ALL
   end
 
   private
+
+    # Return sorted codepoint values by descending length.
+    #
+    # @return [Array] An array of emoji codepoint values sorted by descending length
+    def self.sorted_codepoint_values
+      # has to be sorted to match the combined codepoint (2-3 char emojis) before single char emojis
+      @sorted_codepoint_values ||= invert_codes.keys.sort_by {|key| key.length }.reverse
+    end
+
+    EMOJI_PATTERN = /#{codes.keys.map { |name| Regexp.quote(name) }.join("|")}/.freeze
+    EMOJI_PATTERN_UNICODE = /#{sorted_codepoint_values.map { |name| Regexp.quote(name.split('-').collect {|n| n.hex}.pack("U*")) }.join("|")}/.freeze
+    EMOJI_PATTERN_ALL = /(#{EMOJI_PATTERN}|#{EMOJI_PATTERN_UNICODE})/.freeze
+    private_constant :EMOJI_PATTERN, :EMOJI_PATTERN_UNICODE, :EMOJI_PATTERN_ALL
 
     # Ensure text is a string.
     #
@@ -320,13 +330,5 @@ module Twemoji
     # @private
     def self.hash_to_html_attrs(hash)
       hash.reject { |key, value| value.nil? || value == '' }.map { |attr, value| %(#{attr}="#{value}") }.join(" ")
-    end
-
-    # Return sorted codepoint values by descending length.
-    #
-    # @return [Array] An array of emoji codepoint values sorted by descending length
-    def self.sorted_codepoint_values
-      # has to be sorted to match the combined codepoint (2-3 char emojis) before single char emojis
-      @sorted_codepoint_values ||= invert_codes.keys.sort_by {|key| key.length }.reverse
     end
 end

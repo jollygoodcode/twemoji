@@ -177,6 +177,14 @@ class TwemojiTest < Minitest::Test
     assert_kind_of Regexp, Twemoji.emoji_pattern
   end
 
+  def test_emoji_unicode
+    assert_kind_of Regexp, Twemoji.emoji_pattern_unicode
+  end
+
+  def test_emoji_all
+    assert_kind_of Regexp, Twemoji.emoji_pattern_all
+  end
+
   def test_parse_by_unicode
     expected = %(<img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="emoji">)
 
