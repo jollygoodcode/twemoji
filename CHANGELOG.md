@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 3.1.5 - 2019.12.21
+
+- Moved expensive computations to constant [#53](https://github.com/jollygoodcode/twemoji/pull/53)
+
 ## 3.1.5 - 2019.06.02
 
 - Introduced `Twemoji::Utils::Unicode.unpack` [#51](https://github.com/jollygoodcode/twemoji/pull/51)
