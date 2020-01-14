@@ -13,9 +13,14 @@ Gem::Specification.new do |spec|
   spec.description   = spec.summary
   spec.homepage      = "https://github.com/jollygoodcode/twemoji"
   spec.license       = "MIT"
-
-  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f =~ %r(^(test)/) }
   spec.require_paths = %w(lib)
+
+  spec.files         = Dir[
+    "README.md",
+    "LICENSE.md",
+    "lib/**/*.yml",
+    "lib/**/*.rb",
+  ]
 
   spec.required_ruby_version = "~> 2.0"
 
