@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 3.1.7 - 2020.09.28
+
+- Relax required ruby version
+
 ## 3.1.6 - 2019.12.21
 
 - Moved expensive computations to constant [#53](https://github.com/jollygoodcode/twemoji/pull/53)
