@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-## 3.1.5 - 2019.12.21
+## 3.1.6 - 2019.12.21
 
 - Moved expensive computations to constant [#53](https://github.com/jollygoodcode/twemoji/pull/53)
 
