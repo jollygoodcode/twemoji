@@ -113,7 +113,7 @@ module Twemoji
 
     options[:asset_root] = asset_root
     options[:file_ext]   = file_ext
-    options[:img_attrs]  = { class: class_name }.merge! img_attrs
+    options[:img_attrs]  = { class: class_name }.merge(img_attrs)
 
     if text.is_a?(Nokogiri::HTML::DocumentFragment)
       parse_document(text)
