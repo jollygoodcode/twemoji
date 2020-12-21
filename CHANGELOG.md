@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 3.1.8 - 2020.12.21
+
+- Fix retained memory.
+
 ## 3.1.7 - 2020.09.28
 
 - Relax required ruby version
@@ -34,8 +38,8 @@
 ## 3.1.0 - 2016.12.13
 
 - `Twemoji.parse` can now parse unicode values, too [#35](https://github.com/jollygoodcode/twemoji/pull/35)
-  * [New API] `Twemoji.emoji_pattern_unicode` - List all emoji unicodes in a regex
-  * [New API] `Twemoji.emoji_pattern_all` - List all emoji names and unicodes in a regex
+  - [New API] `Twemoji.emoji_pattern_unicode` - List all emoji unicodes in a regex
+  - [New API] `Twemoji.emoji_pattern_all` - List all emoji names and unicodes in a regex
 
 ## 3.0.2 - 2016.11.15
 
@@ -153,15 +157,15 @@
 
   **New Methods**:
 
-  * [`Twemoji.find_by`](https://github.com/jollygoodcode/twemoji/blob/fe2810ddbe1f2cfdb496bcdd9e1576ba1e05eb06/lib/twemoji.rb#L9-L35) now accepts `unicode` keyword argument (either a raw unicode or escaped-unicode string) to find emoji text
+  - [`Twemoji.find_by`](https://github.com/jollygoodcode/twemoji/blob/fe2810ddbe1f2cfdb496bcdd9e1576ba1e05eb06/lib/twemoji.rb#L9-L35) now accepts `unicode` keyword argument (either a raw unicode or escaped-unicode string) to find emoji text
 
-  * Add [`Twemoji.find_by_unicode`](https://github.com/jollygoodcode/twemoji/blob/fe2810ddbe1f2cfdb496bcdd9e1576ba1e05eb06/lib/twemoji.rb#L61-L71) to find emoji text by raw emoji unicode or escaped-unicode string
+  - Add [`Twemoji.find_by_unicode`](https://github.com/jollygoodcode/twemoji/blob/fe2810ddbe1f2cfdb496bcdd9e1576ba1e05eb06/lib/twemoji.rb#L61-L71) to find emoji text by raw emoji unicode or escaped-unicode string
 
-  * Add [`Twemoji.render_unicode`](https://github.com/jollygoodcode/twemoji/blob/fe2810ddbe1f2cfdb496bcdd9e1576ba1e05eb06/lib/twemoji.rb#L73-L86) to render raw emoji unicode from emoji text or emoji code
+  - Add [`Twemoji.render_unicode`](https://github.com/jollygoodcode/twemoji/blob/fe2810ddbe1f2cfdb496bcdd9e1576ba1e05eb06/lib/twemoji.rb#L73-L86) to render raw emoji unicode from emoji text or emoji code
 
   **Changes**:
 
-  * `img` tag's `alt` changes from emoji text like `:heart_eyes:` to actual unicode `"😍"`
+  - `img` tag's `alt` changes from emoji text like `:heart_eyes:` to actual unicode `"😍"`
 
 - Restrict Nokogiri to (1.4..1.6.5). @JuanitoFatas [#3](https://github.com/jollygoodcode/twemoji/pull/3)
 
