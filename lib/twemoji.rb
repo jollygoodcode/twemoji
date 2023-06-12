@@ -95,7 +95,7 @@ module Twemoji
   #
   # @example Usage
   #   Twemoji.parse("I like chocolate :heart_eyes:!")
-  #   => 'I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="emoji">!'
+  #   => 'I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f60d.svg" class="emoji">!'
   #
   # @param text [String] Source text to parse.
   #

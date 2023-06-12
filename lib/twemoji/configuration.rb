@@ -28,7 +28,7 @@ module Twemoji
     attr_accessor :asset_root, :file_ext, :class_name, :img_attrs
 
     def initialize
-      @asset_root = "https://twemoji.maxcdn.com/2"
+      @asset_root = "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets"
       @file_ext   = "svg"
       @class_name = "emoji"
       @img_attrs  = {}

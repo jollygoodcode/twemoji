@@ -7,7 +7,7 @@ class TwemojiConfigurationTest < Minitest::Test
   end
 
   def test_configuration_defaults
-    assert_equal "https://twemoji.maxcdn.com/2", Twemoji.configuration.asset_root
+    assert_equal "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets", Twemoji.configuration.asset_root
     assert_equal "svg", Twemoji.configuration.file_ext
     assert_equal "emoji", Twemoji.configuration.class_name
     assert_equal Hash(nil), Twemoji.configuration.img_attrs
