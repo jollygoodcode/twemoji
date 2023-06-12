@@ -6,6 +6,7 @@ require "async"
 require "async/barrier"
 require "async/semaphore"
 require "async/http/internet"
+require "fileutils"
 
 ROOT = File.dirname(__FILE__)
 
@@ -166,5 +167,12 @@ File.open(File.join(ROOT, "data", "emoji-unicode-svg.yml"), "w") do |file|
 
   file.puts emoji_unicode_svg_hash.to_yaml
 end
+
+# Step 7. Let's copy data files and the gem is ready to go.
+
+FileUtils.cp_r(
+  File.join(ROOT, "data"),
+  File.join(ROOT, "..", "lib", "twemoji")
+)
 
 puts "DONE, #{fixed_present_emojies.size} emojies so far 🍻"
