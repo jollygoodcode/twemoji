@@ -5,7 +5,7 @@ class TwemojiTest < Minitest::Test
   end
 
   def test_number_of_emojis
-    assert_equal 1661, Twemoji.codes.size
+    assert_equal 4904, Twemoji.codes.size
   end
 
   def test_twemoji_png_and_svg_not_loaded_by_default
@@ -20,7 +20,7 @@ class TwemojiTest < Minitest::Test
     assert_raises NameError do
       Twemoji::PNG
     end
-    assert_equal 1661, Twemoji.png.size
+    assert_equal 4904, Twemoji.png.size
   end
 
   def test_twemoji_svg
@@ -28,7 +28,7 @@ class TwemojiTest < Minitest::Test
     assert_raises NameError do
       Twemoji::SVG
     end
-    assert_equal 1661, Twemoji.svg.size
+    assert_equal 4904, Twemoji.svg.size
   end
 
   def test_finder_methods_cannot_find_by_more_than_one
@@ -162,8 +162,10 @@ class TwemojiTest < Minitest::Test
 
   def test_parse_diversity_emojis
     DiversityEmoji.all.each do |diversity|
-      # Each diversity set of emojis (base + 5 modifier = 6) should result in 6 img tags
-      assert_equal 6, Twemoji.parse(diversity).scan(/<img/).size
+      # Each diversity set of emojis could have either 6 or 11 tags.
+      # v3: base + 5 modifier = 6
+      # v5: base + 5 modifier + 5 new syntax = 11
+      assert_includes [6, 11], Twemoji.parse(diversity).scan(/<img/).size
     end
   end
 
