@@ -137,16 +137,22 @@ unless Dir.exist?(File.join(ROOT, "data"))
 end
 
 File.open(File.join(ROOT, "data", "emoji-unicode.yml"), "w") do |file|
+  original_file = File.join(ROOT, "..", "lib", "twemoji", "data", "emoji-unicode.yml")
+  original_hash = YAML.load(File.read(original_file))
+
   emoji_unicode_hash = {}
 
   fixed_present_emojies.each do |name, unicode|
     emoji_unicode_hash[":#{name}:"] = unicode
   end
 
-  file.puts emoji_unicode_hash.to_yaml
+  file.puts emoji_unicode_hash.merge(original_hash).to_yaml
 end
 
 File.open(File.join(ROOT, "data", "emoji-unicode-png.yml"), "w") do |file|
+  original_file = File.join(ROOT, "..", "lib", "twemoji", "data", "emoji-unicode-png.yml")
+  original_hash = YAML.load(File.read(original_file))
+
   emoji_unicode_png_hash = {}
 
   fixed_present_emojies.each do |name, unicode|
@@ -154,10 +160,13 @@ File.open(File.join(ROOT, "data", "emoji-unicode-png.yml"), "w") do |file|
     emoji_unicode_png_hash[":#{name}:"] = "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/#{slug}.png"
   end
 
-  file.puts emoji_unicode_png_hash.to_yaml
+  file.puts emoji_unicode_png_hash.merge(original_hash).to_yaml
 end
 
 File.open(File.join(ROOT, "data", "emoji-unicode-svg.yml"), "w") do |file|
+  original_file = File.join(ROOT, "..", "lib", "twemoji", "data", "emoji-unicode-svg.yml")
+  original_hash = YAML.load(File.read(original_file))
+
   emoji_unicode_svg_hash = {}
 
   fixed_present_emojies.each do |name, unicode|
@@ -165,7 +174,7 @@ File.open(File.join(ROOT, "data", "emoji-unicode-svg.yml"), "w") do |file|
     emoji_unicode_svg_hash[":#{name}:"] = "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/#{slug}.svg"
   end
 
-  file.puts emoji_unicode_svg_hash.to_yaml
+  file.puts emoji_unicode_svg_hash.merge(original_hash).to_yaml
 end
 
 # Step 7. Let's copy data files and the gem is ready to go.
