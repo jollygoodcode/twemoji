@@ -16,6 +16,7 @@ This RubyGem `twemoji` is a minimum implementation of Twitter Emoji in Ruby so t
 
 - [ ] Refactor emoji map generation
 - [ ] Add documentation on how to import new emoji sets
+- [ ] Add validator for the combined set at CDN
 
 ## Twemoji Gem and twemoji.js versions
 
