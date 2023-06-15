@@ -7,6 +7,7 @@ require "async/barrier"
 require "async/semaphore"
 require "async/http/internet"
 require "fileutils"
+require_relative "./helpers/emoji_name"
 
 ROOT = File.dirname(__FILE__)
 
@@ -41,33 +42,7 @@ emojies = emojies.merge(flag_emojies)
 
 fixed_emojies = {}
 emojies.each do |name, unicode|
-  fixed_name = name.dup
-
-  fixed_name.gsub!("flag:_", "flag_")
-  fixed_name.gsub!(/[“”]/, "_")
-  fixed_name.gsub!("!", "_")
-  fixed_name.gsub!("_(", "_")
-  fixed_name.gsub!(/\)\z/, "")
-  fixed_name.gsub!(":_", "_")
-  fixed_name.gsub!("’", "")
-  fixed_name.gsub!(/_[\#\*]\z/, "")
-  fixed_name.gsub!(",_", "_")
-  fixed_name.gsub!("._", "_")
-  fixed_name.gsub!("_&_", "_")
-  fixed_name.gsub!("_u.s_", "_us_")
-  fixed_name.gsub!("ñ", "n")
-  fixed_name.gsub!(")_", "_")
-  fixed_name.gsub!("å", "a")
-  fixed_name.gsub!("é", "e")
-  fixed_name.gsub!("ô", "p")
-  fixed_name.gsub!("ç", "c")
-  fixed_name.gsub!("ã", "a")
-  fixed_name.gsub!("í", "i")
-  fixed_name.gsub!("-", "_")
-  fixed_name.gsub!(":_", "_")
-  fixed_name.gsub!("__", "_")
-
-  fixed_emojies[fixed_name] = unicode
+  fixed_emojies[emoji_name(name)] = unicode
 end
 
 ## STEP 3. Validating that all emojies adhere to our format.
@@ -121,14 +96,13 @@ end
 # Let's remove absent emojies from our Hash.
 
 File.open(File.join(ROOT, "absent_emojies.txt"), "w") do |file|
-  file.puts(@absent_emoji_names.to_yaml)
+  file.puts(@absent_emoji_names.sort.to_h.to_yaml)
 end
 
 fixed_present_emojies = fixed_emojies.reject { |name| @absent_emoji_names.key?(name) }
 
 puts fixed_emojies.size
 puts fixed_present_emojies.size
-
 
 # Step 6. Finally, let's prepare our data files and we're ready to ship a brand new version.
 
