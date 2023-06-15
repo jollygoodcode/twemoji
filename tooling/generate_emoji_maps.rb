@@ -26,15 +26,18 @@ emojies = load_emoji_definitions()
 
 absent_emoji_names = find_missing_emojies_on_cdn(emojies)
 
-## Step 3. As you can see, we're down from 3911 items to 3661. Not bad!
+# STEP 3.
+# As you can see, we're down from 3911 items to 3661. Not bad!
 # Let's remove absent emojies from our Hash.
 
-fixed_present_emojies = emojies.reject { |name| absent_emoji_names.key?(name) }
+puts "\n--> All emojies in the set: #{emojies.size}"
 
-puts emojies.size
-puts fixed_present_emojies.size
+emojies.reject! { |name| absent_emoji_names.key?(name) }
 
-# Step 4. Finally, let's prepare our data files and we're ready to ship a brand new version.
+puts "--> All emojies in the set that are present on CDN: #{emojies.size}\n"
+
+# STEP 4.
+# Finally, let's prepare our data files and we're ready to ship a brand new version.
 
 unless Dir.exist?(File.join(ROOT, "data"))
   Dir.mkdir(File.join(ROOT, "data"))
@@ -46,7 +49,7 @@ File.open(File.join(ROOT, "data", "emoji-unicode.yml"), "w") do |file|
 
   emoji_unicode_hash = {}
 
-  fixed_present_emojies.each do |name, unicode|
+  emojies.each do |name, unicode|
     emoji_unicode_hash[":#{name}:"] = unicode
   end
 
@@ -59,7 +62,7 @@ File.open(File.join(ROOT, "data", "emoji-unicode-png.yml"), "w") do |file|
 
   emoji_unicode_png_hash = {}
 
-  fixed_present_emojies.each do |name, unicode|
+  emojies.each do |name, unicode|
     slug = unicode.gsub("_", "-")
     emoji_unicode_png_hash[":#{name}:"] = "#{Twemoji::Configuration::DEFAULT_ASSET_ROOT}/72x72/#{slug}.png"
   end
@@ -73,7 +76,7 @@ File.open(File.join(ROOT, "data", "emoji-unicode-svg.yml"), "w") do |file|
 
   emoji_unicode_svg_hash = {}
 
-  fixed_present_emojies.each do |name, unicode|
+  emojies.each do |name, unicode|
     slug = unicode.gsub("_", "-")
     emoji_unicode_svg_hash[":#{name}:"] = "#{Twemoji::Configuration::DEFAULT_ASSET_ROOT}/svg/#{slug}.svg"
   end
@@ -87,5 +90,3 @@ FileUtils.cp_r(
   File.join(ROOT, "data"),
   File.join(ROOT, "..", "lib", "twemoji")
 )
-
-puts "DONE, #{fixed_present_emojies.size} emojies so far 🍻"
