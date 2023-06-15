@@ -36,6 +36,14 @@ bundle exec ruby tooling/import_latest_emojies.rb
 
 **Step 3**. PROFIT :beers:
 
+### How to use this fork in your Rails app
+
+In your Gemfile, include the latest fork's tag:
+
+```ruby
+gem "twemoji", github: "sqlhabit/twemoji", tag: "v4.0.1"
+```
+
 ## Twemoji Gem and twemoji.js versions
 
 - Twemoji Gem 4.x supports Twemoji v14 (3245 emojis)
