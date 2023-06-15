@@ -2,65 +2,38 @@ require "open-uri"
 require "yaml"
 require "pp"
 require "net/https"
-require "async"
-require "async/barrier"
-require "async/semaphore"
-require "async/http/internet"
 require "fileutils"
 require_relative "./helpers/load_emoji_definitions"
+require_relative "./helpers/find_missing_emojies_on_cdn"
 require_relative "../lib/twemoji/configuration"
 
 ROOT = File.dirname(__FILE__)
 
-## STEP 1. Load emoji definitions from unicode.org and flags.yml.
+# STEP 1.
+# Load emoji definitions from unicode.org and flags.yml,
+# fix emoji names and validate them.
 
 emojies = load_emoji_definitions()
 
-## STEP 2. Now we have a Hash with 3911 items.
-# They're original unicode.org emojies – some aren't present in the Twemoji set,
-# some are missing on CDN.
+# STEP 2.
+# Now we have a Hash with 3911 items.
+# They're all original unicode.org emojies.
+#
+# Problem 1: Some aren't present in the Twemoji set,
+# Problem 2: Some are missing on CDN.
 #
 # Let's validate which emojies are present on CDN and keep only those.
 
-@absent_emoji_names = {}
-
-PARALLELISM = 20
-
-# https://github.com/socketry/async-http#limiting-requests
-Async do
-	internet = Async::HTTP::Internet.new
-	barrier = Async::Barrier.new
-	semaphore = Async::Semaphore.new(PARALLELISM, parent: barrier)
-
-  emojies.each do |emoji_name, unicode|
-		semaphore.async do
-      slug = unicode.gsub("_", "-")
-
-			request = internet.get("#{Twemoji::Configuration::DEFAULT_ASSET_ROOT}/svg/#{slug}.svg")
-
-      request.read # if we don't read, connections won't be closed
-
-      if request.status != 200
-        puts "⚠️ --> Emoji is absent: #{unicode} #{emoji_name}"
-
-        @absent_emoji_names[emoji_name] = unicode
-      end
-		end
-	end
-
-	barrier.wait
-ensure
-	internet&.close
-end
+absent_emoji_names = find_missing_emojies_on_cdn(emojies)
 
 ## Step 3. As you can see, we're down from 3911 items to 3661. Not bad!
 # Let's remove absent emojies from our Hash.
 
 File.open(File.join(ROOT, "absent_emojies.txt"), "w") do |file|
-  file.puts(@absent_emoji_names.sort.to_h.to_yaml)
+  file.puts(absent_emoji_names.sort.to_h.to_yaml)
 end
 
-fixed_present_emojies = emojies.reject { |name| @absent_emoji_names.key?(name) }
+fixed_present_emojies = emojies.reject { |name| absent_emoji_names.key?(name) }
 
 puts emojies.size
 puts fixed_present_emojies.size
