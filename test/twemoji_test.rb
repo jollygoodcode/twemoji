@@ -47,6 +47,14 @@ class TwemojiTest < Minitest::Test
     assert_equal ":cookie:", Twemoji.find_by(code: "1f36a")
   end
 
+  def test_find_by_text_for_emoji_with_multiple_names_v1
+    assert_equal "1f60d", Twemoji.find_by_text(":smiling_face_with_heart_eyes:")
+  end
+
+  def test_find_by_text_for_emoji_with_multiple_names_v2
+    assert_equal "1f60d", Twemoji.find_by_text(":heart_eyes:")
+  end
+
   def test_finder_methods_find_by_unicode
     assert_equal ":cookie:", Twemoji.find_by(unicode: "🍪")
   end
