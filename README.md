@@ -14,9 +14,27 @@ This RubyGem `twemoji` is a minimum implementation of Twitter Emoji in Ruby so t
 
 ## About this fork
 
-- [ ] Refactor emoji map generation
-- [ ] Add documentation on how to import new emoji sets
-- [ ] Add validator for the combined set at CDN
+It looks like the original Twemoji gem isn't maintained – the latest version contains only 1.6K emojies from 3.6K emojies present in the latest Twemoji version.
+
+This fork:
+
+* fixes a broken CDN URL (Twemojies are hosted on [jsdelivr.com/](https://www.jsdelivr.com/) now :heart:)
+* imports the latest emojies set (with backwards compatibility)
+* adds the necessary tooling to easily import future editions
+
+### How to import the latest Twemoji set
+
+**Step 1**. Change the CDN URL (`Twemoji::Configuration::DEFAULT_ASSET_ROOT`) constant.
+
+**Step 2**. Run the tooling script that downloads the latest [unicode.org](https://unicode.org/Public/emoji/latest/emoji-test.txt) official emoji list, validates which emojies are present on CDN and prepares unicode-emoji name maps for the gem.
+
+```bash
+bundle install
+
+bundle exec ruby tooling/import_latest_emojies.rb
+```
+
+**Step 3**. PROFIT :beers:
 
 ## Twemoji Gem and twemoji.js versions
 

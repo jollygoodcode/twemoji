@@ -2,7 +2,7 @@ require "open-uri"
 require_relative "./emoji_name"
 
 # Just in case: there's a copy of this file as of June 2023 in this folder.
-UNICODE_ORG_EMOJI_LIST_URL = "https://unicode.org/Public/emoji/15.0/emoji-test.txt"
+UNICODE_ORG_EMOJI_LIST_URL = "https://unicode.org/Public/emoji/latest/emoji-test.txt"
 HELPERS_FOLDER = File.dirname(__FILE__)
 
 def validate_emoji_names!(emojies)
