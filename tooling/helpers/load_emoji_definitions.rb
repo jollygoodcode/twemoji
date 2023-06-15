@@ -5,6 +5,16 @@ require_relative "./emoji_name"
 UNICODE_ORG_EMOJI_LIST_URL = "https://unicode.org/Public/emoji/15.0/emoji-test.txt"
 HELPERS_FOLDER = File.dirname(__FILE__)
 
+def validate_emoji_names!(emojies)
+  emojies.each_with_index do |(name, unicode), index|
+    if name !~ /\A[a-z0-9\_]+\z/
+      raise "⚠️ #{index}. --> Invalid emoji name: #{name} - #{unicode}"
+    else
+      puts "✅ #{index}. --> Valid #{name} - #{unicode}"
+    end
+  end
+end
+
 def load_emoji_definitions
   raw_unicode_emojies = URI.open(UNICODE_ORG_EMOJI_LIST_URL).read.split("\n")
 
@@ -39,6 +49,8 @@ def load_emoji_definitions
   emojies.each do |name, unicode|
     final_emojies[emoji_name(name)] = unicode
   end
+
+  validate_emoji_names!(final_emojies)
 
   final_emojies
 end

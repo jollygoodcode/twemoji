@@ -16,17 +16,7 @@ ROOT = File.dirname(__FILE__)
 
 emojies = load_emoji_definitions()
 
-## STEP 2. Validating that all emojies adhere to our format.
-
-emojies.each_with_index do |(name, unicode), index|
-  if name !~ /\A[a-z0-9\_]+\z/
-    raise "⚠️ #{index}. --> Invalid emoji name: #{name} - #{unicode}"
-  else
-    puts "✅ #{index}. --> Valid #{name} - #{unicode}"
-  end
-end
-
-## STEP 3. Now we have a Hash with 3911 items.
+## STEP 2. Now we have a Hash with 3911 items.
 # They're original unicode.org emojies – some aren't present in the Twemoji set,
 # some are missing on CDN.
 #
@@ -63,7 +53,7 @@ ensure
 	internet&.close
 end
 
-## Step 4. As you can see, we're down from 3911 items to 3661. Not bad!
+## Step 3. As you can see, we're down from 3911 items to 3661. Not bad!
 # Let's remove absent emojies from our Hash.
 
 File.open(File.join(ROOT, "absent_emojies.txt"), "w") do |file|
@@ -75,7 +65,7 @@ fixed_present_emojies = emojies.reject { |name| @absent_emoji_names.key?(name) }
 puts emojies.size
 puts fixed_present_emojies.size
 
-# Step 5. Finally, let's prepare our data files and we're ready to ship a brand new version.
+# Step 4. Finally, let's prepare our data files and we're ready to ship a brand new version.
 
 unless Dir.exist?(File.join(ROOT, "data"))
   Dir.mkdir(File.join(ROOT, "data"))
@@ -122,7 +112,7 @@ File.open(File.join(ROOT, "data", "emoji-unicode-svg.yml"), "w") do |file|
   file.puts emoji_unicode_svg_hash.merge(original_hash).sort.to_h.to_yaml
 end
 
-# Step 6. Let's copy data files and the gem is ready to go.
+# Step 5. Let's copy data files and the gem is ready to go.
 
 FileUtils.cp_r(
   File.join(ROOT, "data"),
