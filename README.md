@@ -14,11 +14,11 @@ This RubyGem `twemoji` is a minimum implementation of Twitter Emoji in Ruby so t
 
 ## About this fork
 
-It looks like the original Twemoji gem isn't maintained – the latest version contains only 1.6K emojies from 3.6K emojies present in the latest Twemoji version.
+It looks like the original Twemoji gem isn't maintained – the latest version contains only 1.6K emojies from 3.2K emojies present in the latest Twemoji version.
 
 This fork:
 
-* fixes a broken CDN URL (Twemojies are hosted on [jsdelivr.com/](https://www.jsdelivr.com/) now :heart:)
+* fixes a broken CDN URL (Twemojies are hosted on [jsdelivr.com](https://www.jsdelivr.com/) now :heart:)
 * imports the latest emojies set (with backwards compatibility)
 * adds the necessary tooling to easily import future editions
 
