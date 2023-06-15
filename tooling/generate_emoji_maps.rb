@@ -8,6 +8,7 @@ require "async/semaphore"
 require "async/http/internet"
 require "fileutils"
 require_relative "./helpers/emoji_name"
+require_relative "../lib/twemoji/configuration"
 
 ROOT = File.dirname(__FILE__)
 
@@ -63,7 +64,7 @@ end
 
 @absent_emoji_names = {}
 
-PARALLELISM = 10
+PARALLELISM = 20
 
 # https://github.com/socketry/async-http#limiting-requests
 Async do
@@ -75,7 +76,7 @@ Async do
 		semaphore.async do
       slug = unicode.gsub("_", "-")
 
-			request = internet.get("https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/#{slug}.svg")
+			request = internet.get("#{Twemoji::Configuration::DEFAULT_ASSET_ROOT}/svg/#{slug}.svg")
 
       request.read # if we don't read, connections won't be closed
 
@@ -131,7 +132,7 @@ File.open(File.join(ROOT, "data", "emoji-unicode-png.yml"), "w") do |file|
 
   fixed_present_emojies.each do |name, unicode|
     slug = unicode.gsub("_", "-")
-    emoji_unicode_png_hash[":#{name}:"] = "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/#{slug}.png"
+    emoji_unicode_png_hash[":#{name}:"] = "#{Twemoji::Configuration::DEFAULT_ASSET_ROOT}/72x72/#{slug}.png"
   end
 
   file.puts emoji_unicode_png_hash.merge(original_hash).sort.to_h.to_yaml
@@ -145,7 +146,7 @@ File.open(File.join(ROOT, "data", "emoji-unicode-svg.yml"), "w") do |file|
 
   fixed_present_emojies.each do |name, unicode|
     slug = unicode.gsub("_", "-")
-    emoji_unicode_svg_hash[":#{name}:"] = "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/#{slug}.svg"
+    emoji_unicode_svg_hash[":#{name}:"] = "#{Twemoji::Configuration::DEFAULT_ASSET_ROOT}/svg/#{slug}.svg"
   end
 
   file.puts emoji_unicode_svg_hash.merge(original_hash).sort.to_h.to_yaml
