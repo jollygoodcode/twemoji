@@ -4,6 +4,7 @@ require "async/semaphore"
 require "async/http/internet"
 require_relative "../../lib/twemoji/configuration"
 
+HELPERS_FOLDER = File.dirname(__FILE__)
 PARALLELISM = 20
 
 def find_missing_emojies_on_cdn(emojies)
@@ -34,6 +35,10 @@ def find_missing_emojies_on_cdn(emojies)
     barrier.wait
   ensure
     internet&.close
+  end
+
+  File.open(File.join(HELPERS_FOLDER, "absent_emojies.txt"), "w") do |file|
+    file.puts(absent_emoji_names.sort.to_h.to_yaml)
   end
 
   absent_emoji_names

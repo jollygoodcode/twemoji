@@ -29,10 +29,6 @@ absent_emoji_names = find_missing_emojies_on_cdn(emojies)
 ## Step 3. As you can see, we're down from 3911 items to 3661. Not bad!
 # Let's remove absent emojies from our Hash.
 
-File.open(File.join(ROOT, "absent_emojies.txt"), "w") do |file|
-  file.puts(absent_emoji_names.sort.to_h.to_yaml)
-end
-
 fixed_present_emojies = emojies.reject { |name| absent_emoji_names.key?(name) }
 
 puts emojies.size
