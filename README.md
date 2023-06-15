@@ -1,5 +1,7 @@
 # Twemoji
 
+:warnign: This is a fork of an unmaintained **twemoji** gem that contains the latest Twemoji set of 3.2K emojies.
+
 [![Gem Version](https://badge.fury.io/rb/twemoji.svg)](https://badge.fury.io/rb/twemoji)
 [![Build Status](https://travis-ci.org/jollygoodcode/twemoji.svg)][travis]
 [![Inline docs](http://inch-ci.org/github/jollygoodcode/twemoji.svg?branch=master)][inch-doc]
