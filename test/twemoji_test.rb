@@ -33,34 +33,34 @@ class TwemojiTest < Minitest::Test
 
   def test_finder_methods_cannot_find_by_more_than_one
     exception = assert_raises ArgumentError do
-      Twemoji.find_by(text: ":heart_eyes:", code: "1f60d")
+      Twemoji.find_by(text: ":cookie:", code: "1f36a")
     end
 
     assert_equal "Can only specify text, code or unicode one at a time", exception.message
   end
 
   def test_finder_methods_find_by_text
-    assert_equal "1f60d", Twemoji.find_by(text: ":heart_eyes:")
+    assert_equal "1f36a", Twemoji.find_by(text: ":cookie:")
   end
 
   def test_finder_methods_find_by_code
-    assert_equal ":heart_eyes:", Twemoji.find_by(code: "1f60d")
+    assert_equal ":cookie:", Twemoji.find_by(code: "1f36a")
   end
 
   def test_finder_methods_find_by_unicode
-    assert_equal ":heart_eyes:", Twemoji.find_by(unicode: "😍")
+    assert_equal ":cookie:", Twemoji.find_by(unicode: "🍪")
   end
 
   def test_find_by_text
-    assert_equal "1f60d", Twemoji.find_by_text(":heart_eyes:")
+    assert_equal "1f36a", Twemoji.find_by_text(":cookie:")
   end
 
   def test_find_by_code
-    assert_equal ":heart_eyes:", Twemoji.find_by_code("1f60d")
+    assert_equal ":cookie:", Twemoji.find_by_code("1f36a")
   end
 
   def test_find_by_unicode
-    assert_equal ":heart_eyes:", Twemoji.find_by_unicode("😍")
+    assert_equal ":smiling_face_with_heart_eyes:", Twemoji.find_by_unicode("😍")
   end
 
   def test_find_by_unicode_copyright
@@ -68,7 +68,7 @@ class TwemojiTest < Minitest::Test
   end
 
   def test_find_by_unicode_country_flag
-    assert_equal ":flag-es:", Twemoji.find_by_unicode("🇪🇸")
+    assert_equal ":flag_spain:", Twemoji.find_by_unicode("🇪🇸")
   end
 
   def test_render_unicode_country_flag_es
@@ -80,7 +80,7 @@ class TwemojiTest < Minitest::Test
   end
 
   def test_find_by_escaped_unicode
-    assert_equal ":heart_eyes:", Twemoji.find_by_unicode("\u{1f60d}")
+    assert_equal ":smiling_face_with_heart_eyes:", Twemoji.find_by_unicode("\u{1f60d}")
   end
 
   def test_parse_plus_one
@@ -188,37 +188,37 @@ class TwemojiTest < Minitest::Test
   end
 
   def test_parse_by_unicode
-    expected = %(<img draggable="false" title=":heart_eyes:" alt="😍" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f60d.svg" class="emoji">)
+    expected = %(<img draggable="false" title=":cookie:" alt="🍪" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f36a.svg" class="emoji">)
 
-    assert_equal expected, Twemoji.parse("😍")
+    assert_equal expected, Twemoji.parse("🍪")
   end
 
   def test_parse_by_unicode_flag
-    expected = %(<img draggable=\"false\" title=\":flag-my:\" alt=\"🇲🇾\" src=\"https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1f2-1f1fe.svg\" class=\"emoji\">)
+    expected = %(<img draggable=\"false\" title=\":flag_my:\" alt=\"🇲🇾\" src=\"https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1f2-1f1fe.svg\" class=\"emoji\">)
 
     assert_equal expected, Twemoji.parse("🇲🇾")
   end
 
   def test_parse_by_unicode_text
-    expected = %(I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f60d.svg" class="twemoji">!)
+    expected = %(I like chocolate <img draggable="false" title=":smiling_face_with_heart_eyes:" alt="😍" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f60d.svg" class="twemoji">!)
 
     assert_equal expected, Twemoji.parse("I like chocolate 😍!", class_name: 'twemoji')
   end
 
   def test_parse_by_unicode_attr
-    expected = %(<img draggable="false" title=":heart_eyes:" alt="😍" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f60d.svg" class="twemoji" aria-label="emoji: heart_eyes">)
+    expected = %(<img draggable="false" title=":smiling_face_with_heart_eyes:" alt="😍" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f60d.svg" class="twemoji" aria-label="emoji: smiling_face_with_heart_eyes">)
     aria_label = ->(name) { 'emoji: ' + name.gsub(":", '') }
     assert_equal expected, Twemoji.parse("😍", img_attrs: {'aria-label'=> aria_label }, class_name: 'twemoji' )
   end
 
   def test_parse_by_unicode_multiple
-    expected = %(<img draggable="false" title=":cookie:" alt="🍪" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f36a.svg" class="emoji" aria-label="emoji: cookie"><img draggable="false" title=":birthday:" alt="🎂" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f382.svg" class="emoji" aria-label="emoji: birthday">)
+    expected = %(<img draggable="false" title=":cookie:" alt="🍪" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f36a.svg" class="emoji" aria-label="emoji: cookie"><img draggable="false" title=":birthday_cake:" alt="🎂" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f382.svg" class="emoji" aria-label="emoji: birthday_cake">)
     aria_label = ->(name) { 'emoji: ' + name.gsub(":", '') }
     assert_equal expected, Twemoji.parse("🍪🎂", img_attrs: {'aria-label'=> aria_label } )
   end
 
   def test_parse_by_unicode_multiple_html
-    expected = %(<p><img draggable="false" title=":cookie:" alt="🍪" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f36a.svg" class="emoji" aria-label="emoji: cookie"><img draggable="false" title=":birthday:" alt="🎂" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f382.svg" class="emoji" aria-label="emoji: birthday"></p>)
+    expected = %(<p><img draggable="false" title=":cookie:" alt="🍪" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f36a.svg" class="emoji" aria-label="emoji: cookie"><img draggable="false" title=":birthday_cake:" alt="🎂" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f382.svg" class="emoji" aria-label="emoji: birthday_cake"></p>)
     aria_label = ->(name) { 'emoji: ' + name.gsub(":", '') }
     assert_equal expected, Twemoji.parse(Nokogiri::HTML::DocumentFragment.parse("<p>🍪🎂</p>"), img_attrs: {'aria-label'=> aria_label } ).to_html
   end
@@ -230,7 +230,7 @@ class TwemojiTest < Minitest::Test
   end
 
   def test_parse_by_unicode_and_name
-    expected = %(<img draggable="false" title=":cookie:" alt="🍪" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f36a.svg" class="emoji" aria-label="emoji: cookie"><img draggable="false" title=":birthday:" alt="🎂" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f382.svg" class="emoji" aria-label="emoji: birthday">)
+    expected = %(<img draggable="false" title=":cookie:" alt="🍪" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f36a.svg" class="emoji" aria-label="emoji: cookie"><img draggable="false" title=":birthday_cake:" alt="🎂" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f382.svg" class="emoji" aria-label="emoji: birthday_cake">)
     aria_label = ->(name) { 'emoji: ' + name.gsub(":", '') }
     assert_equal expected, Twemoji.parse(":cookie:🎂", img_attrs: {'aria-label'=> aria_label } )
   end
@@ -242,7 +242,7 @@ class TwemojiTest < Minitest::Test
   end
 
   def test_parse_empty_class_name
-    expected = '<img draggable="false" title=":flag-br:" alt="🇧🇷" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1e7-1f1f7.svg">'
+    expected = '<img draggable="false" title=":flag_brazil:" alt="🇧🇷" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1e7-1f1f7.svg">'
 
     assert_equal expected, Twemoji.parse('🇧🇷', class_name: nil)
     assert_equal expected, Twemoji.parse('🇧🇷', class_name: '')
