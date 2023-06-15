@@ -120,7 +120,7 @@ File.open(File.join(ROOT, "data", "emoji-unicode.yml"), "w") do |file|
     emoji_unicode_hash[":#{name}:"] = unicode
   end
 
-  file.puts emoji_unicode_hash.merge(original_hash).to_yaml
+  file.puts emoji_unicode_hash.merge(original_hash).sort.to_h.to_yaml
 end
 
 File.open(File.join(ROOT, "data", "emoji-unicode-png.yml"), "w") do |file|
@@ -134,7 +134,7 @@ File.open(File.join(ROOT, "data", "emoji-unicode-png.yml"), "w") do |file|
     emoji_unicode_png_hash[":#{name}:"] = "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/#{slug}.png"
   end
 
-  file.puts emoji_unicode_png_hash.merge(original_hash).to_yaml
+  file.puts emoji_unicode_png_hash.merge(original_hash).sort.to_h.to_yaml
 end
 
 File.open(File.join(ROOT, "data", "emoji-unicode-svg.yml"), "w") do |file|
@@ -148,7 +148,7 @@ File.open(File.join(ROOT, "data", "emoji-unicode-svg.yml"), "w") do |file|
     emoji_unicode_svg_hash[":#{name}:"] = "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/#{slug}.svg"
   end
 
-  file.puts emoji_unicode_svg_hash.merge(original_hash).to_yaml
+  file.puts emoji_unicode_svg_hash.merge(original_hash).sort.to_h.to_yaml
 end
 
 # Step 7. Let's copy data files and the gem is ready to go.
