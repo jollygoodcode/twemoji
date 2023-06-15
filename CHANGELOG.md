@@ -60,7 +60,7 @@
   ```ruby
   {
     ...
-    ":heart_eyes:" => "https://twemoji.maxcdn.com/2/svg/1f60d.svg",
+    ":heart_eyes:" => "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f60d.svg",
     ...
   }
   ```
@@ -70,7 +70,7 @@
   ```ruby
   {
     ...
-    ":heart_eyes:" => "https://twemoji.maxcdn.com/2/72x72/1f60d.png",
+    ":heart_eyes:" => "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f60d.png",
     ...
   }
   ```
@@ -80,7 +80,7 @@
 - Require Ruby 2.0+
 - `Twemoji::CODES` changes to `Twemoji.codes`
 - `Twemoji::ICODES` changes to `Twemoji.invert_codes`
-- `asset_root` config default value changed to `https://twemoji.maxcdn.com/2`
+- `asset_root` config default value changed to `https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets`
 - `file_ext` config default value changed to `svg`, available values are `"svg"` and `"png"`
 - PNG now only has one size `72x72`
 - Remove `Twemoji.to_json` method

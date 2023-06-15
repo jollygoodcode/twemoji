@@ -7,6 +7,8 @@ group :development do
   gem "rake"
   gem "bundler"
   gem "pry"
+  gem "async"
+  gem "async-http"
 end
 
 group :test do

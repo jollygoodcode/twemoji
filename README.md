@@ -1,5 +1,7 @@
 # Twemoji
 
+:warning: This is a fork of an unmaintained **twemoji** gem that contains the latest Twemoji set of 3.2K emojies.
+
 [![Gem Version](https://badge.fury.io/rb/twemoji.svg)](https://badge.fury.io/rb/twemoji)
 [![Build Status](https://travis-ci.org/jollygoodcode/twemoji.svg)][travis]
 [![Inline docs](http://inch-ci.org/github/jollygoodcode/twemoji.svg?branch=master)][inch-doc]
@@ -12,10 +14,41 @@ Twitter [opensourced Twitter Emoji](http://twitter.github.io/twemoji/) and the o
 
 This RubyGem `twemoji` is a minimum implementation of Twitter Emoji in Ruby so that you can use emoji in your Ruby/Rails apps too!
 
-__Note:__ This gem might not implement all the features available in the JavaScript implementation.
+## About this fork
+
+It looks like the original Twemoji gem isn't maintained – the latest version contains only 1.6K emojies from 3.2K emojies present in the latest Twemoji version.
+
+This fork:
+
+* fixes a broken CDN URL (Twemojies are hosted on [jsdelivr.com](https://www.jsdelivr.com/) now :heart:)
+* imports the latest emojies set (with backwards compatibility)
+* adds the necessary tooling to easily import future editions
+
+### How to import the latest Twemoji set
+
+**Step 1**. Change the CDN URL (`Twemoji::Configuration::DEFAULT_ASSET_ROOT`) constant.
+
+**Step 2**. Run the tooling script that downloads the latest [unicode.org](https://unicode.org/Public/emoji/latest/emoji-test.txt) official emoji list, validates which emojies are present on CDN and prepares unicode-emoji name maps for the gem.
+
+```bash
+bundle install
+
+bundle exec ruby tooling/import_latest_emojies.rb
+```
+
+**Step 3**. PROFIT :beers:
+
+### How to use this fork in your Rails app
+
+In your Gemfile, include the latest fork's tag:
+
+```ruby
+gem "twemoji", github: "sqlhabit/twemoji", tag: "v4.0.1"
+```
 
 ## Twemoji Gem and twemoji.js versions
 
+- Twemoji Gem 4.x supports Twemoji v14 (3245 emojis)
 - Twemoji Gem 3.x supports twemoji.js V2 (1661 emojis) [Preview](https://jollygoodcode.github.io/twemoji/)
 - Twemoji Gem 2.x supports twemoji.js V1 (874 emojis) [Preview](http://jollygoodcode.github.io/twemoji/v1/)
 
@@ -66,7 +99,7 @@ In your ERb view:
 will render
 
 ```
-I like chocolate <img class="emoji" draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/72x72/1f60d.png">!
+I like chocolate <img class="emoji" draggable="false" title=":heart_eyes:" alt="😍" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f60d.png">!
 ```
 
 More options could be passed in, please see [Twemoji.parse options](https://github.com/jollygoodcode/twemoji#twemojiparse-options) for more details.
@@ -130,28 +163,28 @@ Parsing by name token:
 
 ```ruby
 > Twemoji.parse "I like chocolate :heart_eyes:!"
-=> 'I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="emoji">!'
+=> 'I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f60d.svg" class="emoji">!'
 ```
 
 Parsing by name unicode values:
 
 ```ruby
 > Twemoji.parse "I like chocolate 😍!"
-=> 'I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="emoji">!'
+=> 'I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f60d.svg" class="emoji">!'
 ```
 
 Parsing by both name and unicode:
 
 ```ruby
 > Twemoji.parse ":cookie: 🎂"
-=> '<img draggable="false" title=":cookie:" alt="🍪" src="https://twemoji.maxcdn.com/2/svg/1f36a.svg" class="emoji"> <img draggable="false" title=":birthday:" alt="🎂" src="https://twemoji.maxcdn.com/2/svg/1f382.svg" class="emoji">'
+=> '<img draggable="false" title=":cookie:" alt="🍪" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f36a.svg" class="emoji"> <img draggable="false" title=":birthday:" alt="🎂" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f382.svg" class="emoji">'
 ```
 
 ##### `Twemoji.parse` options
 
 ##### `asset_root`
 
-Default assets root url. Defaults to `https://twemoji.maxcdn.com/2/`:
+Default assets root url. Defaults to `https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/`:
 
 ```ruby
 > Twemoji.parse "I like chocolate :heart_eyes:!", asset_root: "foocdn.com"
@@ -166,7 +199,7 @@ Can change to `"png"`:
 
 ```ruby
 > Twemoji.parse 'I like chocolate :heart_eyes:!', file_ext: "png"
-=> 'I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/72x72/1f60d.png" class="emoji">!'
+=> 'I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f60d.png" class="emoji">!'
 ```
 
 ##### `class_name`
@@ -175,7 +208,7 @@ Default image CSS class name. Defaults to `"emoji"`.
 
 ```ruby
 > Twemoji.parse "I like chocolate :heart_eyes:!", class_name: "superemoji"
-=> 'I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="superemoji">!'
+=> 'I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f60d.svg" class="superemoji">!'
 ```
 
 ##### `img_attrs`
@@ -184,7 +217,7 @@ List of image attributes for the `img` tag. Optional.
 
 ```ruby
 > Twemoji.parse "I like chocolate :heart_eyes:!", class_name: "twemoji", img_attrs: { style: "height: 1.3em;" }
-=> 'I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="twemoji" style="height: 1.3em;">!'
+=> 'I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f60d.svg" class="twemoji" style="height: 1.3em;">!'
 ```
 
 attribute value can apply proc-like object, remove `:` from title attribute:
@@ -193,7 +226,7 @@ attribute value can apply proc-like object, remove `:` from title attribute:
 > no_colons = ->(name) { name.gsub(":", "") }
 
 > Twemoji.parse "I like chocolate :heart_eyes:!", class_name: "twemoji", img_attrs: { title: no_colons }
-=> 'I like chocolate <img draggable="false" title="heart_eyes" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="twemoji">!'
+=> 'I like chocolate <img draggable="false" title="heart_eyes" alt="😍" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f60d.svg" class="twemoji">!'
 ```
 
 #### `Twemoji.emoji_pattern`
@@ -257,7 +290,7 @@ end.to_json.html_safe %>
 
 ```ruby
 Twemoji.configure do |config|
-  config.asset_root = "https://twemoji.maxcdn.com/2"
+  config.asset_root = "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets"
   config.file_ext   = "svg"
   config.class_name = "emoji"
   config.img_attrs  = {}

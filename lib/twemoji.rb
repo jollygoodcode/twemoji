@@ -13,10 +13,10 @@ module Twemoji
   # Find code by text, find text by code, and find text by unicode.
   #
   # @example Usage
-  #   Twemoji.find_by(text: ":heart_eyes:") # => "1f60d"
-  #   Twemoji.find_by(code: "1f60d")      # => ":heart_eyes:"
-  #   Twemoji.find_by(unicode: "😍")        # => ":heart_eyes:"
-  #   Twemoji.find_by(unicode: "\u{1f60d}") # => ":heart_eyes:"
+  #   Twemoji.find_by(text: ":cookie:") # => "1f36a"
+  #   Twemoji.find_by(code: "1f36a")      # => ":cookie:"
+  #   Twemoji.find_by(unicode: "🍪")        # => ":cookie:"
+  #   Twemoji.find_by(unicode: "\u{1f36a}") # => ":cookie:"
   #
   # @option options [String] (optional) :text
   # @option options [String] (optional) :code
@@ -41,8 +41,8 @@ module Twemoji
   # Find emoji code by emoji text.
   #
   # @example Usage
-  #   Twemoji.find_by_text ":heart_eyes:"
-  #   => "1f60d"
+  #   Twemoji.find_by_text ":cookie:"
+  #   => "1f36a"
   #
   # @param text [String] Text to find emoji code.
   # @return [String] Emoji Code.
@@ -53,8 +53,8 @@ module Twemoji
   # Find emoji text by emoji code.
   #
   # @example Usage
-  #   Twemoji.find_by_code "1f60d"
-  #   => ":heart_eyes:"
+  #   Twemoji.find_by_code "1f36a"
+  #   => ":cookie:"
   #
   # @param code [String] Emoji code to find text.
   # @return [String] Emoji Text.
@@ -65,8 +65,8 @@ module Twemoji
   # Find emoji text by raw emoji unicode.
   #
   # @example Usage
-  #   Twemoji.find_by_unicode "😍"
-  #   => ":heart_eyes:"
+  #   Twemoji.find_by_unicode "🍪"
+  #   => ":cookie:"
   #
   # @param raw [String] Emoji raw unicode to find text.
   # @return [String] Emoji Text.
@@ -77,10 +77,10 @@ module Twemoji
   # Render raw emoji unicode from emoji text or emoji code.
   #
   # @example Usage
-  #   Twemoji.render_unicode ":heart_eyes:"
-  #   => "😍"
-  #   Twemoji.render_unicode "1f60d"
-  #   => "😍"
+  #   Twemoji.render_unicode ":cookie:"
+  #   => "🍪"
+  #   Twemoji.render_unicode "1f36a"
+  #   => "🍪"
   #
   # @param text_or_code [String] Emoji text or code to render as unicode.
   # @return [String] Emoji UTF-8 Text.
@@ -94,8 +94,8 @@ module Twemoji
   # Parse DOM, replace emoji with image.
   #
   # @example Usage
-  #   Twemoji.parse("I like chocolate :heart_eyes:!")
-  #   => 'I like chocolate <img draggable="false" title=":heart_eyes:" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" class="emoji">!'
+  #   Twemoji.parse("I like chocolate :cookie:!")
+  #   => 'I like chocolate <img draggable="false" title=":cookie:" alt="🍪" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f36a.svg" class="emoji">!'
   #
   # @param text [String] Source text to parse.
   #
